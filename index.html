@@ -1805,6 +1805,456 @@ html, body { width:100%; height:100%; overflow:hidden; }
   #screen-feedback .scoreboard-card:after,.sidekick-robot,.sidekick-rocket,.sidekick-spark,#screen-feedback .scoreboard-retry { animation:none!important; transition:none!important; }
 }
 
+
+/* =========================================================
+   AJUSTES EXCLUSIVOS DE RESPONSIVIDADE
+   Mantém cores, conteúdo, identidade visual e layout desktop.
+   ========================================================= */
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+img, svg, video, canvas {
+    max-width: 100%;
+}
+button, input {
+    max-width: 100%;
+}
+.shell, .screen, .inner, .home-copy, .paper, .scoreboard-wrap,
+.scoreboard-card, .prize-instructions, .answers, .answer {
+    min-width: 0;
+    max-width: 100%;
+}
+.answer, .rule, .scoreboard-message, .prize-instructions,
+.scoreboard-player, .question-text {
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+/* Tablets e celulares */
+@media (max-width: 760px) {
+    .shell {
+        width: 100%;
+        padding-left: clamp(10px, 3.5vw, 20px);
+        padding-right: clamp(10px, 3.5vw, 20px);
+    }
+
+    .topbar {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .brand {
+        flex: 0 0 auto;
+        font-size: clamp(18px, 5vw, 23px);
+        padding: 7px 12px;
+    }
+
+    .event-label {
+        min-width: 0;
+        font-size: clamp(8px, 2vw, 10px);
+        letter-spacing: clamp(.5px, .3vw, 2px);
+        overflow-wrap: anywhere;
+    }
+
+    .event-label strong {
+        font-size: clamp(9px, 2.4vw, 12px);
+    }
+
+    /* A ilustração continua inteira: os potes não podem encolher no flex. */
+    #screen-home {
+        position: relative;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    #screen-home .home-copy {
+        position: relative !important;
+        order: 1;
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    #screen-home .scene {
+        position: relative !important;
+        inset: auto !important;
+        order: 2;
+        display: flex;
+        flex: 0 0 auto;
+        width: 100% !important;
+        height: clamp(220px, 58vw, 320px);
+        min-height: 0 !important;
+        margin: 10px auto 0;
+        opacity: 1;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    #screen-home .scene .glow {
+        width: min(100%, 300px);
+        max-height: 100%;
+        margin: auto;
+    }
+
+    #screen-home .scene .jars {
+        left: 50%;
+        right: auto;
+        bottom: 32px !important;
+        width: max-content;
+        max-width: 100%;
+        gap: clamp(4px, 2vw, 10px);
+        flex-wrap: nowrap;
+        transform: translateX(-50%) !important;
+    }
+
+    #screen-home .scene .jar {
+        flex: 0 0 auto;
+        min-width: 0;
+        transform-origin: bottom center;
+    }
+
+    #screen-home .scene .jar.orange {
+        transform: scale(.82) rotate(-8deg) !important;
+    }
+
+    #screen-home .scene .jar.pink {
+        transform: scale(.82) !important;
+    }
+
+    #screen-home .scene .jar.cyan {
+        transform: scale(.82) rotate(7deg) !important;
+    }
+
+    #screen-home .scene .platform {
+        left: 50%;
+        bottom: 15px !important;
+        width: min(95%, 430px);
+        transform: translateX(-50%);
+    }
+
+    #screen-home .scene .robot {
+        right: 4%;
+        top: 18%;
+        transform: scale(.72) rotate(4deg);
+        transform-origin: top right;
+    }
+
+    #screen-home .scene .trophy {
+        top: 3%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: clamp(48px, 12vw, 64px);
+    }
+
+    #screen-home .scene .arcade-decor,
+    #screen-home .scene .stars {
+        overflow: hidden;
+    }
+
+    /* Histórico flui abaixo da nota, sem sobrepor botão ou conteúdo. */
+    #screen-home #previous-result {
+        position: relative !important;
+        inset: auto !important;
+        order: 3;
+        display: block;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 8px 0 0;
+        transform: none !important;
+        overflow-wrap: anywhere;
+    }
+
+    #screen-home #previous-result[hidden] {
+        display: none !important;
+    }
+
+    #screen-home .big-btn {
+        width: 100%;
+        max-width: 390px;
+    }
+
+    #screen-home .small-note {
+        max-width: 100%;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+    }
+
+    .inner {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .screen-head {
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .timer {
+        flex: 0 0 auto;
+        font-size: clamp(14px, 4vw, 22px);
+        padding: 4px 8px;
+        white-space: nowrap;
+    }
+
+    .mini-brand {
+        min-width: 0;
+        font-size: clamp(18px, 5vw, 23px);
+    }
+
+    .progress {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .question-meta {
+        flex-wrap: wrap;
+        font-size: 12px;
+    }
+
+    .paper {
+        width: 100%;
+        padding: clamp(12px, 3.5vw, 18px);
+        overflow-wrap: anywhere;
+    }
+
+    .question-text {
+        font-size: clamp(18px, 5vw, 27px);
+        line-height: 1.2;
+    }
+
+    .answer {
+        gap: 8px;
+        padding: 9px clamp(7px, 2vw, 12px);
+        min-height: 44px;
+        white-space: normal;
+        text-align: left;
+    }
+
+    .answer > span:last-child {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .answer-letter {
+        flex: 0 0 30px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .blue-btn, .pink-btn, .result-actions button,
+    .scoreboard-retry, .quiz-action button {
+        width: 100%;
+        min-width: 0;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    /* O placar adapta os conteúdos sem cortar medalhas, texto ou instruções. */
+    #screen-feedback .scoreboard-wrap {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #screen-feedback .scoreboard-card {
+        width: 100%;
+        max-width: 100%;
+        max-height: none;
+        overflow: hidden;
+        padding: clamp(12px, 3.5vw, 20px);
+    }
+
+    #screen-feedback .scoreboard-stats {
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    #screen-feedback .scoreboard-stats div {
+        min-width: 0;
+        padding: 10px 5px;
+    }
+
+    #screen-feedback .scoreboard-stats strong {
+        font-size: clamp(21px, 6vw, 32px);
+        overflow-wrap: anywhere;
+    }
+
+    #screen-feedback .prize-instructions {
+        width: 100%;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    #screen-feedback .scoreboard-brand-scene {
+        max-width: 100%;
+        padding-left: clamp(12px, 4vw, 42px);
+        padding-right: clamp(12px, 4vw, 42px);
+    }
+
+    #screen-feedback .scoreboard-sidekick {
+        width: clamp(28px, 10vw, 50px);
+    }
+
+    #screen-feedback .scoreboard-sidekick-left {
+        left: 2px;
+    }
+
+    #screen-feedback .scoreboard-sidekick-right {
+        right: 2px;
+    }
+
+    .footer {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Celulares estreitos */
+@media (max-width: 420px) {
+    .shell {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #screen-home .home {
+        padding-top: 14px;
+    }
+
+    #screen-home h1 {
+        font-size: clamp(34px, 10.5vw, 46px);
+        letter-spacing: -1.5px;
+        overflow-wrap: normal;
+    }
+
+    #screen-home .player-fields {
+        width: 100%;
+    }
+
+    #screen-home .scene {
+        height: 225px;
+    }
+
+    #screen-home .scene .jars {
+        gap: 0;
+        bottom: 29px !important;
+    }
+
+    #screen-home .scene .jar.orange {
+        transform: scale(.72) rotate(-8deg) !important;
+        margin-right: -5px;
+    }
+
+    #screen-home .scene .jar.pink {
+        transform: scale(.72) !important;
+    }
+
+    #screen-home .scene .jar.cyan {
+        transform: scale(.72) rotate(7deg) !important;
+        margin-left: -5px;
+    }
+
+    #screen-home .scene .robot {
+        transform: scale(.58) rotate(4deg);
+    }
+
+    #screen-home .scene .trophy {
+        font-size: 48px;
+    }
+
+    #screen-home #previous-result {
+        font-size: 10px !important;
+        padding: 8px !important;
+    }
+
+    #screen-quiz .question-meta {
+        gap: 4px 10px;
+    }
+
+    #screen-quiz .answer {
+        font-size: 13px;
+    }
+
+    #screen-feedback .scoreboard-card {
+        padding: 12px 9px;
+    }
+
+    #screen-feedback .scoreboard-kicker {
+        letter-spacing: .8px;
+        overflow-wrap: anywhere;
+    }
+
+    #screen-feedback .scoreboard-headline {
+        overflow-wrap: anywhere;
+    }
+
+    #screen-feedback .scoreboard-sidekick {
+        display: none;
+    }
+}
+
+/* Telas muito estreitas e celulares em orientação paisagem */
+@media (max-width: 340px) {
+    .event-label {
+        max-width: 52%;
+        letter-spacing: 0;
+    }
+
+    #screen-home h1 {
+        font-size: 32px;
+    }
+
+    #screen-home .scene .jar.orange {
+        transform: scale(.62) rotate(-8deg) !important;
+        margin-right: -10px;
+    }
+
+    #screen-home .scene .jar.pink {
+        transform: scale(.62) !important;
+    }
+
+    #screen-home .scene .jar.cyan {
+        transform: scale(.62) rotate(7deg) !important;
+        margin-left: -10px;
+    }
+
+    #screen-quiz .answer-letter {
+        flex-basis: 26px;
+        width: 26px;
+        height: 26px;
+        font-size: 14px;
+    }
+
+    #screen-feedback .scoreboard-stats span {
+        font-size: 9px;
+        letter-spacing: 0;
+    }
+}
+
+@media (max-height: 520px) and (max-width: 900px) {
+    #screen-home .scene {
+        height: 180px;
+    }
+
+    #screen-home .scene .trophy {
+        font-size: 42px;
+    }
+
+    #screen-feedback .scoreboard-wrap {
+        padding-top: 4px;
+        padding-bottom: 8px;
+    }
+
+    #screen-feedback .scoreboard-card {
+        max-height: none;
+    }
+}
+
 </style>
  </head>
  <body>
