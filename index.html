@@ -1,0 +1,2754 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#160b35" name="theme-color"/>
+  <title>Semana da Qualidade | Skala Brasil</title>
+  <style>
+:root {
+    --night:#10082d;
+    --purple:#27105c;
+    --blue:#174cff;
+    --pool:#75e7ff;
+    --green:#a8d52a;
+    --yellow:#ffe52e;
+    --pink:#ff1680;
+    --orange:#ff8a24;
+    --paper:#fffdf2;
+    --ink:#151044;
+}
+
+* {
+    box-sizing:border-box
+}
+
+[hidden] {
+    display:none!important
+}
+
+body {
+    margin:0;
+    min-height:100vh;
+    color:white;
+    font-family:Arial,Helvetica,sans-serif;
+    background:radial-gradient(ellipse at 12% 22%, rgba(139, 34, 231, 0.8), transparent 35%),
+               radial-gradient(ellipse at 85% 75%, rgba(23, 76, 255, 0.7), transparent 40%),
+               linear-gradient(145deg, #0d0626, #251052 60%, #0d0626);
+}
+
+button {
+    font:inherit
+}
+
+button:focus-visible {
+    outline:4px solid white;
+    outline-offset:4px
+}
+
+.app {
+    position:relative;
+    isolation:isolate;
+    min-height:100vh;
+    overflow:hidden
+}
+
+/* ==================================================
+   SETOR 02 — FUNDO GERAL E GRADE ARCADE VIVA
+   ================================================== */
+.app:before {
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    opacity:.35;
+    background-image:linear-gradient(#75e7ff44 1px,transparent 1px),linear-gradient(90deg,#75e7ff44 1px,transparent 1px);
+    background-size:24px 24px;
+    animation: gridMove 15s linear infinite;
+}
+
+@keyframes gridMove {
+    from { background-position: 0 0; }
+    to { background-position: -24px 24px; }
+}
+
+.shell {
+    width:min(1100px,100%);
+    min-height:100vh;
+    margin:auto;
+    padding:20px clamp(15px,4vw,42px);
+    display:flex;
+    flex-direction:column
+}
+
+/* ==================================================
+   SETOR 03 — CABEÇALHO E IDENTIDADE VISUAL
+   ================================================== */
+.topbar {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px
+}
+
+.brand {
+    background:linear-gradient(135deg, var(--green), #8bb020);
+    color:#101020;
+    border:3px solid #e6ff5c;
+    box-shadow:4px 4px 0 #07051a, 0 0 15px rgba(168, 213, 42, 0.4);
+    padding:8px 16px;
+    transform:rotate(-2deg);
+    font-weight:1000;
+    font-size:23px;
+    line-height:.85;
+    letter-spacing:-1px;
+    transition: transform 0.3s ease;
+}
+
+.brand:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow:6px 6px 0 #07051a, 0 0 25px rgba(168, 213, 42, 0.7);
+}
+
+.brand small {
+    display:block;
+    text-align:center;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-top:5px
+}
+
+.event-label {
+    text-align:right;
+    font-size:10px;
+    letter-spacing:2px;
+    color:var(--pool);
+    font-weight:900;
+    text-shadow: 0 0 5px rgba(117, 231, 255, 0.5);
+}
+
+.event-label strong {
+    display:block;
+    color:var(--yellow);
+    font-size:12px;
+    margin-top:4px;
+    text-shadow: 0 0 8px rgba(255, 229, 46, 0.6);
+}
+
+/* ==================================================
+   SETOR 04 — ESTRUTURA E TRANSIÇÃO ENTRE TELAS
+   ================================================== */
+.screen {
+    display:none;
+    flex:1;
+    animation:appear .4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.screen.active {
+    display:flex
+}
+
+@keyframes appear {
+    from {
+        opacity:0;
+        transform:translateY(20px) scale(0.95)
+    }
+    to {
+        opacity:1;
+        transform:none
+    }
+}
+
+/* ==================================================
+   SETOR 05 — TELA INICIAL: LAYOUT E TEXTO
+   ================================================== */
+.home {
+    align-items:center;
+    gap:28px;
+    padding:25px 0 18px
+}
+
+.home-copy {
+    flex:1;
+    min-width:0
+}
+
+.tag {
+    display:inline-block;
+    background:var(--pool);
+    color:var(--ink);
+    border:3px solid white;
+    padding:7px 10px;
+    box-shadow:4px 4px 0 var(--blue), 0 0 15px rgba(117, 231, 255, 0.5);
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:11px;
+    border-radius: 4px;
+}
+
+h1 {
+    font-size:clamp(44px,7vw,80px);
+    line-height:.88;
+    letter-spacing:-3px;
+    margin:23px 0 0;
+    font-weight:1000;
+    text-transform:uppercase;
+    text-shadow: 0 0 20px rgba(23, 76, 255, 0.6), 4px 4px 0 var(--blue), 8px 8px 0 #08051d;
+}
+
+h1 span {
+    display:block;
+    color:var(--green);
+    text-shadow: 0 0 20px rgba(168, 213, 42, 0.6), 4px 4px 0 #577310, 8px 8px 0 #08051d;
+}
+
+.theme {
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 14px;
+    background:linear-gradient(135deg, var(--pink), #d1005c);
+    border:3px solid #ff92bf;
+    box-shadow:5px 5px 0 #08051d, 0 0 20px rgba(255, 22, 128, 0.6);
+    font-weight:1000;
+    font-size:clamp(16px,2.2vw,22px);
+    letter-spacing:1px;
+    line-height:1.05;
+    text-transform:uppercase;
+    transform:rotate(-2deg);
+    border-radius: 6px;
+    animation: themeFloat 3s ease-in-out infinite alternate;
+}
+
+@keyframes themeFloat {
+    from { transform: rotate(-2deg) translateY(0); }
+    to { transform: rotate(-1deg) translateY(-3px); }
+}
+
+.lead {
+    max-width:490px;
+    color:#f4f1ff;
+    line-height:1.55;
+    margin:22px 0 0;
+    font-size:16px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.lead strong {
+    color:var(--yellow);
+    text-shadow: 0 0 8px rgba(255, 229, 46, 0.5);
+}
+
+/* SETOR 05.1 — BOTÃO JOGAR MEGA 3D */
+.big-btn {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    width:min(100%,390px);
+    min-height:66px;
+    margin-top:25px;
+    padding:14px 18px;
+    border:4px solid #fff9a5;
+    border-radius: 12px;
+    background:linear-gradient(180deg, var(--yellow) 0%, #ffae00 100%);
+    color:#171044;
+    box-shadow:0 8px 0 #bd5718, 0 15px 25px rgba(0,0,0,0.6), inset 0 -4px 10px rgba(189, 87, 24, 0.4);
+    font-size:clamp(22px,3vw,30px);
+    font-weight:1000;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all .15s cubic-bezier(0.2, 1.5, 0.4, 1);
+}
+
+.big-btn:hover {
+    filter:brightness(1.15);
+    transform:translateY(-4px) scale(1.02);
+    box-shadow:0 12px 0 #bd5718, 0 20px 35px rgba(255, 229, 46, 0.4), inset 0 -4px 10px rgba(189, 87, 24, 0.4);
+}
+
+.big-btn:active {
+    transform:translateY(6px) scale(0.98);
+    box-shadow:0 2px 0 #bd5718, 0 5px 10px rgba(0,0,0,0.5), inset 0 3px 6px rgba(0,0,0,0.3);
+}
+
+.play-triangle {
+    width:0;
+    height:0;
+    border-top:12px solid transparent;
+    border-bottom:12px solid transparent;
+    border-left:20px solid var(--blue);
+    filter: drop-shadow(2px 2px 0px rgba(255,255,255,0.5));
+}
+
+.small-note {
+    color:#c8bee7;
+    font-size:12px;
+    margin-top:17px;
+    opacity: 0.8;
+}
+
+/* ==================================================
+   SETOR 06 — CENÁRIO ARCADE DA TELA INICIAL
+   ================================================== */
+.scene {
+    position:relative;
+    flex:0 0 43%;
+    min-height:410px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    isolation: isolate;
+}
+
+.glow {
+    position:absolute;
+    width:100%;
+    aspect-ratio:1;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255, 229, 46, 0.25), rgba(255, 22, 128, 0.15) 45%, transparent 70%);
+    z-index: 0;
+    animation: glowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% { opacity: .6; transform: scale(.95) translateZ(0); }
+    100% { opacity: 1; transform: scale(1.1) translateZ(0); }
+}
+
+/* SETOR 06.1 — ESTRELAS EXISTENTES */
+.stars {
+    position:absolute;
+    inset:0;
+    color:var(--yellow);
+    font-size:28px;
+    text-shadow: 0 0 15px var(--yellow), 3px 3px var(--orange);
+    z-index: 2;
+}
+
+.stars span {
+    position:absolute;
+    animation: twinkle 2s infinite alternate ease-in-out;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.4; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+.stars span:nth-child(1) { top:15%; left:7%; animation-delay: 0s; }
+.stars span:nth-child(2) { top:19%; right:6%; color:var(--pool); text-shadow: 0 0 15px var(--pool), 3px 3px var(--blue); animation-delay: 0.5s; }
+.stars span:nth-child(3) { top:54%; right:1%; color:var(--pink); text-shadow: 0 0 15px var(--pink), 3px 3px #8d004b; animation-delay: 1s; }
+.stars span:nth-child(4) { top:57%; left:1%; color:var(--green); text-shadow: 0 0 15px var(--green), 3px 3px #3c9d28; animation-delay: 1.5s; }
+
+/* SETOR 06.2 — TROFÉU */
+.trophy {
+    position:absolute;
+    top:4%;
+    font-size:85px;
+    filter: drop-shadow(5px 6px 0 var(--purple)) drop-shadow(0 0 25px rgba(255, 229, 46, 0.7));
+    animation: trophyFloat 3.5s ease-in-out infinite;
+    z-index: 2;
+}
+
+@keyframes trophyFloat {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-12px) rotate(3deg) scale(1.05); }
+}
+
+.jars {
+    position:absolute;
+    bottom:72px;
+    display:flex;
+    align-items:end;
+    justify-content:center;
+    gap:8px;
+    width:100%;
+    z-index: 2;
+}
+
+/* SETOR 06.4 — FRASCOS SKALA EFEITO VIDRO/NEON */
+.jar {
+    height:104px;
+    width:78px;
+    border:4px solid #1b1244;
+    border-radius:13px 13px 16px 16px;
+    display:grid;
+    place-items:center;
+    color:#171044;
+    font-size:10px;
+    font-weight:1000;
+    text-align:center;
+    position:relative;
+    box-shadow: inset 5px 0 rgba(255,255,255,0.4), inset -5px -5px 10px rgba(0,0,0,0.3), 4px 5px #0004, 0 0 15px rgba(117, 231, 255, 0.2);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.jar:hover {
+    transform: translateY(-10px) scale(1.05) !important;
+    z-index: 10;
+}
+
+.jar:before {
+    content:"";
+    position:absolute;
+    top:-15px;
+    left:8px;
+    right:8px;
+    height:15px;
+    background:inherit;
+    border:4px solid #1b1244;
+    border-radius:5px 5px 0 0;
+    box-shadow: inset 3px 0 rgba(255,255,255,0.4);
+}
+
+.jar span {
+    background:rgba(255,255,255,0.85);
+    width:100%;
+    padding:5px 0;
+    line-height:1.1;
+    border-top: 2px solid rgba(255,255,255,0.5);
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.jar.orange {
+    background:linear-gradient(135deg, #ffa85c, var(--orange));
+    height:88px;
+    transform:rotate(-8deg)
+}
+
+.jar.pink {
+    background:linear-gradient(135deg, #ff8bc1, #ff5ca7);
+    width:88px;
+    height:124px;
+    z-index:1;
+    box-shadow: inset 5px 0 rgba(255,255,255,0.4), inset -5px -5px 10px rgba(0,0,0,0.3), 4px 5px #0004, 0 0 25px rgba(255, 22, 128, 0.4);
+}
+
+.jar.cyan {
+    background:linear-gradient(135deg, #a3f1ff, var(--pool));
+    height:97px;
+    transform:rotate(7deg)
+}
+
+/* SETOR 06.5 — PLATAFORMA DOS FRASCOS */
+.platform {
+    position:absolute;
+    bottom:45px;
+    width:95%;
+    height:24px;
+    border:4px solid #9cebff;
+    background:repeating-linear-gradient(90deg,var(--blue) 0 26px,#4c86ff 26px 52px);
+    box-shadow:0 10px #08051d, 0 14px var(--purple), 0 0 30px rgba(23, 76, 255, 0.5), inset 0 5px 10px rgba(255,255,255,0.3);
+    clip-path:polygon(0 0,100% 0,100% 60%,96% 60%,96% 100%,4% 100%,4% 60%,0 60%);
+    z-index: 2;
+}
+
+/* SETOR 06.3 — ROBÔ */
+.robot {
+    position:absolute;
+    right:2%;
+    top:30%;
+    width:76px;
+    height:98px;
+    filter:drop-shadow(6px 6px 0 #09051e) drop-shadow(0 0 15px rgba(117, 231, 255, 0.5));
+    transform:rotate(4deg);
+    z-index: 2;
+    animation: robotHover 4s ease-in-out infinite alternate;
+}
+
+@keyframes robotHover {
+    from { transform: rotate(4deg) translateY(0); }
+    to { transform: rotate(8deg) translateY(-8px); }
+}
+
+.robot-head {
+    position:absolute;
+    left:7px;
+    width:62px;
+    height:52px;
+    background:linear-gradient(135deg, var(--pool), #26c0e4);
+    border:5px solid #17265b;
+    border-radius:10px;
+    box-shadow:inset -6px -5px #36acd9, inset 3px 3px rgba(255,255,255,0.5);
+}
+
+.robot-head:before {
+    content:"••";
+    position:absolute;
+    top:7px;
+    left:10px;
+    color:var(--blue);
+    font-size:23px;
+    letter-spacing:8px;
+    text-shadow: 0 0 8px rgba(255,255,255,0.8);
+}
+
+.robot-head:after {
+    content:"⌣";
+    position:absolute;
+    top:23px;
+    left:0;
+    right:0;
+    text-align:center;
+    color:var(--blue);
+    font-size:22px;
+    font-weight:bold;
+    text-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+
+.robot-body {
+    position:absolute;
+    top:55px;
+    left:19px;
+    width:42px;
+    height:37px;
+    background:linear-gradient(135deg, #fff, #d5d8e7);
+    border:5px solid #17265b;
+    border-radius:7px;
+    box-shadow: inset -4px -4px rgba(0,0,0,0.1);
+}
+
+.robot-body:after {
+    content:"★";
+    position:absolute;
+    top:3px;
+    left:7px;
+    color:var(--green);
+    font-size:17px;
+    text-shadow: 0 0 5px rgba(168, 213, 42, 0.8);
+}
+
+/* ==================================================
+   SETOR 07 — RODAPÉ
+   ================================================== */
+.footer {
+    margin-top:auto;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding-top:14px;
+    border-top:1px solid rgba(255,255,255,0.15);
+    color:#c9c0e4;
+    font-size:10px;
+    letter-spacing:1px;
+    text-transform:uppercase
+}
+
+.footer strong {
+    color:var(--green);
+    text-shadow: 0 0 5px rgba(168, 213, 42, 0.4);
+}
+
+/* ==================================================
+   SETOR 08 — TELAS INTERNAS DO QUIZ
+   ================================================== */
+.inner {
+    width:min(720px,100%);
+    margin:25px auto 20px;
+    display:flex;
+    flex-direction:column;
+    flex:1
+}
+
+.screen-head {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:20px
+}
+
+.back {
+    border:0;
+    background:transparent;
+    color:var(--yellow);
+    font-size:34px;
+    font-weight:900;
+    cursor:pointer;
+    transition: transform 0.2s, text-shadow 0.2s;
+    text-shadow: 0 0 10px rgba(255, 229, 46, 0.3);
+}
+
+.back:hover {
+    transform: translateX(-5px) scale(1.1);
+    text-shadow: 0 0 15px rgba(255, 229, 46, 0.8);
+}
+
+.mini-brand {
+    text-align:center;
+    font-size:23px;
+    line-height:.9;
+    color:var(--yellow);
+    font-weight:1000;
+    text-shadow: 0 0 10px rgba(255, 229, 46, 0.5), 2px 2px 0 var(--purple);
+}
+
+.mini-brand small {
+    display:block;
+    font-size:11px;
+    color:white;
+    margin-top:5px;
+    text-shadow: none;
+}
+
+.pixel-mark {
+    width:44px;
+    height:18px;
+    background:linear-gradient(90deg,var(--blue) 0 30%,transparent 30% 40%,var(--pink) 40% 70%,transparent 70% 78%,var(--yellow) 78%);
+    clip-path:polygon(0 35%,65% 35%,65% 0,100% 0,100% 70%,35% 70%,35% 100%,0 100%);
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+}
+
+.section-title {
+    text-align:center;
+    font-size:clamp(28px,5vw,42px);
+    font-weight:1000;
+    text-transform:uppercase;
+    text-shadow:3px 3px var(--purple), 0 0 20px rgba(255,255,255,0.3);
+    margin:0 0 20px
+}
+
+.title-line {
+    width:75%;
+    height:5px;
+    margin:-8px auto 22px;
+    background:linear-gradient(90deg,var(--pink),var(--blue),var(--pool));
+    box-shadow: 0 0 10px rgba(117, 231, 255, 0.5);
+    border-radius: 5px;
+}
+
+.paper {
+    background:var(--paper);
+    color:var(--ink);
+    padding:clamp(18px,4vw,30px);
+    border:5px solid #e8faff;
+    border-radius: 8px;
+    box-shadow:8px 8px 0 #09051d, 0 0 30px rgba(117, 231, 255, 0.15);
+    position:relative
+}
+
+.paper:before {
+    content:"";
+    position:absolute;
+    inset:5px;
+    border:2px dashed #d7e3ff;
+    border-radius: 4px;
+    pointer-events:none
+}
+
+.rules {
+    display:grid;
+    gap:0
+}
+
+.rule {
+    display:grid;
+    grid-template-columns:52px 1fr;
+    align-items:center;
+    gap:14px;
+    padding:13px 0;
+    border-bottom:2px solid #e1e9f3;
+    font-size:17px;
+    line-height:1.3;
+    transition: transform 0.2s, background 0.2s;
+    border-radius: 8px;
+}
+
+.rule:hover {
+    transform: translateX(5px);
+    background: rgba(23, 76, 255, 0.03);
+}
+
+.rule:last-child {
+    border-bottom:0
+}
+
+.rule-icon {
+    width:48px;
+    height:48px;
+    display:grid;
+    place-items:center;
+    font-size:26px;
+    border:3px solid #ffffffa6;
+    box-shadow:3px 3px #d5d8e7, inset 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    color:white;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rule:hover .rule-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.rule:nth-child(1) .rule-icon { background:linear-gradient(135deg, #4ef247, #31c92b); }
+.rule:nth-child(2) .rule-icon { background:linear-gradient(135deg, #ff4fa3, var(--pink)); }
+.rule:nth-child(3) .rule-icon { background:linear-gradient(135deg, #ffe52e, #ffc900); color:var(--ink); }
+.rule:nth-child(4) .rule-icon { background:linear-gradient(135deg, #75e7ff, #365cff); }
+.rule:nth-child(5) .rule-icon { background:linear-gradient(135deg, #bba0ff, #8b22e7); }
+
+.bottom-action {
+    display:flex;
+    justify-content:center;
+    margin-top:22px
+}
+
+.blue-btn,.pink-btn {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    width:min(100%,430px);
+    min-height:60px;
+    padding:13px 20px;
+    border:4px solid #b7f7ff;
+    border-radius: 10px;
+    color:white;
+    font-weight:1000;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 6px #08051d, 0 10px 20px rgba(0,0,0,0.3);
+    transition: all 0.15s cubic-bezier(0.2, 1.5, 0.4, 1);
+}
+
+.blue-btn { background:linear-gradient(180deg, #4c86ff, var(--blue)); }
+.pink-btn { background:linear-gradient(180deg, #ff4fa3, var(--pink)); border-color:#ff94c4; }
+
+.blue-btn:hover,.pink-btn:hover {
+    filter:brightness(1.15);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.blue-btn:active,.pink-btn:active {
+    transform: translateY(4px) scale(0.98);
+    box-shadow:0 2px #08051d, 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.callout {
+    align-self:flex-end;
+    max-width:220px;
+    margin:18px 0 0;
+    background:var(--paper);
+    color:var(--ink);
+    padding:12px 15px;
+    border:3px solid var(--pool);
+    border-radius: 8px;
+    box-shadow:4px 4px var(--purple), 0 0 15px rgba(117, 231, 255, 0.2);
+    font-size:13px;
+    line-height:1.3;
+    font-weight:1000;
+    text-transform:uppercase;
+    animation: pulseCallout 3s ease-in-out infinite alternate;
+}
+
+@keyframes pulseCallout {
+    from { transform: scale(1); }
+    to { transform: scale(1.03); }
+}
+
+.progress-wrap {
+    margin-bottom:17px
+}
+
+.progress {
+    height:25px;
+    border:4px solid #3a91ff;
+    border-radius: 12px;
+    background:#090d44;
+    padding:2px;
+    display:flex;
+    gap:2px;
+    box-shadow: 0 0 15px rgba(23, 76, 255, 0.3), inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+.progress-segment {
+    flex:1;
+    background:#29245d;
+    border-radius: 3px;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.progress-segment.done {
+    background:linear-gradient(180deg, #e8ff5b 0, #7de529 100%);
+    box-shadow:inset -2px 0 #3c9d28, 0 0 12px var(--green);
+}
+
+.question-meta {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-top:9px;
+    font-weight:800;
+    font-size:13px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.timer {
+    color:var(--yellow);
+    font-weight:1000;
+    font-size:22px;
+    text-shadow: 0 0 10px rgba(255, 229, 46, 0.6), 2px 2px 0 var(--purple);
+    background: rgba(0,0,0,0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 2px solid rgba(255,229,46,0.3);
+}
+
+.category {
+    display:inline-block;
+    background:linear-gradient(135deg, #fff9a5, var(--yellow));
+    padding:7px 11px;
+    border-radius: 6px;
+    font-size:12px;
+    font-weight:1000;
+    text-transform:uppercase;
+    box-shadow:3px 3px #ffbd27, 0 0 15px rgba(255, 229, 46, 0.3);
+}
+
+.question-text {
+    font-size:clamp(21px,3.5vw,29px);
+    line-height:1.22;
+    font-weight:900;
+    margin:17px 0 20px;
+    color: var(--purple);
+}
+
+.answers {
+    display:grid;
+    gap:12px
+}
+
+.answer {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    width:100%;
+    min-height:53px;
+    padding:9px 12px;
+    background:linear-gradient(to right, #f1f5ff, #ffffff);
+    color:var(--ink);
+    border:2px solid #b9d7ff;
+    border-radius: 8px;
+    text-align:left;
+    font-size:16px;
+    font-weight: 700;
+    cursor:pointer;
+    transition: all 0.2s cubic-bezier(0.2, 1.5, 0.4, 1);
+    box-shadow: 0 4px 0 rgba(185, 215, 255, 0.5);
+}
+
+.answer-letter {
+    flex:0 0 36px;
+    height:36px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg, #4c86ff, var(--blue));
+    color:white;
+    font-weight:1000;
+    font-size:18px;
+    box-shadow: inset 2px 2px rgba(255,255,255,0.4), 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.answer:nth-child(even) {
+    background:linear-gradient(to right, #ffe2f0, #ffffff);
+    border-color:#ff9dc9;
+    box-shadow: 0 4px 0 rgba(255, 157, 201, 0.5);
+}
+
+.answer:nth-child(even) .answer-letter {
+    background:linear-gradient(135deg, #ff4fa3, var(--pink));
+}
+
+.answer:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.01);
+    filter: brightness(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1), 0 4px 0 var(--blue);
+}
+
+.answer:nth-child(even):hover:not(:disabled) {
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1), 0 4px 0 var(--pink);
+}
+
+.answer.selected {
+    outline:3px solid var(--blue);
+    outline-offset:2px;
+    background: #e6f0ff;
+    border-color: var(--blue);
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(23, 76, 255, 0.2);
+}
+
+.answer:disabled {
+    cursor:default;
+    opacity:.85;
+}
+
+.answer.correct {
+    background:linear-gradient(to right, #ddffd8, #f0fff0) !important;
+    border-color:#48ce4c !important;
+    box-shadow: 0 0 20px rgba(72, 206, 76, 0.4), 0 4px 0 #3c9d28 !important;
+    transform: scale(1.03);
+    z-index: 2;
+}
+
+.answer.correct .answer-letter {
+    background:linear-gradient(135deg, #4ef247, #20a52c) !important;
+}
+
+.answer.wrong {
+    background:linear-gradient(to right, #ffe1e1, #fff5f5) !important;
+    border-color:#ff5c70 !important;
+    box-shadow: 0 4px 0 #d93d50 !important;
+}
+.answer.wrong .answer-letter {
+    background:linear-gradient(135deg, #ff8c9a, #ff5c70) !important;
+}
+
+.quiz-action {
+    margin-top:17px
+}
+
+.quiz-action button {
+    width:100%
+}
+
+.feedback-banner {
+    text-align:center;
+    padding:14px 10px;
+    border:4px solid #5affc1;
+    border-radius: 12px;
+    background:linear-gradient(135deg, #075e4b, #043d31);
+    color:white;
+    box-shadow:5px 5px #09051d, 0 0 30px rgba(90, 255, 193, 0.3);
+    font-size:clamp(21px,4vw,30px);
+    font-weight:1000;
+    text-transform:uppercase;
+    text-shadow:2px 2px #063b38;
+    animation: popBanner 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popBanner {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.feedback-banner.wrong {
+    background:linear-gradient(135deg, #8d194a, #5c0f30);
+    border-color:#ff9fc5;
+    box-shadow:5px 5px #09051d, 0 0 30px rgba(255, 159, 197, 0.3);
+    text-shadow:2px 2px #4a0925;
+}
+
+.reward {
+    text-align:center;
+    margin:20px 0 15px
+}
+
+.reward-icon {
+    font-size:84px;
+    line-height:1;
+    filter:drop-shadow(4px 5px #b77b00) drop-shadow(0 0 25px rgba(255, 229, 46, 0.5));
+    animation: rewardBounce 2s ease-in-out infinite alternate;
+}
+
+@keyframes rewardBounce {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(-10px) scale(1.05); }
+}
+
+.points {
+    display:inline-block;
+    background:linear-gradient(180deg, var(--yellow), #ffc000);
+    color:var(--ink);
+    padding:10px 20px;
+    margin-top:10px;
+    border:3px solid #fff8a0;
+    border-radius: 8px;
+    box-shadow:4px 4px #09051d, inset 0 -3px rgba(0,0,0,0.1);
+    font-size:25px;
+    font-weight:1000
+}
+
+.feedback-copy {
+    font-size:19px;
+    font-weight:900;
+    line-height:1.35;
+    text-align:center;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.stats {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    background:linear-gradient(to bottom, #fff, #f4f6fa);
+    color:var(--ink);
+    margin-top:20px;
+    border:4px solid var(--pink);
+    border-radius: 12px;
+    box-shadow:5px 5px #09051d, 0 0 20px rgba(255, 22, 128, 0.2);
+}
+
+.stat {
+    padding:15px 10px;
+    text-align:center
+}
+
+.stat+.stat {
+    border-left:2px dashed #d6e1f4
+}
+
+.stat-label {
+    font-size:13px;
+    font-weight: 800;
+    color: var(--purple);
+}
+
+.stat-value {
+    display:block;
+    font-size:27px;
+    font-weight:1000;
+    margin-top:4px;
+    color: var(--blue);
+}
+
+.final-progress {
+    height:17px;
+    background:#c9cce6;
+    border-radius: 8px;
+    margin:13px 10px 3px;
+    overflow:hidden;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.final-progress span {
+    display:block;
+    height:100%;
+    background:linear-gradient(90deg,var(--green),#d6ff4d);
+    width:0;
+    box-shadow: inset 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+.result-actions {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:18px
+}
+
+.result-actions button {
+    width:100%;
+    font-size:13px;
+    min-height:54px
+}
+
+.notice {
+    font-size:11px;
+    color:#d5ccef;
+    text-align:center;
+    margin-top:14px;
+    opacity: 0.8;
+}
+
+/* ==================================================
+   SETOR 08.5 — SCOREBOARD FINAL, MEDALHAS E PRINT
+   ================================================== */
+.scoreboard-wrap { width:100%; margin:auto; padding:18px 0 24px; }
+.scoreboard-card { --medal:#8d75b8; width:min(760px,100%); margin:0 auto; padding:clamp(18px,4vw,34px); text-align:center; color:#fff; background:linear-gradient(160deg,#1b1038,#090817 72%); border:5px solid #6f559b; border-radius: 20px; box-shadow:8px 8px 0 #05040c, inset 0 0 0 2px #ffffff16, 0 0 40px rgba(111, 85, 155, 0.4); position:relative; overflow:hidden; }
+.scoreboard-card:before { content:""; position:absolute; inset:8px; border:2px dashed #ffffff35; border-radius: 12px; pointer-events:none; }
+.scoreboard-card > * { position:relative; }
+.scoreboard-kicker { color:var(--pool); font-size:10px; font-weight:1000; letter-spacing:2px; text-shadow: 0 0 8px var(--pool); }
+.scoreboard-status { margin:13px auto 4px; color:#fff; font-size:clamp(30px,6vw,48px); font-weight:1000; line-height:1; text-shadow:4px 4px #090511, 0 0 20px rgba(255,255,255,0.4); }
+.scoreboard-medal { font-size:clamp(54px,10vw,76px); line-height:1.15; margin:6px 0 0; }
+.scoreboard-stars { color:#8874a8; font-size:27px; letter-spacing:9px; min-height:32px; }
+.scoreboard-headline { font-size:clamp(18px,3vw,25px); font-weight:1000; margin:8px 0 18px; }
+.scoreboard-player-label { color:#c8bce8; font-size:10px; font-weight:900; letter-spacing:2px; margin:0; }
+.scoreboard-player { overflow-wrap:anywhere; margin:5px 0 18px; font-size:clamp(23px,4vw,34px); line-height:1.1; color:#fff; text-shadow: 0 0 15px rgba(255,255,255,0.3); }
+.scoreboard-stats { display:grid; grid-template-columns:1fr 1fr; background:linear-gradient(to bottom, #ffffff, #f0f0f0); color:#1b1038; border:4px solid var(--medal); border-radius: 12px; margin:0 auto 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+.scoreboard-stats div { padding:14px 8px; min-width:0; }
+.scoreboard-stats div+div { border-left:2px dashed #ddd6ed; }
+.scoreboard-stats span { display:block; font-size:11px; font-weight:900; letter-spacing:1px; color: var(--purple); }
+.scoreboard-stats strong { display:block; font-size:clamp(25px,5vw,36px); margin-top:4px; overflow-wrap:anywhere; }
+.scoreboard-message { max-width:560px; margin:0 auto 16px; line-height:1.5; font-size:14px; text-shadow: 1px 1px 2px #000; }
+.prize-instructions { text-align:left; color:#21153d; background:linear-gradient(135deg, #fffdf2, #fff7cc); border:4px solid var(--yellow); border-radius: 12px; padding:14px 16px; margin:16px 0; box-shadow:4px 4px 0 #05040c, inset 0 0 15px rgba(255,229,46,0.3); }
+.prize-instructions > strong { display:block; text-align:center; font-size:14px; margin-bottom:10px; color: var(--purple); }
+.prize-instructions p { font-size:12px; line-height:1.5; margin:7px 0; font-weight: 700; }
+.prize-instructions small { display:block; margin-top:10px; font-weight:800; color:#7b174b; line-height:1.4; }
+.scoreboard-retry { width:100%; min-height:52px; margin-top:12px; }
+.scoreboard-footer { margin-top:18px; font-size:9px; letter-spacing:2px; color:#b9acd8; }
+.scoreboard-card.bronze { --medal:#cd8748; border-color:#cd8748; box-shadow:8px 8px 0 #05040c, inset 0 0 0 2px #f5c08b55, 0 0 40px rgba(205, 135, 72, 0.3); }
+.scoreboard-card.silver { --medal:#c8d2e0; border-color:#c8d2e0; box-shadow:8px 8px 0 #05040c, inset 0 0 0 2px #ffffff70, 0 0 40px rgba(200, 210, 224, 0.3); }
+.scoreboard-card.gold { --medal:#ffe34d; border-color:#ffe34d; box-shadow:8px 8px 0 #05040c, inset 0 0 0 2px #fff7b855, 0 0 60px rgba(255, 227, 77, 0.4); }
+.scoreboard-card.failed { --medal:#7c5aa5; border-color:#7c5aa5; background:repeating-linear-gradient(135deg,#0a0815,#0a0815 14px,#171025 14px,#171025 28px); }
+.scoreboard-card.failed .scoreboard-status { color:#c6a9ed; text-shadow: none; }
+.scoreboard-card.bronze .scoreboard-stars { color:#cd8748; text-shadow: 0 0 10px rgba(205, 135, 72, 0.6); }
+.scoreboard-card.silver .scoreboard-stars { color:#e2e8f0; text-shadow:0 0 12px #fff; }
+.scoreboard-card.gold .scoreboard-stars { color:#ffe34d; text-shadow:0 0 15px #ffe34d; }
+@media(max-width:600px) { .scoreboard-wrap { padding-top:10px; } .scoreboard-card { padding:20px 14px; border-width:4px; } .scoreboard-stats div { padding:12px 5px; } .prize-instructions { padding:12px; } .print-desktop { display:none; } }
+@media(min-width:601px) { .print-mobile { display:none; } }
+
+/* ==================================================
+   SETOR 26 — ANIMAÇÃO ARCADE DO PLACAR FINAL
+   ================================================== */
+.scoreboard-card.result-enter { animation: scoreboardEnter .6s cubic-bezier(.18,.89,.32,1.28) both; }
+@keyframes scoreboardEnter {
+  0% { opacity:0; transform:translateY(40px) scale(.8) rotate(-3deg); filter: blur(5px); }
+  70% { opacity:1; transform:translateY(-5px) scale(1.02) rotate(1deg); filter: blur(0); }
+  100% { opacity:1; transform:translateY(0) scale(1) rotate(0); }
+}
+.scoreboard-medal.pop { animation: medalPop .8s cubic-bezier(.2,1.6,.4,1) both; }
+@keyframes medalPop {
+  0% { transform:scale(.2) rotate(-35deg); opacity:0; }
+  65% { transform:scale(1.3) rotate(10deg); opacity:1; filter: drop-shadow(0 0 40px var(--medal)); }
+  82% { transform:scale(.9) rotate(-5deg); }
+  100% { transform:scale(1) rotate(0); opacity:1; }
+}
+.scoreboard-stars { display:flex; justify-content:center; align-items:center; gap:clamp(12px,3vw,24px); letter-spacing:0; margin:4px 0 8px; }
+.scoreboard-stars .score-star { display:inline-block; min-width:28px; opacity:0; transform:translateY(-24px) scale(.2) rotate(-30deg); }
+.scoreboard-stars.animate .score-star { animation: starDrop .6s cubic-bezier(.2,1.7,.4,1) forwards; }
+.scoreboard-stars .score-star:nth-child(1) { animation-delay:.15s; }
+.scoreboard-stars .score-star:nth-child(2) { animation-delay:.35s; }
+.scoreboard-stars .score-star:nth-child(3) { animation-delay:.55s; }
+@keyframes starDrop {
+  0% { opacity:0; transform:translateY(-30px) scale(.2) rotate(-45deg); }
+  65% { opacity:1; transform:translateY(5px) scale(1.4) rotate(15deg); }
+  82% { transform:translateY(-3px) scale(.9) rotate(-5deg); }
+  100% { opacity:1; transform:translateY(0) scale(1) rotate(0); }
+}
+.scoreboard-stars.animate .score-star.lit { animation-name: starDrop, starPulse; animation-duration:.6s,1.2s; animation-delay:var(--drop-delay),.9s; animation-timing-function:cubic-bezier(.2,1.7,.4,1),ease-in-out; animation-iteration-count:1,infinite; animation-direction:normal,alternate; }
+@keyframes starPulse { from { filter:drop-shadow(0 0 2px currentColor); transform:scale(1); } to { filter:drop-shadow(0 0 15px currentColor); transform:scale(1.15); } }
+.scoreboard-stats strong.score-count-pop { display:inline-block; animation: scorePop .5s .4s cubic-bezier(.2,1.5,.4,1) both; }
+@keyframes scorePop { 0% { transform:scale(.4); opacity:.2; } 70% { transform:scale(1.2); opacity:1; } 100% { transform:scale(1); opacity:1; } }
+.scoreboard-card.failed .scoreboard-medal { animation: failWobble .7s ease-in-out both; }
+.scoreboard-card.failed .scoreboard-stars .score-star { color:#8d79aa; text-shadow: none; }
+@keyframes failWobble { 0%,100% { transform:rotate(0); } 20%,60% { transform:rotate(-12deg); } 40%,80% { transform:rotate(12deg); } }
+@media(prefers-reduced-motion:reduce) {
+ .scoreboard-card.result-enter,.scoreboard-medal.pop,.scoreboard-stars.animate .score-star,.scoreboard-stars.animate .score-star.lit,.score-count-pop,.scoreboard-card.failed .scoreboard-medal { animation:none!important; opacity:1!important; transform:none!important; filter:none!important; }
+}
+
+/* ==================================================
+   SETOR 09 — RESPONSIVIDADE PARA CELULARES
+   ================================================== */
+@media(max-width:760px) {
+    .shell {
+    padding:14px 16px 18px
+}
+
+.home {
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding-top:20px
+}
+
+h1 {
+    font-size:clamp(42px,12vw,66px)
+}
+
+.lead {
+    font-size:14px;
+    margin-top:18px
+}
+
+.scene {
+    flex:auto;
+    min-height:290px;
+    width:100%
+}
+
+.trophy {
+    font-size:61px
+}
+
+.jars {
+    bottom:42px
+}
+
+.platform {
+    bottom:17px
+}
+
+.robot {
+    top:25%;
+    right:6%;
+    transform:scale(.78) rotate(4deg);
+    transform-origin:top right
+}
+
+.jar {
+    transform:scale(.85)
+}
+
+.jar.orange {
+    transform:scale(.85) rotate(-8deg)
+}
+
+.jar.cyan {
+    transform:scale(.85) rotate(7deg)
+}
+
+.inner {
+    margin:18px auto 15px
+}
+
+.rule {
+    font-size:15px
+}
+
+.paper {
+    padding:18px
+}
+
+.section-title {
+    font-size:30px
+}
+
+.footer {
+    font-size:9px
+}
+
+.result-actions {
+    grid-template-columns:1fr
+}
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,*:before,*:after {
+    animation:none!important;
+    transition:none!important
+}
+
+}
+
+/* ==================================================
+   SETOR 10 — CAMPOS DE IDENTIFICAÇÃO DO JOGADOR
+   ================================================== */
+.player-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: min(100%, 390px);
+    margin-top: 25px;
+}
+
+.player-fields label {
+    margin-top: 5px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.player-fields input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 3px solid #e8faff;
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 700;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+    transition: all 0.2s;
+}
+
+.player-fields input:focus {
+    outline: none;
+    border-color: var(--pool);
+    box-shadow: 0 4px 0 var(--blue), 0 0 15px rgba(117, 231, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.field-error {
+    min-height: 16px;
+    margin: 0;
+    color: var(--yellow);
+    font-size: 12px;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0,0,0,0.8);
+}
+
+/* ==================================================
+   SETOR 11 — EFEITOS DO TROFÉU E DO BOTÃO JOGAR
+   ================================================== */
+/* Aplicados no Setor 05 e 06 diretamente */
+
+/* ==================================================
+   SETOR 12 — EFEITOS VISUAIS EXTRAS DA TELA INICIAL
+   ================================================== */
+
+.screen.home .scene {
+    isolation: isolate;
+}
+
+.arcade-decor {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.arcade-decor .float-icon {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+    line-height: 1;
+    font-weight: 900;
+    opacity: .9;
+    text-shadow: 0 0 8px currentColor, 0 0 18px currentColor;
+    animation: arcadeFloat 3.4s ease-in-out infinite;
+}
+
+.arcade-decor .icon-1 { top: 12%; left: 13%; color: var(--yellow); font-size: 29px; }
+.arcade-decor .icon-2 { top: 25%; right: 15%; color: var(--pink); animation-delay: -.8s; }
+.arcade-decor .icon-3 { top: 43%; left: 4%; color: var(--pool); animation-delay: -1.6s; }
+.arcade-decor .icon-4 { top: 57%; right: 4%; color: var(--green); animation-delay: -2.2s; }
+.arcade-decor .icon-5 { top: 35%; right: 22%; color: #7dffb5; animation-delay: -1.1s; }
+.arcade-decor .icon-6 { bottom: 23%; left: 13%; color: #83eaff; animation-delay: -2.7s; }
+.arcade-decor .icon-7 { top: 17%; left: 43%; color: #ff7bce; animation-delay: -.5s; }
+.arcade-decor .icon-8 { bottom: 18%; right: 14%; color: #bba0ff; animation-delay: -1.9s; }
+.arcade-decor .icon-9 { top: 64%; left: 26%; color: var(--yellow); font-size: 12px; animation-delay: -1.4s; }
+.arcade-decor .icon-10 { top: 8%; right: 34%; color: #9efff2; font-size: 19px; animation-delay: -2.4s; }
+
+@keyframes arcadeFloat {
+    0%, 100% { transform: translateY(0) rotate(-8deg) scale(1); opacity: .65; }
+    50% { transform: translateY(-12px) rotate(8deg) scale(1.18); opacity: 1; }
+}
+
+.screen.home .stars,
+.screen.home .trophy,
+.screen.home .robot,
+.screen.home .jars,
+.screen.home .platform {
+    z-index: 2;
+}
+
+@media (max-width: 760px) {
+    .arcade-decor .float-icon { font-size: 20px; }
+    .arcade-decor .icon-1 { top: 8%; left: 5%; }
+    .arcade-decor .icon-2 { top: 18%; right: 7%; }
+    .arcade-decor .icon-3 { top: 42%; left: 2%; }
+    .arcade-decor .icon-4 { top: 55%; right: 2%; }
+    .arcade-decor .icon-6 { bottom: 20%; left: 5%; }
+    .arcade-decor .icon-8 { bottom: 15%; right: 6%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .screen.home .glow,
+    .arcade-decor .float-icon {
+        animation: none !important;
+    }
+}
+
+/* ==================================================
+   SETOR 24 — CRÉDITO DISCRETO NO RODAPÉ
+   ================================================== */
+.creator-credit {
+    color: #a99bc9;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: .5px;
+    text-transform: none;
+    opacity: .75;
+    white-space: nowrap;
+}
+
+/* ==================================================
+   SETOR 25 — POPUP LEVEL UP
+   ================================================== */
+.level-up-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(13, 3, 35, .85);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .3s ease, visibility .3s ease;
+}
+
+.level-up-popup.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.level-up-content {
+    width: min(360px, 100%);
+    padding: 26px 22px;
+    text-align: center;
+    background: linear-gradient(135deg, #fffdf2, #fff7cc);
+    border: 5px solid #ffe52e;
+    border-radius: 16px;
+    box-shadow: 8px 8px 0 #07051a, 0 0 50px rgba(255, 229, 46, 0.4);
+    transform: scale(.5) rotate(-10deg);
+    transition: transform .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.level-up-popup.show .level-up-content {
+    transform: scale(1) rotate(0);
+}
+
+.level-up-stars {
+    color: #ff1680;
+    font-size: 32px;
+    text-shadow: 0 0 15px rgba(255, 22, 128, 0.5);
+    animation: levelUpSparkle .6s ease-in-out infinite alternate;
+}
+
+.level-up-title {
+    margin: 8px 0;
+    color: #174cff;
+    font-size: 38px;
+    font-weight: 1000;
+    text-shadow: 3px 3px 0 #a8d52a, 0 0 15px rgba(168, 213, 42, 0.5);
+}
+
+.level-up-points {
+    margin: 12px 0;
+    padding: 12px 8px;
+    color: #151044;
+    background: linear-gradient(180deg, #ffe52e, #ffc000);
+    border: 3px solid #151044;
+    border-radius: 8px;
+    font-size: 28px;
+    font-weight: 1000;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.8);
+}
+
+.level-up-message {
+    color: #ff1680;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+@keyframes levelUpSparkle {
+    from { transform: scale(.9) rotate(-5deg); filter: drop-shadow(0 0 5px currentColor); }
+    to { transform: scale(1.15) rotate(5deg); filter: drop-shadow(0 0 20px currentColor); }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+    .creator-credit {
+        order: 3;
+        width: 100%;
+        padding-top: 3px;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .level-up-stars { animation: none; }
+    .level-up-popup, .level-up-content { transition: none; }
+}
+
+/* ==================================================
+   AJUSTE FINAL — TELAS SEM ROLAGEM E FLUXO DO RESULTADO
+   ================================================== */
+html, body { width:100%; height:100%; overflow:hidden; }
+.app { height:100vh; height:100dvh; min-height:0; overflow:hidden; }
+.shell { height:100vh; height:100dvh; min-height:0; overflow:hidden; padding-top:12px; padding-bottom:10px; }
+.screen { min-height:0; overflow:hidden; }
+.screen.active { min-height:0; }
+.inner { min-height:0; overflow:hidden; }
+#screen-feedback .inner { justify-content:center; gap:clamp(7px,1.5vh,15px); margin:8px auto; }
+#screen-feedback .screen-head { margin-bottom:clamp(4px,1vh,10px); }
+#screen-feedback .feedback-banner { padding:clamp(9px,1.8vh,15px) 8px; }
+#screen-feedback .reward { margin:clamp(5px,1vh,12px) 0; }
+#screen-feedback .reward-icon { font-size:clamp(42px,7vh,70px); }
+#screen-feedback .points { font-size:clamp(19px,3vh,25px); padding:8px 16px; }
+#screen-feedback .feedback-copy { font-size:clamp(14px,2.2vh,19px); margin:4px 0; }
+#screen-feedback .stats { margin-top:clamp(5px,1vh,12px); }
+#screen-feedback .stat { padding:clamp(8px,1.4vh,15px) 8px; }
+#screen-feedback .stat-value { font-size:clamp(21px,3.4vh,27px); }
+#screen-feedback .notice { margin-top:5px; }
+#screen-feedback .scoreboard-wrap { padding:0; overflow:hidden; }
+#screen-feedback .scoreboard-card { max-height:calc(100dvh - 100px); overflow-y:auto; padding:clamp(10px,2vh,20px); }
+#screen-feedback .scoreboard-status { margin:7px auto 3px; font-size:clamp(25px,5vh,42px); }
+#screen-feedback .scoreboard-medal { font-size:clamp(38px,7vh,60px); margin:0; }
+#screen-feedback .scoreboard-stars { min-height:24px; font-size:23px; margin:0 0 4px; }
+#screen-feedback .scoreboard-headline { margin:5px 0 9px; }
+#screen-feedback .scoreboard-player { margin:3px 0 9px; font-size:clamp(20px,3.5vh,30px); }
+#screen-feedback .scoreboard-stats { margin-bottom:9px; }
+#screen-feedback .scoreboard-stats div { padding:8px 6px; }
+#screen-feedback .scoreboard-stats strong { font-size:clamp(22px,4vh,32px); }
+#screen-feedback .scoreboard-message { font-size:12px; line-height:1.35; margin-bottom:8px; }
+#screen-feedback .prize-instructions { padding:9px 12px; margin:8px 0; }
+#screen-feedback .prize-instructions p { font-size:11px; line-height:1.3; margin:5px 0; }
+#screen-feedback .prize-instructions small { margin-top:6px; }
+#screen-feedback .scoreboard-footer { margin-top:8px; }
+#screen-feedback .scoreboard-retry { margin-top:5px; min-height:44px; }
+#screen-home { position:relative; }
+#previous-result { position:absolute; right:0; top:80%; bottom:auto; transform:translateY(-50%); width:min(300px,32%); margin:0!important; padding:10px!important; font-size:12px; z-index:5; }
+#previous-result-text { font-size:11px!important; line-height:1.25; }
+@media (max-width:760px) {
+  .shell { padding:8px 12px 8px; }
+  .topbar { flex:0 0 auto; }
+  .screen.home { overflow:hidden; padding:10px 0 4px; gap:0; }
+  .screen.home .home-copy { flex:0 0 auto; }
+  .screen.home h1 { font-size:clamp(36px,9vw,54px); margin-top:12px; letter-spacing:-2px; }
+  .screen.home .theme { margin-top:10px; padding:7px 10px; font-size:16px; }
+  .screen.home .lead { margin-top:10px; line-height:1.3; }
+  .screen.home .player-fields { margin-top:10px; gap:4px; }
+  .screen.home .player-fields label { font-size:10px; margin-top:2px; }
+  .screen.home .player-fields input { min-height:38px; padding:7px 10px; }
+  .screen.home .big-btn { min-height:48px; margin-top:8px; font-size:22px; }
+  .screen.home .small-note { margin-top:7px; font-size:10px; }
+  .screen.home .scene { position:absolute; right:0; bottom:24px; width:36%; min-height:0; height:30%; opacity:.82; pointer-events:none; }
+  .screen.home .scene .jars { bottom:20px; transform:scale(.72); }
+  .screen.home .scene .platform { bottom:10px; }
+  .screen.home .scene .robot { transform:scale(.58); }
+  #previous-result { right:0; top:80%; bottom:auto; transform:translateY(-50%); width:42%; padding:7px!important; font-size:10px; }
+  #previous-result-text { font-size:10px!important; }
+  .footer { padding-top:5px; font-size:8px; }
+  #screen-feedback .inner { margin:4px auto; }
+  #screen-feedback .screen-head { margin-bottom:3px; }
+  #screen-feedback .feedback-copy { max-width:100%; }
+  #screen-feedback .scoreboard-card { max-height:calc(100dvh - 72px); }
+  #screen-feedback .prize-instructions { font-size:10px; }
+}
+@media (max-height:700px) {
+  .scoreboard-kicker { font-size:8px; }
+  #screen-feedback .scoreboard-card { padding:8px 12px; }
+  #screen-feedback .prize-instructions p { font-size:10px; }
+  #screen-feedback .scoreboard-footer { display:none; }
+}
+
+/* ==================================================
+   AJUSTE FINAL DE PUBLICAÇÃO — ENCAIXE, LEGIBILIDADE E CORES
+   ================================================== */
+.shell:has(#screen-how.active) > .topbar,
+.shell:has(#screen-quiz.active) > .topbar,
+.shell:has(#screen-feedback.active) > .topbar,
+.shell:has(#screen-how.active) > .footer,
+.shell:has(#screen-quiz.active) > .footer,
+.shell:has(#screen-feedback.active) > .footer { display:none; }
+#screen-how .callout, #screen-quiz .callout { display:none; }
+#screen-how .inner, #screen-quiz .inner { width:min(900px,100%); margin:8px auto; }
+#screen-quiz .screen-head { margin-bottom:8px; }
+#screen-quiz .progress-wrap { margin-bottom:9px; }
+#screen-quiz .paper { padding:clamp(12px,2.2vh,24px); }
+#screen-quiz .question-text { font-size:clamp(19px,3.2vh,28px); margin:12px 0 14px; }
+#screen-quiz .answers { gap:7px; }
+#screen-quiz .answer { min-height:clamp(42px,6.5vh,54px); padding:7px 10px; }
+
+#screen-quiz .answer:nth-child(1) { background:linear-gradient(to right, #eee7ff, #ffffff); border-color:#281747; }
+#screen-quiz .answer:nth-child(1) .answer-letter { background:linear-gradient(135deg, #472b7a, #281747); color:#fff; }
+#screen-quiz .answer:nth-child(2) { background:linear-gradient(to right, #fff8cc, #ffffff); border-color:#FFE34D; }
+#screen-quiz .answer:nth-child(2) .answer-letter { background:linear-gradient(135deg, #ffe97a, #FFE34D); color:#281747; }
+#screen-quiz .answer:nth-child(3) { background:linear-gradient(to right, #e4faff, #ffffff); border-color:#9CEBFF; }
+#screen-quiz .answer:nth-child(3) .answer-letter { background:linear-gradient(135deg, #b8f0ff, #9CEBFF); color:#281747; }
+#screen-quiz .answer:nth-child(4) { background:linear-gradient(to right, #e9e5ff, #ffffff); border-color:#1747FF; }
+#screen-quiz .answer:nth-child(4) .answer-letter { background:linear-gradient(135deg, #4d73ff, #1747FF); color:#fff; }
+#screen-quiz .answer.selected { outline:3px solid #281747; outline-offset:2px; filter:brightness(.95); box-shadow: 0 0 15px rgba(0,0,0,0.2); }
+#screen-quiz .quiz-action { margin-top:10px; }
+#screen-quiz .quiz-action button { min-height:48px; }
+#screen-feedback .inner { width:min(760px,100%); }
+#screen-feedback .scoreboard-wrap { width:100%; margin:auto; }
+#screen-feedback .scoreboard-card { width:100%; max-height:calc(100dvh - 20px); overflow:hidden; display:flex; flex-direction:column; justify-content:center; gap:0; }
+#screen-feedback .prize-instructions { flex:0 1 auto; min-height:0; overflow:visible; }
+#screen-feedback .device-instructions { display:grid; grid-template-columns:1fr 1fr; gap:7px 12px; }
+#screen-feedback .device-tip { display:grid; grid-template-columns:28px 1fr; gap:7px; align-items:start; font-size:11px; line-height:1.3; padding:6px 7px; background:#f1edff; border:1px solid #d5c9ff; border-radius: 6px; }
+#screen-feedback .device-icon { font-size:20px; line-height:1.2; filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.1)); }
+#screen-feedback .device-tip b { color:#32186b; }
+#screen-feedback .instruction-intro, #screen-feedback .prize-step { font-size:11px; line-height:1.3; margin:5px 0 7px; }
+#screen-feedback .prize-instructions > strong { font-size:12px; margin-bottom:5px; }
+#screen-feedback .prize-instructions small { font-size:10px; }
+#screen-home { min-height:0; }
+#screen-home .home-copy { position:relative; }
+#previous-result { background:rgba(16,8,45,.75)!important; color:#d5ccef!important; border:1px solid #5d4b83!important; box-shadow:0 0 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,255,255,0.05)!important; opacity:.85; transition:all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-radius: 8px; backdrop-filter: blur(5px); }
+#previous-result:hover { opacity:1; transform:translateY(calc(-50% - 4px)) scale(1.02); box-shadow:0 5px 20px rgba(0,0,0,0.7), inset 0 0 10px rgba(255,255,255,0.1)!important; }
+#previous-result strong { color:#e8deff; text-shadow: 0 0 5px rgba(232, 222, 255, 0.5); }
+#previous-result-text { color:#c9b9ef; font-weight: 700; }
+@media(max-width:760px) {
+  .shell { padding:8px 12px 8px; }
+  #screen-quiz .inner { margin:2px auto; }
+  #screen-quiz .screen-head { margin-bottom:6px; }
+  #screen-quiz .question-text { font-size:clamp(18px,3vh,24px); margin:9px 0 11px; }
+  #screen-quiz .answer { font-size:14px; min-height:42px; }
+  #screen-quiz .answer-letter { flex-basis:30px; height:30px; font-size:15px; }
+  #screen-feedback .scoreboard-card { padding:9px 10px; border-width:3px; max-height:calc(100dvh - 12px); }
+  #screen-feedback .scoreboard-kicker { font-size:8px; letter-spacing:1px; }
+  #screen-feedback .scoreboard-status { font-size:clamp(23px,4.5vh,34px); margin:4px auto 2px; }
+  #screen-feedback .scoreboard-medal { font-size:clamp(34px,6vh,48px); line-height:1; }
+  #screen-feedback .scoreboard-stars { min-height:20px; margin:1px 0 3px; }
+  #screen-feedback .scoreboard-headline { font-size:clamp(15px,2.8vh,20px); margin:3px 0 5px; }
+  #screen-feedback .scoreboard-player-label { font-size:8px; }
+  #screen-feedback .scoreboard-player { font-size:clamp(18px,3vh,24px); margin:2px 0 6px; }
+  #screen-feedback .scoreboard-stats { margin-bottom:6px; }
+  #screen-feedback .scoreboard-stats div { padding:5px; }
+  #screen-feedback .scoreboard-stats span { font-size:9px; }
+  #screen-feedback .scoreboard-stats strong { font-size:clamp(20px,3.5vh,26px); }
+  #screen-feedback .scoreboard-message { font-size:10px; line-height:1.25; margin-bottom:5px; }
+  #screen-feedback .prize-instructions { padding:7px; margin:5px 0; }
+  #screen-feedback .device-instructions { gap:4px; }
+  #screen-feedback .device-tip { grid-template-columns:21px 1fr; gap:4px; font-size:9px; line-height:1.2; padding:4px; }
+  #screen-feedback .device-icon { font-size:16px; }
+  #screen-feedback .instruction-intro, #screen-feedback .prize-step { font-size:9px; margin:3px 0; }
+  #screen-feedback .prize-instructions > strong { font-size:10px; }
+  #screen-feedback .prize-instructions small { font-size:9px; line-height:1.2; margin-top:3px; }
+  #screen-feedback .scoreboard-retry { min-height:38px; margin-top:5px; font-size:11px; }
+  #screen-feedback .scoreboard-footer { display:none; }
+  #previous-result { width:48%; right:0; bottom:4px; }
+}
+@media(max-height:650px) {
+  #screen-feedback .scoreboard-kicker, #screen-feedback .scoreboard-footer { display:none; }
+  #screen-feedback .scoreboard-card { padding:7px 9px; }
+  #screen-feedback .device-tip { font-size:9px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #previous-result { transition:none; }
+}
+
+/* Confirmação arcade ao sair de uma pergunta */
+.exit-confirm-overlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(10,3,24,.85);backdrop-filter:blur(6px)}
+.exit-confirm-overlay.show{display:flex;animation:exitFadeIn .2s ease-out}
+.exit-confirm-card{width:min(440px,100%);padding:24px;background:linear-gradient(145deg,#281747,#160b28);color:#fff;border:4px solid #9CEBFF;border-radius:12px;box-shadow:7px 7px 0 #1747FF,0 0 40px rgba(23, 71, 255, 0.4);text-align:center;position:relative;overflow:hidden; transform: scale(0.9); animation: exitPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;}
+.exit-confirm-card:before{content:"✦  ✧  ✦  ✧  ✦";display:block;color:#FFE34D;letter-spacing:8px;font-size:18px;margin-bottom:12px;animation:exitSparkle 2s ease-in-out infinite; text-shadow: 0 0 10px rgba(255,229,46,0.5);}
+.exit-confirm-card h2{font-size:clamp(21px,4vw,28px);margin:0 0 10px;font-weight:1000; text-shadow: 2px 2px 0 var(--blue);}
+.exit-confirm-card p{font-size:15px;line-height:1.5;color:#e9e2fa;margin:0 0 22px}
+.exit-confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.exit-confirm-actions button{min-height:48px;border:3px solid #fff;border-radius:8px;font-weight:1000;font-size:14px;cursor:pointer;transition:transform .15s,filter .15s, box-shadow .15s}
+.exit-confirm-actions button:hover{transform:translateY(-3px);filter:brightness(1.15)}
+.exit-confirm-actions button:active{transform:translateY(2px);}
+.exit-confirm-yes{background:linear-gradient(180deg, #FFE34D, #ffc000);color:#281747;box-shadow:0 4px 0 #a87e00, 0 8px 15px rgba(0,0,0,0.3)}
+.exit-confirm-no{background:linear-gradient(180deg, #9CEBFF, #36acd9);color:#281747;box-shadow:0 4px 0 #1747FF, 0 8px 15px rgba(0,0,0,0.3)}
+@keyframes exitFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes exitPop{from{transform: scale(0.8);}to{transform: scale(1);}}
+@keyframes exitSparkle{0%,100%{opacity:.65;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.exit-confirm-overlay.show,.exit-confirm-card,.exit-confirm-card:before{animation:none; transform:none;}}
+
+/* Medalhas com acabamento de premiação e identidade Skala. */
+#screen-feedback .scoreboard-card {
+  background:radial-gradient(ellipse at 50% 15%,rgba(40,23,71,.95),transparent 55%),linear-gradient(155deg,#1b1038 0%,#090817 78%);
+}
+#screen-feedback .scoreboard-card.bronze {
+  --medal:#CD7F32; border-color:#CD7F32;
+  box-shadow:8px 8px 0 #05040c,inset 0 0 0 2px #f6c18a55,0 0 40px rgba(205, 127, 50, 0.4);
+}
+#screen-feedback .scoreboard-card.silver {
+  --medal:#D9E1EA; border-color:#D9E1EA;
+  box-shadow:8px 8px 0 #05040c,inset 0 0 0 2px #ffffff70,0 0 40px rgba(217, 225, 234, 0.3);
+}
+#screen-feedback .scoreboard-card.gold {
+  --medal:#FFE34D; border-color:#FFE34D;
+  box-shadow:8px 8px 0 #05040c,inset 0 0 0 2px #fff7b877,0 0 50px rgba(255, 227, 77, 0.5);
+  animation:goldAura 2.5s ease-in-out infinite alternate;
+}
+@keyframes goldAura { from { filter:drop-shadow(0 0 5px rgba(255,227,77,0.2)); } to { filter:drop-shadow(0 0 20px rgba(255,227,77,0.6)); } }
+.scoreboard-brand-scene {
+  height:44px; display:flex; justify-content:center; align-items:flex-end; gap:6px;
+  position:relative; margin:0 auto 8px; padding:0 42px 3px; width:max-content; max-width:100%;
+  border-bottom:4px solid #1747FF;
+  filter:drop-shadow(0 4px 0 #090511) drop-shadow(0 0 10px rgba(23,71,255,0.3));
+}
+.brand-product {
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  width:38px; height:30px; border:2px solid #281747; border-radius:6px 6px 9px 9px;
+  font-size:6px; line-height:1.05; font-weight:1000; color:#281747;
+  box-shadow:2px 2px 0 #090511, inset 0 3px 5px rgba(255,255,255,0.4); transform-origin:bottom center;
+  animation:productBounce 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.product-orange { background:linear-gradient(135deg, #ffbc85, #FF943B); transform:rotate(-7deg); }
+.product-pink { background:linear-gradient(135deg, #ff8bc1, #FF4FA3); height:36px; animation-delay:.2s; }
+.product-blue { background:linear-gradient(135deg, #d4f5ff, #9CEBFF); transform:rotate(7deg); animation-delay:.4s; }
+.brand-rocket { position:absolute; right:0; top:-12px; font-size:30px; filter:drop-shadow(0 0 10px rgba(255, 79, 163, 0.6)); animation:rocketLift 2.1s ease-in-out infinite; }
+.brand-spark { position:absolute; color:#FFE34D; font-size:17px; text-shadow: 0 0 8px currentColor; animation:sparkBlink 1.3s ease-in-out infinite alternate; }
+.spark-a { left:10px; top:0; } .spark-b { right:29px; top:-6px; color:#9CEBFF; animation-delay:.4s; }
+@keyframes productBounce { 0%,100% { translate:0 0; } 50% { translate:0 -6px; } }
+@keyframes rocketLift { 0%,100% { translate:0 2px; rotate:-5deg; } 50% { translate:0 -9px; rotate:5deg; } }
+@keyframes sparkBlink { from { opacity:.45; scale:.8; } to { opacity:1; scale:1.2; } }
+@media(max-width:760px) {
+  #screen-home #previous-result { left:0 !important; right:0 !important; bottom:27px !important; width:auto !important; max-width:none !important; padding:5px 8px !important; font-size:9px; }
+  #screen-home #previous-result strong { display:inline; margin-right:8px; }
+  #screen-home #previous-result-text { display:inline; font-size:9px !important; }
+  .scoreboard-brand-scene { height:36px; margin-bottom:5px; }
+  .brand-product { width:31px; height:25px; font-size:5px; }
+  .product-pink { height:30px; }
+  .brand-rocket { font-size:24px; top:-8px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .scoreboard-card.gold,.brand-product,.brand-rocket,.brand-spark { animation:none !important; }
+}
+
+/* HISTÓRICO: FAIXA HORIZONTAL ABAIXO DO BOTÃO E DA NOTA */
+#screen-home { position:relative; }
+#screen-home .home-copy { position:static !important; }
+#screen-home #previous-result {
+  position:absolute !important; left:0 !important; right:0 !important;
+  top:auto !important; bottom:27px !important; transform:none !important;
+  width:auto !important; max-width:none !important; margin:0 !important;
+  padding:7px 12px !important; box-sizing:border-box;
+  background:linear-gradient(90deg,rgba(5,4,18,.88),rgba(8,5,20,.65)) !important;
+  color:#b9acd8 !important; border:1px solid rgba(156,235,255,.3) !important;
+  box-shadow:0 0 20px rgba(7,5,26,.6),inset 0 0 0 1px rgba(255,255,255,.05) !important;
+  opacity:.75; z-index:6; font-size:10px; backdrop-filter:blur(5px); line-height:1.25;
+  border-radius: 6px;
+}
+#screen-home #previous-result:hover { opacity:1; box-shadow:0 0 25px rgba(23,71,255,.4),inset 0 0 0 1px rgba(255,255,255,.1) !important; }
+#screen-home #previous-result strong { display:inline; margin-right:10px; color:#e8deff !important; text-shadow: 0 0 5px rgba(232,222,255,0.4); }
+#screen-home #previous-result-text { display:inline; margin-top:0 !important; color:#c9b9ef !important; font-size:10px !important; }
+#screen-home #previous-result[hidden] { display:none !important; }
+@media(max-width:760px) {
+  #screen-home #previous-result { bottom:25px !important; padding:5px 8px !important; }
+  #screen-home #previous-result strong, #screen-home #previous-result-text { font-size:9px !important; }
+}
+
+/* AJUSTE FINAL — botão JOGAR e texto de apoio sem sobrepor o histórico */
+#screen-home .big-btn { margin-top: 15px !important; }
+#screen-home .small-note { margin-top: 10px !important; }
+
+/* ==================================================
+   PLACAR FINAL V7 — GLOW CENTRAL, CELEBRACAO E ARCADE VIVO
+   ================================================== */
+#screen-feedback .scoreboard-wrap { width:100%; max-width:1320px; padding:14px 0 22px; }
+#screen-feedback .scoreboard-card {
+  width:100%; max-width:1280px; box-sizing:border-box; isolation:isolate;
+  padding:clamp(18px,2.4vw,30px) clamp(16px,2vw,28px) 18px;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,79,163,.25) 0%, rgba(40,23,71,.35) 27%, transparent 56%),
+    radial-gradient(ellipse at 50% 48%, rgba(23,71,255,.2), transparent 52%),
+    linear-gradient(155deg,#1b1038 0%,#10091f 56%,#080713 100%);
+}
+#screen-feedback .scoreboard-card:after {
+  content:""; position:absolute; z-index:-1; pointer-events:none;
+  width:min(85vw,900px); height:440px; left:50%; top:90px; transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(255,79,163,.3) 0%,rgba(255,227,77,.2) 24%,rgba(23,71,255,.15) 43%,transparent 75%);
+  filter:blur(15px); animation:centralGlow 3s ease-in-out infinite alternate;
+}
+@keyframes centralGlow { from { opacity:.6; transform:translateX(-50%) scale(.95); } to { opacity:1; transform:translateX(-50%) scale(1.1); } }
+#screen-feedback .scoreboard-kicker { position:relative; z-index:2; text-shadow:0 0 12px #9cebff88; }
+#screen-feedback .scoreboard-status { position:relative; z-index:2; margin-top:10px; text-shadow:0 4px 0 #080713,0 0 25px rgba(255,255,255,0.5); }
+#screen-feedback .scoreboard-medal { position:relative; z-index:2; filter:drop-shadow(0 0 20px rgba(255,227,77,0.7)); }
+#screen-feedback .scoreboard-headline { text-shadow:0 0 20px color-mix(in srgb,var(--medal) 40%,transparent); }
+#screen-feedback .scoreboard-brand-scene {
+  height:88px; gap:10px; margin:0 auto 10px; padding:0 70px 7px;
+  border-bottom-width:6px; border-image:linear-gradient(90deg,#9cebff,#1747ff,#9cebff) 1;
+  filter:drop-shadow(0 0 15px rgba(23,71,255,0.5)) drop-shadow(0 5px 0 #090511);
+}
+#screen-feedback .brand-product { width:66px; height:52px; font-size:9px; border-width:3px; border-radius:9px 9px 15px 15px; box-shadow:3px 4px 0 #090511,0 0 15px rgba(255,255,255,0.3); }
+#screen-feedback .product-pink { height:66px; }
+#screen-feedback .brand-rocket { font-size:39px; top:-18px; right:2px; }
+#screen-feedback .brand-spark { font-size:23px; text-shadow: 0 0 10px currentColor; }
+#screen-feedback .spark-a { left:18px; top:5px; }
+#screen-feedback .spark-b { right:48px; top:-14px; }
+.scoreboard-sidekick { position:absolute; z-index:1; top:92px; width:155px; display:flex; flex-direction:column; align-items:center; gap:7px; pointer-events:none; }
+.scoreboard-sidekick-left { left:clamp(12px,3vw,42px); }
+.scoreboard-sidekick-right { right:clamp(12px,3vw,42px); }
+.sidekick-robot,.sidekick-rocket { display:block; font-size:clamp(46px,5vw,72px); filter:drop-shadow(0 0 20px rgba(156,235,255,0.5)); animation:sidekickFloat 2.5s ease-in-out infinite; }
+.sidekick-rocket { font-size:clamp(48px,5vw,72px); filter:drop-shadow(0 0 20px rgba(255,79,163,0.5)); animation:rocketDash 2.2s ease-in-out infinite; }
+.sidekick-speech { display:block; padding:9px 12px; color:#fff; background:rgba(22,8,45,.85); backdrop-filter: blur(4px); border:2px solid #ff4fa3; border-radius:15px 15px 15px 4px; box-shadow:0 0 20px rgba(255,79,163,0.4); font-size:10px; line-height:1.25; font-weight:1000; letter-spacing:.4px; transform:rotate(-5deg); }
+.scoreboard-sidekick-right .sidekick-speech { border-color:#9cebff; border-radius:15px 15px 4px 15px; box-shadow:0 0 20px rgba(156,235,255,0.4); transform:rotate(5deg); }
+.sidekick-spark { font-size:25px; text-shadow: 0 0 10px currentColor; animation:sparkleBlink 1s ease-in-out infinite alternate; }
+@keyframes sidekickFloat { 0%,100% { transform:translateY(0) rotate(-4deg); } 50% { transform:translateY(-12px) rotate(4deg); } }
+@keyframes rocketDash { 0%,100% { transform:translate(0,0) rotate(-9deg); } 50% { transform:translate(8px,-12px) rotate(4deg); } }
+@keyframes sparkleBlink { from { opacity:.5; transform:scale(.8) rotate(-15deg); } to { opacity:1; transform:scale(1.25) rotate(15deg); } }
+#screen-feedback .scoreboard-stats { max-width:440px; box-shadow:0 15px 30px rgba(0,0,0,0.5), 0 0 30px color-mix(in srgb,var(--medal) 25%,transparent); }
+#screen-feedback .scoreboard-message { max-width:760px; }
+#screen-feedback .prize-instructions { position:relative; z-index:2; }
+#screen-feedback .scoreboard-retry { position:relative; z-index:2; box-shadow:0 5px 0 #8d004b,0 0 25px rgba(255,0,140,0.3); transition:transform .2s cubic-bezier(0.2, 1.5, 0.4, 1),filter .2s,box-shadow .2s; border-radius: 10px; }
+#screen-feedback .scoreboard-retry:hover { transform:translateY(-3px) scale(1.02); filter:brightness(1.15); box-shadow:0 8px 0 #8d004b,0 0 35px rgba(255,0,140,0.5); }
+#screen-feedback .scoreboard-retry:active { transform:translateY(3px) scale(0.98); box-shadow:0 2px 0 #8d004b,0 0 15px rgba(255,0,140,0.4); }
+#screen-feedback .scoreboard-footer { position:relative; z-index:2; text-shadow: 0 0 5px rgba(185,172,216,0.3); }
+@media(max-width:900px) {
+  #screen-feedback .scoreboard-card { padding:18px 14px 15px; }
+  .scoreboard-sidekick { top:88px; width:80px; gap:4px; }
+  .sidekick-speech { font-size:7px; padding:5px 6px; }
+  .sidekick-robot,.sidekick-rocket { font-size:39px; }
+  #screen-feedback .scoreboard-brand-scene { height:65px; padding:0 44px 5px; }
+  #screen-feedback .brand-product { width:48px; height:39px; font-size:7px; }
+  #screen-feedback .product-pink { height:49px; }
+  #screen-feedback .brand-rocket { font-size:29px; }
+}
+@media(max-width:600px) {
+  #screen-feedback .scoreboard-wrap { padding:6px 0 12px; }
+  #screen-feedback .scoreboard-card { border-width:3px; box-shadow:4px 4px 0 #05040c, 0 0 20px rgba(111,85,155,0.3); }
+  .scoreboard-sidekick { top:74px; width:50px; opacity:.9; }
+  .scoreboard-sidekick-left { left:3px; }
+  .scoreboard-sidekick-right { right:3px; }
+  .sidekick-speech { display:none; }
+  .sidekick-robot,.sidekick-rocket { font-size:30px; }
+  .sidekick-spark { font-size:17px; }
+  #screen-feedback .scoreboard-status { font-size:clamp(27px,8vw,38px); margin-top:8px; }
+  #screen-feedback .scoreboard-medal { font-size:54px; }
+  #screen-feedback .scoreboard-headline { margin:6px 0 12px; font-size:17px; }
+  #screen-feedback .scoreboard-player { margin-bottom:12px; }
+  #screen-feedback .scoreboard-brand-scene { height:52px; gap:5px; padding:0 30px 4px; }
+  #screen-feedback .brand-product { width:35px; height:29px; font-size:5px; border-width:2px; }
+  #screen-feedback .product-pink { height:37px; }
+  #screen-feedback .brand-rocket { font-size:23px; top:-10px; }
+  #screen-feedback .brand-spark { font-size:16px; }
+  #screen-feedback .scoreboard-stats strong { font-size:clamp(23px,6vw,30px); }
+  #screen-feedback .prize-instructions { padding:10px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #screen-feedback .scoreboard-card:after,.sidekick-robot,.sidekick-rocket,.sidekick-spark,#screen-feedback .scoreboard-retry { animation:none!important; transition:none!important; }
+}
+
+</style>
+ </head>
+ <body>
+  <div class="app">
+   <main class="shell">
+    <!-- SETOR HTML 01 — CABEÇALHO: MARCA E NOME DO EVENTO -->
+    <header class="topbar">
+     <div class="brand">
+      SKALA
+      <small>
+       BRASIL
+      </small>
+     </div>
+     <div class="event-label">
+      ARCADE EDITION
+      <strong>
+       SEMANA DA QUALIDADE
+      </strong>
+     </div>
+    </header>
+    <!-- TELA 1: INÍCIO -->
+    <!-- SETOR HTML 02 — TELA INICIAL: TEXTO, IDENTIFICAÇÃO E CENÁRIO -->
+    <section class="screen home active" id="screen-home">
+     <div class="home-copy">
+      <div class="tag">
+       ✦ Desafio da Qualidade
+      </div>
+      <h1>
+       SEMANA DA
+       <span>
+        QUALIDADE
+       </span>
+      </h1>
+      <div class="theme">
+       Impulsionando
+       <br/>
+       o desempenho
+      </div>
+      <p class="lead">
+       Teste seus conhecimentos sobre
+       <strong>
+        Qualidade
+       </strong>
+       , avance de fase e descubra quantos pontos consegue conquistar!
+      </p>
+      <div class="player-fields">
+       <label for="player-first-name">
+        Identifique-se para jogar
+       </label>
+       <input autocomplete="given-name" id="player-first-name" maxlength="40" name="given-name" placeholder="Digite seu nome" required="" type="text"/>
+       <label for="player-last-name">
+        Sobrenome
+       </label>
+       <input autocomplete="family-name" id="player-last-name" maxlength="60" name="family-name" placeholder="Digite seu sobrenome" required="" type="text"/>
+       <p class="field-error" id="name-error" role="alert">
+       </p>
+       <button class="big-btn" id="start-btn" type="button">
+        <span class="play-triangle">
+        </span>
+        JOGAR
+       </button>
+      </div>
+      <p class="small-note">
+       ▶ Um desafio de cada vez. Qualidade em cada detalhe!
+      </p>
+     </div>
+     <div aria-hidden="true" class="scene">
+      <div class="glow">
+      </div>
+      <!-- SETOR 06.0 — NOVOS SÍMBOLOS FLUTUANTES DO ARCADE -->
+      <div class="arcade-decor">
+       <span class="float-icon icon-1">✦</span>
+       <span class="float-icon icon-2">★</span>
+       <span class="float-icon icon-3">✧</span>
+       <span class="float-icon icon-4">⚙</span>
+       <span class="float-icon icon-5">✓</span>
+       <span class="float-icon icon-6">◆</span>
+       <span class="float-icon icon-7">+</span>
+       <span class="float-icon icon-8">✳</span>
+       <span class="float-icon icon-9">●</span>
+       <span class="float-icon icon-10">★</span>
+      </div>
+      <div class="stars">
+       <span>
+        ✦
+       </span>
+       <span>
+        ✧
+       </span>
+       <span>
+        ✦
+       </span>
+       <span>
+        ✧
+       </span>
+      </div>
+      <div class="trophy">
+       🏆
+      </div>
+      <div class="robot">
+       <div class="robot-head">
+       </div>
+       <div class="robot-body">
+       </div>
+      </div>
+      <div class="jars">
+       <div class="jar orange">
+        <span>
+         SKALA
+         <br/>
+         BRASIL
+        </span>
+       </div>
+       <div class="jar pink">
+        <span>
+         SKALA
+         <br/>
+         BRASIL
+         <br/>
+         ★
+        </span>
+       </div>
+       <div class="jar cyan">
+        <span>
+         SKALA
+         <br/>
+         BRASIL
+        </span>
+       </div>
+      </div>
+      <div class="platform">
+      </div>
+     </div>
+      <div class="paper" hidden="" id="previous-result">
+       <strong>🏆 SEU ÚLTIMO RESULTADO</strong>
+       <div id="previous-result-text"></div>
+      </div>
+    </section>
+    <!-- SETOR HTML 03 — TELA DE INSTRUÇÕES -->
+    <!-- TELA 2: COMO FUNCIONA -->
+    <section class="screen" id="screen-how">
+     <div class="inner">
+      <div class="screen-head">
+       <button aria-label="Voltar" class="back" data-go="home">
+        ‹
+       </button>
+       <div class="mini-brand">
+        SKALA
+        <small>
+         BRASIL
+        </small>
+       </div>
+       <div class="pixel-mark">
+       </div>
+      </div>
+      <h2 class="section-title">
+       Como funciona?
+      </h2>
+      <div class="title-line">
+      </div>
+      <div class="paper rules">
+       <div class="rule">
+        <div class="rule-icon">
+         🎮
+        </div>
+        <div>
+         <strong>
+          Responda perguntas
+         </strong>
+         <br/>
+         sobre Qualidade.
+        </div>
+       </div>
+       <div class="rule">
+        <div class="rule-icon">
+         ◴
+        </div>
+        <div>
+         <strong>
+          Fique atento ao tempo
+         </strong>
+         <br/>
+         de cada resposta.
+        </div>
+       </div>
+       <div class="rule">
+        <div class="rule-icon">
+         ★
+        </div>
+        <div>
+         <strong>
+          Acumule pontos
+         </strong>
+         <br/>
+         conforme seus acertos.
+        </div>
+       </div>
+       <div class="rule">
+        <div class="rule-icon">
+         ▥
+        </div>
+        <div>
+         <strong>
+          Veja seu resultado
+         </strong>
+         <br/>
+         no final do jogo.
+        </div>
+       </div>
+       <div class="rule">
+        <div class="rule-icon">
+         🏆
+        </div>
+        <div>
+         <strong>
+          Divirta-se
+         </strong>
+         <br/>
+         e impulsione seu conhecimento!
+        </div>
+       </div>
+      </div>
+      <div class="bottom-action">
+       <button class="blue-btn" id="begin-quiz">
+        ENTENDI, VAMOS LÁ!
+        <span>
+         ❯
+        </span>
+       </button>
+      </div>
+      <div class="callout">
+       QUALIDADE TAMBÉM É ATITUDE TODO DIA! ♥
+      </div>
+     </div>
+    </section>
+    <!-- TELA 3: PERGUNTA -->
+    <!-- SETOR HTML 04 — TELA DE PERGUNTAS -->
+    <section class="screen" id="screen-quiz">
+     <div class="inner">
+      <div class="screen-head">
+       <button aria-label="Voltar" class="back" data-go="how">
+        ‹
+       </button>
+       <div class="mini-brand">
+        SKALA
+        <small>
+         BRASIL
+        </small>
+       </div>
+       <div class="timer">
+        ◴
+        <span id="timer">
+         50
+        </span>
+        s
+       </div>
+      </div>
+      <div class="progress-wrap">
+       <div class="progress" id="progress">
+       </div>
+       <div class="question-meta">
+        <span id="question-count">
+         Pergunta 1 de 10
+        </span>
+        <span id="points-live">
+         0 pontos
+        </span>
+       </div>
+      </div>
+      <div class="paper">
+       <span class="category" id="category">
+        PROCESSOS
+       </span>
+       <h2 class="question-text" id="question-text">
+        Aqui vai a sua pergunta sobre Qualidade?
+       </h2>
+       <div class="answers" id="answers">
+       </div>
+       <div class="quiz-action">
+        <button class="pink-btn" disabled="" id="answer-btn">
+         RESPONDER
+         <span>
+          ❯
+         </span>
+        </button>
+       </div>
+      </div>
+      <div class="callout">
+       PENSE BEM! QUALIDADE É ATITUDE TODOS OS DIAS! ♥
+      </div>
+     </div>
+    </section>
+    <!-- SETOR HTML 05 — FEEDBACK E RESULTADO -->
+    <!-- TELA 4: FEEDBACK E RESULTADO -->
+    <section class="screen" id="screen-feedback">
+     <div class="inner" id="question-feedback-panel">
+      <div class="screen-head">
+       <button aria-label="Voltar ao início" class="back" data-go="home">
+        ‹
+       </button>
+       <div class="mini-brand">
+        SKALA
+        <small>
+         BRASIL
+        </small>
+       </div>
+       <div class="pixel-mark">
+       </div>
+      </div>
+      <div class="feedback-banner" id="feedback-banner">
+       RESPOSTA CORRETA!
+      </div>
+      <div class="reward">
+       <div class="reward-icon" id="reward-icon">
+        🏆
+       </div>
+       <div class="points" id="points-earned">
+        +10 PONTOS
+       </div>
+      </div>
+      <p class="feedback-copy" id="feedback-copy">
+       Muito bem! Você está impulsionando o desempenho!
+      </p>
+      <div class="stats">
+       <div class="stat">
+        <span class="stat-label">
+         🏆 Pontos
+        </span>
+        <strong class="stat-value" id="score-total">
+         0
+        </strong>
+       </div>
+       <div class="stat">
+        <span class="stat-label">
+         ✅ Acertos
+        </span>
+        <strong class="stat-value" id="correct-total">
+         0 de 10
+        </strong>
+       </div>
+      </div>
+      <div class="result-actions">
+       <button class="blue-btn" id="continue-btn">
+        PRÓXIMA PERGUNTA ❯
+       </button>
+       <button class="pink-btn" hidden="" id="restart-btn">
+        JOGAR NOVAMENTE ↻
+       </button>
+      </div>
+      <p class="notice">
+       Seu resultado fica salvo somente neste navegador e dispositivo.
+      </p>
+     </div>
+     <div class="scoreboard-wrap" id="final-scoreboard" hidden>
+      <div class="scoreboard-card" id="scoreboard-card">
+       <div class="scoreboard-kicker">SEMANA DA QUALIDADE · ARCADE EDITION</div>
+       <div class="scoreboard-sidekick scoreboard-sidekick-left" aria-hidden="true"><span class="sidekick-speech">VOCÊ<br>ARRASOU!</span><span class="sidekick-robot">🤖</span><span class="sidekick-spark">✨</span></div>
+       <div class="scoreboard-sidekick scoreboard-sidekick-right" aria-hidden="true"><span class="sidekick-speech">QUALIDADE<br>TE LEVA<br>MAIS LONGE!</span><span class="sidekick-rocket">🚀</span><span class="sidekick-spark">🎉</span></div>
+       <div class="scoreboard-glow" aria-hidden="true"></div>
+       <div class="scoreboard-status" id="scoreboard-status">GAME OVER</div>
+       <div class="scoreboard-medal" id="scoreboard-medal" aria-hidden="true">😢</div>
+       <div class="scoreboard-stars" id="scoreboard-stars" aria-label="Sem medalha">✦ ✦ ✦</div>
+       <div class="scoreboard-brand-scene" aria-label="Produtos Skala e foguete impulsionando o desempenho">
+        <span class="brand-product product-orange" title="Produto Skala">SKALA<br>BRASIL</span>
+        <span class="brand-product product-pink" title="Produto Skala">SKALA<br>BRASIL</span>
+        <span class="brand-product product-blue" title="Produto Skala">SKALA<br>BRASIL</span>
+        <span class="brand-rocket" aria-hidden="true">🚀</span>
+        <span class="brand-spark spark-a" aria-hidden="true">✦</span>
+        <span class="brand-spark spark-b" aria-hidden="true">✧</span>
+       </div>
+       <div class="scoreboard-headline" id="scoreboard-headline">TENTE MAIS UMA VEZ!</div>
+       <p class="scoreboard-player-label">JOGADOR(A)</p>
+       <h2 class="scoreboard-player" id="scoreboard-player">Nome Sobrenome</h2>
+       <div class="scoreboard-stats">
+        <div><span>PONTUAÇÃO</span><strong id="scoreboard-points">0</strong></div>
+        <div><span>ACERTOS</span><strong id="scoreboard-correct">0/10</strong></div>
+       </div>
+       <p class="scoreboard-message" id="scoreboard-message">Você precisa acertar todas as 10 perguntas para liberar o prêmio.</p>
+       <div class="prize-instructions" id="prize-instructions" hidden>
+        <strong>📸 COMO SALVAR SEU RESULTADO E RETIRAR O BRINDE</strong>
+        <p class="instruction-intro">Tire uma captura de tela mostrando seu nome, a medalha, a pontuação e os 10 acertos.</p>
+        <div class="device-instructions">
+         <div class="device-tip"><span class="device-icon" aria-hidden="true">📱</span><div><b>CELULAR ANDROID</b><br>Pressione <b>liga/desliga + volume para baixo</b> ao mesmo tempo. Em alguns modelos, deslize a mão pela tela para capturar.</div></div>
+         <div class="device-tip"><span class="device-icon" aria-hidden="true">🍎</span><div><b>IPHONE</b><br>Com Face ID: pressione <b>botão lateral + aumentar volume</b> juntos. Com botão de Início: pressione <b>botão lateral/superior + Início</b>.</div></div>
+         <div class="device-tip print-desktop"><span class="device-icon" aria-hidden="true">🪟</span><div><b>COMPUTADOR WINDOWS</b><br>Pressione <b>Win + Shift + S</b>, selecione a área do resultado e salve a captura.</div></div>
+         <div class="device-tip print-desktop"><span class="device-icon" aria-hidden="true">🖥️</span><div><b>MAC / APPLE</b><br>Pressione <b>Shift + Command (⌘) + 4</b> e selecione a área do resultado.</div></div>
+        </div>
+        <p class="prize-step"><b>ÚLTIMO PASSO:</b> apresente a captura salva no <b>stand da Qualidade</b> para retirar seu brinde.</p>
+        <small>O brinde é liberado somente para quem acertar as 10 perguntas. Não feche esta tela antes de salvar o print.</small>
+       </div>
+       <button class="pink-btn scoreboard-retry" id="scoreboard-retry">JOGAR NOVAMENTE ↻</button>
+       <div class="scoreboard-footer">CREATED BY RW · SKALA BRASIL</div>
+      </div>
+     </div>
+    </section>
+    <!-- CONFIRMAÇÃO DE SAÍDA DURANTE O QUIZ -->
+    <div id="exit-confirm" class="exit-confirm-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="exit-confirm-title" aria-describedby="exit-confirm-text">
+      <div class="exit-confirm-card">
+        <h2 id="exit-confirm-title">PAUSAR O DESAFIO?</h2>
+        <p id="exit-confirm-text">Se sair agora, seu progresso desta partida será perdido. Deseja voltar ao início e recomeçar do zero?</p>
+        <div class="exit-confirm-actions">
+          <button type="button" class="exit-confirm-yes" id="exit-confirm-yes">✓ SIM, SAIR</button>
+          <button type="button" class="exit-confirm-no" id="exit-confirm-no">✕ CONTINUAR</button>
+        </div>
+      </div>
+    </div>
+    <!-- SETOR HTML 07 — POPUP LEVEL UP -->
+    <div id="level-up-popup" class="level-up-popup" role="status" aria-live="polite" aria-hidden="true">
+     <div class="level-up-content">
+      <div class="level-up-stars">✦ ★ ✦</div>
+      <div class="level-up-title">LEVEL UP!</div>
+      <div id="level-up-points" class="level-up-points">+0 PONTOS</div>
+      <div class="level-up-message">RESPOSTA CORRETA!</div>
+     </div>
+    </div>
+    <footer class="footer">
+     <span>
+      <strong>
+       SKALA
+      </strong>
+      · Qualidade é atitude
+     </span>
+     <span class="creator-credit">Created by RW</span>
+     <span>
+      PLAYER 01
+      <strong>
+       ●
+      </strong>
+      READY
+     </span>
+    </footer>
+   </main>
+  </div>
+  <!-- SETOR SCRIPT — PERGUNTAS, NAVEGAÇÃO, PONTUAÇÃO E SALVAMENTO -->
+    <script>
+/* ==================================================
+   SETOR 15 — BANCO DE PERGUNTAS
+   Edite os textos e respostas nesta seção.
+   ================================================== */
+/* EDITE QUESTIONS: correct é o índice da resposta correta: 0=A, 1=B, 2=C, 3=D. Os textos abaixo são exemplos para teste. */
+/* BANCO DE PERGUNTAS: edite os textos e respostas aqui. */
+const QUESTIONS = [
+{category:"BPF",question:"Qual atitude está de acordo com as Boas Práticas de Fabricação?",answers:["Usar adornos se estiverem limpos","Higienizar as mãos conforme o procedimento","Guardar objetos pessoais na linha","Usar o celular durante a operação"],correct:1},
+{category:"PROCESSOS",question:"Ao identificar uma condição fora do padrão, o que fazer?",answers:["Ignorar se a produção continuar","Corrigir sem comunicar ninguém","Comunicar o responsável e seguir o procedimento","Esperar o fim do turno"],correct:2},
+{category:"QUALIDADE",question:"Qual é o objetivo principal de um registro de qualidade?",answers:["Garantir rastreabilidade e evidência","Substituir a inspeção","Aumentar o tempo de processo","Evitar a comunicação entre turnos"],correct:0},
+{category:"BPF",question:"Antes de iniciar uma atividade na área produtiva, você deve:",answers:["Começar e preencher depois","Verificar as condições e cumprir os procedimentos aplicáveis","Usar qualquer utensílio disponível","Pular a verificação quando houver pressa"],correct:1},
+{category:"MELHORIA CONTÍNUA",question:"O que fazer ao perceber uma oportunidade de melhoria?",answers:["Não comentar para evitar mudanças","Alterar o processo por conta própria","Registrar ou comunicar a oportunidade conforme o fluxo definido","Esperar que outra pessoa perceba"],correct:2},
+{category:"PROCESSOS",question:"Por que é importante seguir a sequência definida no procedimento?",answers:["Para manter a execução padronizada e reduzir riscos","Apenas para cumprir formalidade","Para dispensar os registros","Porque elimina todas as inspeções"],correct:0},
+{category:"BPF",question:"Qual situação deve ser comunicada ao responsável pela qualidade?",answers:["Uma condição que possa comprometer o produto","Somente problemas no fim do mês","Apenas quando houver reclamação externa","Nenhuma, se a linha estiver rodando"],correct:0},
+{category:"RASTREABILIDADE",question:"A rastreabilidade ajuda a:",answers:["Eliminar a necessidade de identificação","Identificar histórico e informações relevantes do produto","Substituir todos os controles em processo","Evitar a análise de desvios"],correct:1},
+{category:"QUALIDADE",question:"Ao preencher um registro, a informação deve ser:",answers:["Aproximada, para ganhar tempo","Preenchida por outra pessoa sem validação","Legível, correta e conforme o procedimento","Deixada em branco para completar depois"],correct:2},
+{category:"MELHORIA CONTÍNUA",question:"Qual atitude contribui para impulsionar o desempenho?",answers:["Esconder desvios pequenos","Compartilhar problemas e contribuir com melhorias","Ignorar padrões quando há urgência","Repetir uma falha sem comunicar"],correct:1}
+];
+
+/* ==================================================
+   SETOR 16 — CONFIGURAÇÕES, ESTADO E SORTEIO
+   ================================================== */
+const STORAGE_KEY = "skalaQualityQuizLastResult";
+const TIME_PER_QUESTION = 50;
+const QUESTIONS_PER_GAME = 10;
+
+let index = 0;
+let score = 0;
+let correctCount = 0;
+let selected = null;
+let timeLeft = TIME_PER_QUESTION;
+let timerId = null;
+let locked = false;
+let lastWasCorrect = false;
+let lastPoints = 0;
+let gameQuestions = [];
+let levelUpTimeout = null;
+
+const $ = id => document.getElementById(id);
+
+/* SETOR 16.1 — EMBARALHAR ARRAY */
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+/* SETOR 16.2 — SORTEAR PERGUNTAS E ALTERNATIVAS */
+function prepareQuestions() {
+    return shuffleArray(QUESTIONS)
+        .slice(0, Math.min(QUESTIONS_PER_GAME, QUESTIONS.length))
+        .map(question => {
+            const answers = question.answers.map((text, i) => ({
+                text,
+                correct: i === question.correct
+            }));
+            const shuffledAnswers = shuffleArray(answers);
+            return {
+                ...question,
+                answers: shuffledAnswers.map(answer => answer.text),
+                correct: shuffledAnswers.findIndex(answer => answer.correct)
+            };
+        });
+}
+
+/* ==================================================
+   SETOR 17 — NAVEGAÇÃO ENTRE TELAS
+   ================================================== */
+function showScreen(name) {
+    document.querySelectorAll(".screen").forEach(el => el.classList.remove("active"));
+    $("screen-" + name).classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.querySelectorAll("[data-go]").forEach(btn => {
+    btn.addEventListener("click", () => {
+        if (btn.classList.contains("back") && btn.closest("#screen-quiz")) {
+            openExitConfirmation();
+            return;
+        }
+        showScreen(btn.dataset.go);
+    });
+});
+
+function openExitConfirmation() {
+    const modal = $("exit-confirm");
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+    $("exit-confirm-no").focus();
+}
+function closeExitConfirmation() {
+    const modal = $("exit-confirm");
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+}
+function returnToStartMenu() {
+    closeExitConfirmation();
+    clearInterval(timerId);
+    resetQuiz();
+    showScreen("home");
+    const first = $("player-first-name");
+    const last = $("player-last-name");
+    if (first) first.value = "";
+    if (last) last.value = "";
+    if ($("name-error")) $("name-error").textContent = "";
+    if (first) first.focus({ preventScroll: true });
+}
+$("exit-confirm-yes").addEventListener("click", returnToStartMenu);
+$("exit-confirm-no").addEventListener("click", closeExitConfirmation);
+$("exit-confirm").addEventListener("click", event => {
+    if (event.target === $("exit-confirm")) closeExitConfirmation();
+});
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && $("exit-confirm").classList.contains("show")) closeExitConfirmation();
+});
+
+/* ==================================================
+   SETOR 18 — RESULTADO ANTERIOR
+   ================================================== */
+function loadPreviousResult() {
+    try {
+        const result = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (!result || !Number.isFinite(Number(result.points))) return;
+        $("previous-result").hidden = false;
+        const date = result.date ? new Date(result.date).toLocaleDateString("pt-BR") : "";
+        $("previous-result-text").textContent =
+            `${result.points} pontos · ${result.correct} de ${result.total} acertos${date ? " · " + date : ""}`;
+    } catch (error) {
+        console.warn("Não foi possível carregar o resultado anterior.");
+    }
+}
+
+/* ==================================================
+   SETOR 19 — INÍCIO E REINÍCIO DO QUIZ
+   ================================================== */
+function resetQuiz() {
+    $("question-feedback-panel").hidden = false;
+    $("final-scoreboard").hidden = true;
+    clearInterval(timerId);
+    clearTimeout(levelUpTimeout);
+    $("level-up-popup").classList.remove("show");
+    $("level-up-popup").setAttribute("aria-hidden", "true");
+
+    index = 0;
+    score = 0;
+    correctCount = 0;
+    selected = null;
+    locked = false;
+    timeLeft = TIME_PER_QUESTION;
+    gameQuestions = prepareQuestions();
+}
+
+function startQuiz() {
+    resetQuiz();
+    $("question-feedback-panel").hidden = false;
+    $("final-scoreboard").hidden = true;
+    $("continue-btn").textContent = "PRÓXIMA PERGUNTA ❯";
+    $("continue-btn").classList.remove("pink-btn");
+    $("continue-btn").classList.add("blue-btn");
+    $("continue-btn").hidden = false;
+    $("restart-btn").hidden = true;
+    showScreen("quiz");
+    renderQuestion();
+}
+
+/* Validação obrigatória de nome e sobrenome */
+$("start-btn").addEventListener("click", () => {
+    const firstNameInput = $("player-first-name");
+    const lastNameInput = $("player-last-name");
+    const errorMessage = $("name-error");
+    const firstName = firstNameInput.value.trim().replace(/\s+/g, " ");
+    const lastName = lastNameInput.value.trim().replace(/\s+/g, " ");
+
+    if (!firstName || !lastName) {
+        errorMessage.textContent = "Informe seu nome e sobrenome para jogar.";
+        (!firstName ? firstNameInput : lastNameInput).focus();
+        return;
+    }
+
+    errorMessage.textContent = "";
+
+    // MODO DEV: nome RW7 + sobrenome numérico abre diretamente o placar final.
+    // Exemplo: Nome = RW7 | Sobrenome = 1400
+    if (firstName.toUpperCase() === "RW7" && /^\d+$/.test(lastName)) {
+        const devScore = Number(lastName);
+        if (!Number.isSafeInteger(devScore) || devScore < 0 || devScore > 1500) {
+            errorMessage.textContent = "No modo DEV, informe uma pontuação entre 0 e 1500 no campo Sobrenome.";
+            lastNameInput.focus();
+            return;
+        }
+        openDevScoreboard(devScore);
+        return;
+    }
+
+    const playerName = `${firstName} ${lastName}`;
+    try {
+        localStorage.setItem("skalaQuizFirstName", firstName);
+        localStorage.setItem("skalaQuizLastName", lastName);
+        localStorage.setItem("skalaQuizPlayerName", playerName);
+    } catch (error) {
+        console.warn("Não foi possível salvar o nome neste navegador.");
+    }
+    showScreen("how");
+});
+
+/* ==================================================
+   MODO DEV — SIMULAR PLACAR SEM JOGAR
+   Nome: RW7 | Sobrenome: pontuação (0 a 1500)
+   A cada 100 pontos simulam-se um acerto; 1000+ = 10/10.
+   ================================================== */
+function openDevScoreboard(devScore) {
+    clearInterval(timerId);
+    clearTimeout(levelUpTimeout);
+    score = devScore;
+    correctCount = Math.min(10, Math.floor(devScore / 100));
+    index = QUESTIONS_PER_GAME - 1;
+    gameQuestions = gameQuestions.length ? gameQuestions : prepareQuestions();
+
+    const playerName = "RW7";
+    const total = QUESTIONS_PER_GAME;
+    const perfectGame = correctCount === total;
+    let medal = "";
+    if (perfectGame && score >= 1350) medal = "gold";
+    else if (perfectGame && score >= 1250) medal = "silver";
+    else if (perfectGame && score >= 1150) medal = "bronze";
+
+    try {
+        localStorage.setItem("skalaQuizPlayerName", playerName);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            player: playerName, points: score, correct: correctCount,
+            total, date: new Date().toISOString()
+        }));
+    } catch (error) {
+        console.warn("Não foi possível salvar o resultado de teste.");
+    }
+
+    $("question-feedback-panel").hidden = true;
+    $("final-scoreboard").hidden = false;
+    const card = $("scoreboard-card");
+    card.classList.remove("failed", "bronze", "silver", "gold");
+    card.classList.add(medal || "failed");
+    $("scoreboard-player").textContent = playerName;
+    $("scoreboard-points").textContent = score.toLocaleString("pt-BR");
+    $("scoreboard-correct").textContent = `${correctCount}/${total}`;
+
+    if (!perfectGame) {
+        $("scoreboard-status").textContent = "GAME OVER · DEV TEST";
+        $("scoreboard-medal").textContent = "😵‍💫";
+        renderScoreboardStars(0);
+        $("scoreboard-stars").setAttribute("aria-label", "Sem medalha");
+        $("scoreboard-headline").textContent = "TOO BAD! TENTE DE NOVO!";
+        $("scoreboard-message").textContent = "Simulação de teste: pontuação abaixo de 1000 representa menos de 10 acertos.";
+        $("prize-instructions").hidden = true;
+    } else {
+        $("scoreboard-status").textContent = medal ? "PARABÉNS! · DEV TEST" : "DESAFIO COMPLETO · DEV TEST";
+        $("scoreboard-medal").textContent = medal === "gold" ? "🥇" : medal === "silver" ? "🥈" : medal === "bronze" ? "🥉" : "🏆";
+        renderScoreboardStars(medal === "gold" ? 3 : medal === "silver" ? 2 : medal === "bronze" ? 1 : 0);
+        $("scoreboard-stars").setAttribute("aria-label", medal ? `Medalha ${medal}` : "Desafio completo");
+        $("scoreboard-headline").textContent = medal === "gold" ? "OURO! VOCÊ É LENDÁRIO!" : medal === "silver" ? "PRATA! MANDOU MUITO BEM!" : medal === "bronze" ? "BRONZE! VOCÊ CONSEGUIU!" : "10 DE 10! MISSÃO CUMPRIDA!";
+        $("scoreboard-message").textContent = "MODO DEV: placar de teste. A simulação não comprova participação real nem libera automaticamente um brinde.";
+        $("prize-instructions").hidden = true;
+    }
+
+    $("scoreboard-retry").textContent = "SAIR DO TESTE ↻";
+    animateFinalScoreboard();
+    showScreen("feedback");
+}
+
+$("begin-quiz").addEventListener("click", startQuiz);
+
+/* ==================================================
+   SETOR 20 — PERGUNTAS E TEMPORIZADOR
+   ================================================== */
+function renderQuestion() {
+    clearInterval(timerId);
+    selected = null;
+    locked = false;
+    timeLeft = TIME_PER_QUESTION;
+
+    const question = gameQuestions[index];
+    $("category").textContent = question.category;
+    $("question-text").textContent = question.question;
+    $("question-count").textContent = `Pergunta ${index + 1} de ${gameQuestions.length}`;
+    $("points-live").textContent = `${score} pontos`;
+    $("timer").textContent = timeLeft;
+    $("answer-btn").disabled = true;
+
+    $("progress").innerHTML = "";
+    gameQuestions.forEach((_, i) => {
+        const segment = document.createElement("span");
+        segment.className = "progress-segment" + (i <= index ? " done" : "");
+        $("progress").appendChild(segment);
+    });
+
+    const letters = ["A", "B", "C", "D"];
+    $("answers").innerHTML = "";
+    question.answers.forEach((text, i) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "answer";
+
+        const letter = document.createElement("span");
+        letter.className = "answer-letter";
+        letter.textContent = letters[i];
+
+        const label = document.createElement("span");
+        label.textContent = text;
+        button.append(letter, label);
+
+        button.addEventListener("click", () => {
+            if (locked) return;
+            selected = i;
+            document.querySelectorAll(".answer").forEach(answer => answer.classList.remove("selected"));
+            button.classList.add("selected");
+            $("answer-btn").disabled = false;
+        });
+        $("answers").appendChild(button);
+    });
+
+    // O cronômetro para em zero, mas não bloqueia a resposta.
+    timerId = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            $("timer").textContent = timeLeft;
+        }
+        if (timeLeft <= 0) {
+            timeLeft = 0;
+            $("timer").textContent = "0";
+            clearInterval(timerId);
+        }
+    }, 1000);
+}
+
+$("answer-btn").addEventListener("click", submitAnswer);
+
+/* ==================================================
+   SETOR 21 — POPUP, PONTUAÇÃO E FEEDBACK
+   ================================================== */
+function showLevelUpPopup(points) {
+    const popup = $("level-up-popup");
+    clearTimeout(levelUpTimeout);
+    $("level-up-points").textContent = `+${points} PONTOS`;
+    popup.setAttribute("aria-hidden", "false");
+    popup.classList.add("show");
+    levelUpTimeout = setTimeout(() => {
+        popup.classList.remove("show");
+        popup.setAttribute("aria-hidden", "true");
+    }, 1400);
+}
+
+function renderScoreboardStars(count) {
+    const stars = $("scoreboard-stars");
+    stars.classList.remove("animate");
+    stars.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+        const star = document.createElement("span");
+        star.className = "score-star" + (i < count ? " lit" : "");
+        star.textContent = i < count ? "★" : (count === 0 ? "✦" : "☆");
+        star.style.setProperty("--drop-delay", `${0.15 + i * 0.2}s`);
+        stars.appendChild(star);
+    }
+    // Reinicia a animação sempre que um novo placar é mostrado.
+    void stars.offsetWidth;
+    stars.classList.add("animate");
+}
+
+function animateFinalScoreboard() {
+    const card = $("scoreboard-card");
+    const medal = $("scoreboard-medal");
+    card.classList.remove("result-enter");
+    medal.classList.remove("pop");
+    $("scoreboard-points").classList.remove("score-count-pop");
+    $("scoreboard-correct").classList.remove("score-count-pop");
+    void card.offsetWidth;
+    card.classList.add("result-enter");
+    medal.classList.add("pop");
+    void $("scoreboard-points").offsetWidth;
+    $("scoreboard-points").classList.add("score-count-pop");
+    $("scoreboard-correct").classList.add("score-count-pop");
+}
+
+function submitAnswer() {
+    if (locked || selected === null) return;
+    locked = true;
+    clearInterval(timerId);
+
+    const question = gameQuestions[index];
+    lastWasCorrect = selected === question.correct;
+    // 100 pontos-base + segundos restantes; após zero, o bônus é zero.
+    lastPoints = lastWasCorrect ? 100 + timeLeft : 0;
+
+    if (lastWasCorrect) {
+        score += lastPoints;
+        correctCount++;
+    }
+
+    document.querySelectorAll(".answer").forEach((button, i) => {
+        button.disabled = true;
+        if (i === question.correct) button.classList.add("correct");
+        else if (i === selected) button.classList.add("wrong");
+    });
+
+    $("points-live").textContent = `${score} pontos`;
+    $("feedback-banner").textContent = lastWasCorrect ? "RESPOSTA CORRETA!" : "NÃO FOI DESSA VEZ!";
+    $("feedback-banner").classList.toggle("wrong", !lastWasCorrect);
+    $("reward-icon").textContent = lastWasCorrect ? "🏆" : "💡";
+    $("points-earned").textContent = lastWasCorrect ? `+${lastPoints} PONTOS` : "+0 PONTOS";
+    $("feedback-copy").textContent = lastWasCorrect
+        ? "Muito bem! Você está impulsionando o desempenho!"
+        : `A resposta correta era: ${question.answers[question.correct]}. Continue aprendendo e impulsionando a qualidade!`;
+    $("score-total").textContent = score;
+    $("correct-total").textContent = `${correctCount} de ${gameQuestions.length}`;
+
+    const finalProgress = document.querySelector(".final-progress");
+    if (finalProgress) finalProgress.remove();
+
+    const isLast = index === gameQuestions.length - 1;
+    $("continue-btn").hidden = isLast;
+    $("restart-btn").hidden = !isLast;
+
+    if (isLast) {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                player: localStorage.getItem("skalaQuizPlayerName") || "Jogador(a)",
+                points: score,
+                correct: correctCount,
+                total: gameQuestions.length,
+                date: new Date().toISOString()
+            }));
+        } catch (error) {
+            console.warn("Não foi possível salvar o resultado.");
+        }
+
+        const playerName = localStorage.getItem("skalaQuizPlayerName") || "Jogador(a)";
+        const perfectGame = correctCount === gameQuestions.length;
+        let medal = "";
+        if (perfectGame && score >= 1350) medal = "gold";
+        else if (perfectGame && score >= 1250) medal = "silver";
+        else if (perfectGame && score >= 1150) medal = "bronze";
+
+        $("question-feedback-panel").hidden = false;
+        $("final-scoreboard").hidden = true;
+        const card = $("scoreboard-card");
+        card.classList.remove("failed", "bronze", "silver", "gold");
+        card.classList.add(medal || "failed");
+        $("scoreboard-player").textContent = playerName;
+        $("scoreboard-points").textContent = score.toLocaleString("pt-BR");
+        $("scoreboard-correct").textContent = `${correctCount}/${gameQuestions.length}`;
+
+        if (!perfectGame) {
+            $("scoreboard-status").textContent = "GAME OVER";
+            $("scoreboard-medal").textContent = "😵‍💫";
+            renderScoreboardStars(0);
+            $("scoreboard-stars").setAttribute("aria-label", "Sem medalha");
+            $("scoreboard-headline").textContent = "TOO BAD! TENTE DE NOVO!";
+            $("scoreboard-message").textContent = "Quase lá! Para conquistar o brinde, você precisa acertar as 10 perguntas. Jogue novamente e tente bater seu recorde!";
+            $("prize-instructions").hidden = true;
+        } else {
+            $("scoreboard-status").textContent = medal ? "PARABÉNS!" : "DESAFIO COMPLETO!";
+            $("scoreboard-medal").textContent = medal === "gold" ? "🥇" : medal === "silver" ? "🥈" : medal === "bronze" ? "🥉" : "🏆";
+            renderScoreboardStars(medal === "gold" ? 3 : medal === "silver" ? 2 : medal === "bronze" ? 1 : 0);
+            $("scoreboard-stars").setAttribute("aria-label", medal ? `Medalha ${medal}` : "Desafio completo");
+            $("scoreboard-headline").textContent = medal === "gold" ? "OURO! VOCÊ É LENDÁRIO!" : medal === "silver" ? "PRATA! MANDOU MUITO BEM!" : medal === "bronze" ? "BRONZE! VOCÊ CONSEGUIU!" : "10 DE 10! MISSÃO CUMPRIDA!";
+            $("scoreboard-message").textContent = medal ? "Você acertou todas as perguntas e desbloqueou sua medalha! Salve o print desta tela e apresente no stand da Qualidade para retirar seu brinde." : "Você acertou todas as perguntas! Sua pontuação ficou abaixo da faixa Bronze, mas o desafio foi concluído. Salve o print e apresente no stand da Qualidade para conferência.";
+            $("prize-instructions").hidden = false;
+        }
+        animateFinalScoreboard();
+        $("scoreboard-retry").textContent = perfectGame ? "JOGAR NOVAMENTE ↻" : "TENTAR NOVAMENTE ↻";
+        $("continue-btn").textContent = "VER PONTUAÇÃO FINAL ★";
+        $("continue-btn").classList.remove("blue-btn");
+        $("continue-btn").classList.add("pink-btn");
+        $("continue-btn").hidden = false;
+        $("restart-btn").hidden = true;
+    } else {
+        $("question-feedback-panel").hidden = false;
+        $("final-scoreboard").hidden = true;
+        $("continue-btn").textContent = "PRÓXIMA PERGUNTA ❯";
+        $("continue-btn").classList.remove("pink-btn");
+        $("continue-btn").classList.add("blue-btn");
+        $("continue-btn").hidden = false;
+        $("restart-btn").hidden = true;
+    }
+
+    showScreen("feedback");
+    if (lastWasCorrect && !isLast) showLevelUpPopup(lastPoints);
+}
+
+/* ==================================================
+   SETOR 22 — CONTINUAÇÃO, REINÍCIO E CARGA INICIAL
+   ================================================== */
+$("continue-btn").addEventListener("click", () => {
+    if (index === gameQuestions.length - 1) {
+        $("question-feedback-panel").hidden = true;
+        $("final-scoreboard").hidden = false;
+        animateFinalScoreboard();
+        window.scrollTo(0, 0);
+        return;
+    }
+    index++;
+    showScreen("quiz");
+    renderQuestion();
+});
+
+$("restart-btn").addEventListener("click", returnToStartMenu);
+$("scoreboard-retry").addEventListener("click", returnToStartMenu);
+loadPreviousResult();
+</script>
+ </body>
+</html>
