@@ -2083,6 +2083,120 @@ button, input { max-width: 100%; }
   #screen-home .scene *, #screen-feedback .scoreboard-card:after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
 
+
+
+/* ==================================================
+   BACKGROUNDS PERSONALIZADOS — ADIÇÃO SEM ALTERAR O HTML/JS EXISTENTE
+   Arquivos esperados em ./assets/
+   Tela inicial = fábrica; telas intermediárias = arena; placar final = pódio.
+   ================================================== */
+#screen-home {
+  background-image:
+    linear-gradient(180deg, rgba(12, 5, 39, .32), rgba(12, 5, 39, .62)),
+    url("assets/background-mainmenu.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+#screen-how,
+#screen-quiz,
+#screen-feedback {
+  background-image:
+    linear-gradient(180deg, rgba(10, 4, 39, .48), rgba(10, 4, 39, .66)),
+    url("assets/background-question.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* O mesmo screen-feedback é usado para feedback entre perguntas e placar final.
+   Este seletor troca o cenário apenas quando o placar final está visível. */
+#screen-feedback:has(#final-scoreboard:not([hidden])) {
+  background-image:
+    linear-gradient(180deg, rgba(10, 4, 39, .28), rgba(10, 4, 39, .48)),
+    url("assets/background-final.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 700px) {
+  #screen-home,
+  #screen-how,
+  #screen-quiz,
+  #screen-feedback {
+    background-position: center center;
+    border-radius: 12px;
+  }
+}
+
+
+
+/* ==================================================
+   AJUSTE DE TELA CHEIA — preserva o HTML e o JavaScript
+   Expande o jogo para a largura disponível do monitor.
+   ================================================== */
+html {
+  width: 100%;
+  min-height: 100%;
+}
+
+body, .app {
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.shell {
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: clamp(10px, 1.25vw, 20px) clamp(14px, 2.1vw, 36px);
+}
+
+.screen {
+  width: 100%;
+  min-width: 0;
+}
+
+#screen-home,
+#screen-how,
+#screen-quiz,
+#screen-feedback {
+  background-size: cover;
+  background-position: center;
+}
+
+/* Em monitores grandes, a composição usa melhor o espaço horizontal. */
+@media (min-width: 1100px) {
+  .home {
+    gap: clamp(28px, 4vw, 72px);
+  }
+  .home-copy {
+    flex: 0 1 48%;
+    max-width: 760px;
+  }
+  .scene {
+    flex: 1 1 52%;
+    min-width: 0;
+  }
+}
+
+/* Em telas menores, mantém o comportamento responsivo original. */
+@media (max-width: 760px) {
+  .shell {
+    padding: 12px 14px 16px;
+  }
+}
+
 </style>
  </head>
  <body>
