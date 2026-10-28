@@ -3613,6 +3613,107 @@ body {
   *, *::before, *::after { scroll-behavior: auto !important; }
 }
 
+/* ==================================================
+   🔥 AJUSTE DEFINITIVO PARA MOBILE (90% DO PÚBLICO)
+   ================================================== */
+
+/* 1. OBRIGA O MODO RETRATO (PORTRAIT) NOS CELULARES */
+@media (max-width: 900px) and (orientation: landscape) {
+    .app {
+        display: none !important;
+    }
+    body {
+        background: #10082d !important;
+        background-image: none !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+    body::before {
+        content: "🔄 Por favor, gire o celular para a vertical (Modo Retrato) para jogar.";
+        color: #ffe52e;
+        font-size: 20px;
+        line-height: 1.5;
+        font-weight: 900;
+        text-align: center;
+        padding: 30px;
+        font-family: Arial, sans-serif;
+    }
+}
+
+/* 2. LIBERA SCROLL, FIXA FUNDO E REDUZ A PROPORÇÃO GERAL */
+@media (max-width: 760px) and (orientation: portrait) {
+    /* Libera rolagem sem quebrar o layout */
+    html, body {
+        overflow-x: auto !important;
+        overflow-y: auto !important;
+        min-height: 100% !important;
+        
+        /* Fundo fixo: se o usuário rolar a tela, o background acompanha sem cortar */
+        background-attachment: fixed !important;
+        background-size: cover !important;
+        overscroll-behavior: none; /* Evita aquele "pulo" chato no scroll do iOS/Android */
+    }
+
+    /* Destrava a altura do jogo */
+    .app, .shell {
+        height: auto !important;
+        min-height: 100vh !important;
+        overflow: visible !important;
+    }
+
+    /* Redução mágica: o 'zoom' diminui o tamanho de tudo mantendo a proporção de PC */
+    .shell {
+        padding: 10px 10px 30px !important;
+        zoom: 0.85; /* Reduz tudo em 15%, criando espaço para respirar */
+    }
+
+    /* Garante que todas as telas deixem o scroll acontecer solto */
+    #screen-home, #screen-how, #screen-quiz, #screen-feedback {
+        background-attachment: fixed !important;
+        min-height: 100vh !important;
+        height: auto !important;
+        overflow: visible !important;
+        border-radius: 0 !important; /* Tira borda redonda no celular para usar 100% da tela */
+    }
+
+    /* Ajuste para a ilustração da tela inicial não estourar */
+    .scene, #screen-home .scene {
+        position: relative !important;
+        width: 100% !important;
+        height: 240px !important; 
+        margin-top: 15px !important;
+    }
+
+    /* Previne que mascotes e troféus vazem muito para os lados e criem scroll horizontal desnecessário */
+    .scoreboard-sidekick {
+        transform: scale(0.65) !important;
+        transform-origin: center center;
+    }
+
+    /* Dá um respiro extra no final do placar para não colar no rodapé do celular */
+    #screen-feedback .scoreboard-card {
+        margin-bottom: 25px !important;
+        overflow: visible !important;
+    }
+    
+    /* Corrige o rodapé para não ficar por cima do conteúdo se rolar a tela */
+    .footer {
+        position: relative !important;
+        margin-top: 20px !important;
+    }
+}
+
+/* Telas MUITO pequenas (ex: iPhone SE antigo) - Reduz um pouquinho mais */
+@media (max-width: 380px) and (orientation: portrait) {
+    .shell {
+        zoom: 0.75; 
+    }
+}
+
+
 </style>
  </head>
  <body>
