@@ -205,17 +205,33 @@ h1 span {
     transform:rotate(-1deg)
 }
 
+
+/* Texto de apresentação — maior contraste e legibilidade */
 .lead {
-    max-width:490px;
-    color:#eee9ff;
-    line-height:1.55;
-    margin:22px 0 0;
-    font-size:16px
+    max-width: 490px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.65;
+    margin: 22px 0 0;
+
+    /* Contorno escuro para separar o texto da imagem */
+    text-shadow:
+        0 2px 3px #080018,
+        0 0 8px rgba(5, 0, 25, 0.95),
+        1px 1px 2px #080018;
 }
 
 .lead strong {
-    color:var(--yellow)
+    color: #ffe84d;
+    font-weight: 800;
+    text-shadow:
+        0 0 8px rgba(255, 232, 77, 0.35),
+        0 2px 3px #080018;
 }
+
+
+
 
 /* SETOR 05.1 — BOTÃO JOGAR */
 .big-btn {
@@ -1680,7 +1696,7 @@ html, body { width:100%; height:100%; overflow:hidden; }
 #screen-home .home-copy { position:static !important; }
 #screen-home #previous-result {
   position:absolute !important; left:0 !important; right:0 !important;
-  top:auto !important; bottom:27px !important; transform:none !important;
+  top:auto !important; bottom:07px !important; transform:none !important;
   width:auto !important; max-width:none !important; margin:0 !important;
   padding:7px 12px !important; box-sizing:border-box;
   background:linear-gradient(90deg,rgba(5,4,18,.82),rgba(8,5,20,.42)) !important;
@@ -1693,7 +1709,7 @@ html, body { width:100%; height:100%; overflow:hidden; }
 #screen-home #previous-result-text { display:inline; margin-top:0 !important; color:#b9acd8 !important; font-size:10px !important; }
 #screen-home #previous-result[hidden] { display:none !important; }
 @media(max-width:760px) {
-  #screen-home #previous-result { bottom:25px !important; padding:5px 8px !important; }
+  #screen-home #previous-result { bottom:07px !important; padding:5px 8px !important; }
   #screen-home #previous-result strong, #screen-home #previous-result-text { font-size:9px !important; }
 }
 
@@ -2197,6 +2213,1396 @@ body, .app {
   }
 }
 
+
+
+/* ASSET POTekg — usado na tela inicial e também no placar final */
+#screen-home .potekg-asset {
+  position: absolute;
+  z-index: 4;
+  width: min(94%, 460px);
+  max-height: 220px;
+  height: auto;
+  object-fit: contain;
+  left: 50%;
+  bottom: 29px;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 10px rgba(255, 79, 163, .25)) drop-shadow(0 5px 0 rgba(5, 4, 18, .35));
+  pointer-events: none;
+}
+#screen-home .trophy, #screen-home .jars { display: none; }
+#screen-feedback .scoreboard-brand-scene {
+  height: 112px;
+  align-items: flex-end;
+  overflow: visible;
+}
+#screen-feedback .potekg-final-asset {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: min(56vw, 270px);
+  max-height: 100px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto -2px;
+  filter: drop-shadow(0 0 9px rgba(255, 79, 163, .22)) drop-shadow(0 4px 0 rgba(5, 4, 18, .4));
+  pointer-events: none;
+}
+#screen-feedback .scoreboard-brand-scene .brand-product { display: none; }
+@media (max-width: 760px) {
+  #screen-home .potekg-asset {
+    width: min(98%, 340px);
+    max-height: 165px;
+    bottom: 25px;
+  }
+  #screen-feedback .scoreboard-brand-scene {
+    height: 82px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  #screen-feedback .potekg-final-asset {
+    width: min(58vw, 210px);
+    max-height: 74px;
+  }
+}
+@media (max-width: 420px) {
+  #screen-feedback .scoreboard-brand-scene { height: 70px; }
+  #screen-feedback .potekg-final-asset { width: min(60vw, 175px); max-height: 64px; }
+}
+
+
+
+/* ASSETS DE PREMIAÇÃO E MASCOTE — adicionados sem remover o fluxo existente */
+.scoreboard-medal { display:flex; align-items:center; justify-content:center; min-height:clamp(64px,10vw,100px); }
+.scoreboard-medal img { display:block; width:auto; height:clamp(76px,13vw,126px); max-width:min(44vw,220px); object-fit:contain; margin:0 auto; }
+.scoreboard-medal img[hidden], .scoreboard-medal span[hidden] { display:none !important; }
+.scoreboard-medal #scoreboard-gameover-art { width:min(340px,72vw); height:auto; max-height:clamp(70px,15vh,125px); }
+.scoreboard-mascot { position:absolute !important; z-index:0 !important; right:8px; bottom:74px; width:clamp(84px,13vw,142px); max-height:42%; height:auto; object-fit:contain; opacity:.98; pointer-events:none; filter:drop-shadow(0 0 10px #ff4fa344); }
+.scoreboard-card > :not(.scoreboard-mascot):not(.scoreboard-glow) { z-index:1; }
+@media (min-width:761px) {
+  .scoreboard-card { width:min(900px,100%); }
+  .scoreboard-card > .scoreboard-kicker,
+  .scoreboard-card > .scoreboard-status,
+  .scoreboard-card > .scoreboard-medal,
+  .scoreboard-card > .scoreboard-stars,
+  .scoreboard-card > .scoreboard-brand-scene,
+  .scoreboard-card > .scoreboard-headline,
+  .scoreboard-card > .scoreboard-player-label,
+  .scoreboard-card > .scoreboard-player,
+  .scoreboard-card > .scoreboard-stats,
+  .scoreboard-card > .scoreboard-message { max-width:78%; }
+  .scoreboard-card > .scoreboard-stats { width:78%; }
+  .scoreboard-mascot { right:12px; bottom:85px; width:clamp(120px,15vw,175px); max-height:46%; }
+}
+@media (max-width:760px) {
+  .scoreboard-mascot { width:clamp(68px,19vw,96px); right:0; bottom:74px; opacity:.92; }
+  .scoreboard-card > .scoreboard-message { padding-right:48px; }
+  .scoreboard-medal img { height:clamp(68px,12vh,92px); }
+  .scoreboard-medal #scoreboard-gameover-art { width:min(260px,72vw); max-height:90px; }
+}
+
+
+/* AJUSTE VISUAL: troféu rigorosamente centralizado no placar final. */
+#screen-feedback .scoreboard-card > .scoreboard-medal {
+  display:flex;
+  width:78%;
+  max-width:78%;
+  margin:6px auto 0;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+#screen-feedback .scoreboard-medal img {
+  flex:0 0 auto;
+  object-position:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+#screen-feedback .scoreboard-medal #scoreboard-gameover-art {
+  width:min(340px,72vw);
+  max-width:100%;
+  max-height:clamp(70px,15vh,125px);
+  object-fit:contain;
+}
+
+/* Mascote movida para a tela de instruções; aparece parcialmente pela direita. */
+#screen-how { position:relative; }
+#screen-how .how-mascot {
+  position:absolute;
+  z-index:3;
+  right:-88px;
+  bottom:0;
+  width:clamp(230px,28vw,360px);
+  max-height:68%;
+  height:auto;
+  object-fit:contain;
+  object-position:bottom center;
+  pointer-events:none;
+  filter:drop-shadow(0 0 12px rgba(255,79,163,.28));
+}
+@media (min-width:761px) {
+  #screen-how .paper.rules,
+  #screen-how .bottom-action,
+  #screen-how .callout {
+    width:calc(100% - clamp(150px,20vw,250px));
+    margin-right:auto;
+  }
+}
+@media (max-width:760px) {
+  #screen-how .how-mascot { display:none; }
+  #screen-feedback .scoreboard-card > .scoreboard-medal { width:100%; max-width:100%; }
+}
+
+
+
+/* AJUSTE FINAL: centralização consistente do placar e mascote responsivo nas instruções. */
+#screen-feedback .scoreboard-card {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+#screen-feedback .scoreboard-card > .scoreboard-kicker,
+#screen-feedback .scoreboard-card > .scoreboard-status,
+#screen-feedback .scoreboard-card > .scoreboard-medal,
+#screen-feedback .scoreboard-card > .scoreboard-stars,
+#screen-feedback .scoreboard-card > .scoreboard-brand-scene,
+#screen-feedback .scoreboard-card > .scoreboard-headline,
+#screen-feedback .scoreboard-card > .scoreboard-player-label,
+#screen-feedback .scoreboard-card > .scoreboard-player,
+#screen-feedback .scoreboard-card > .scoreboard-stats,
+#screen-feedback .scoreboard-card > .scoreboard-message,
+#screen-feedback .scoreboard-card > .prize-instructions {
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center;
+}
+#screen-feedback .scoreboard-card > .scoreboard-kicker,
+#screen-feedback .scoreboard-card > .scoreboard-status,
+#screen-feedback .scoreboard-card > .scoreboard-medal,
+#screen-feedback .scoreboard-card > .scoreboard-stars,
+#screen-feedback .scoreboard-card > .scoreboard-brand-scene,
+#screen-feedback .scoreboard-card > .scoreboard-headline,
+#screen-feedback .scoreboard-card > .scoreboard-player-label,
+#screen-feedback .scoreboard-card > .scoreboard-player,
+#screen-feedback .scoreboard-card > .scoreboard-stats,
+#screen-feedback .scoreboard-card > .scoreboard-message {
+  max-width:100%;
+}
+#screen-feedback .scoreboard-card > .scoreboard-stats { width:min(100%, 460px); }
+#screen-feedback .scoreboard-card > .scoreboard-message { padding-left:0; padding-right:0; }
+#screen-feedback .scoreboard-card > .scoreboard-medal { width:100%; }
+#screen-feedback .scoreboard-card > .scoreboard-medal img { object-fit:contain; }
+#screen-feedback .scoreboard-card > .scoreboard-footer { width:100%; text-align:center; }
+
+/* Em celular, a mascote continua visível, menor e parcialmente recortada pela borda direita. */
+@media (max-width:760px) {
+  #screen-how .how-mascot {
+    display:block !important;
+    width:clamp(72px, 21vw, 112px);
+    max-height:35%;
+    height:auto;
+    right:-14px;
+    bottom:2px;
+    object-fit:contain;
+    object-position:right bottom;
+    opacity:.95;
+  }
+  #screen-how .paper.rules,
+  #screen-how .bottom-action,
+  #screen-how .callout {
+    width:calc(100% - 76px);
+    margin-left:0;
+    margin-right:auto;
+  }
+  #screen-how .paper.rules { position:relative; z-index:2; }
+}
+@media (max-width:420px) {
+  #screen-how .how-mascot {
+    width:clamp(58px, 18vw, 78px);
+    max-height:29%;
+    right:-10px;
+    bottom:4px;
+  }
+  #screen-how .paper.rules,
+  #screen-how .bottom-action,
+  #screen-how .callout { width:calc(100% - 58px); }
+}
+
+
+
+/* ==================================================
+   SETOR 25 — GLOW UP DA TELA INICIAL
+   Background mais vivo, sem película cinza e sem ilustração sobreposta.
+   ================================================== */
+#screen-home {
+  /* Retira o degradê escuro que apagava as cores do asset. */
+  background-image: url("assets/background-mainmenu.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  isolation: isolate;
+}
+
+/* Halo colorido central: ilumina sem cobrir o cenário. */
+#screen-home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 62% 48%, rgba(0, 225, 255, .13), transparent 34%),
+    radial-gradient(ellipse at 76% 58%, rgba(255, 20, 160, .13), transparent 38%),
+    radial-gradient(ellipse at 52% 20%, rgba(255, 227, 77, .08), transparent 32%);
+  animation: homeAmbientGlow 5.5s ease-in-out infinite alternate;
+}
+
+#screen-home > * { position: relative; z-index: 1; }
+#screen-home .home-copy { z-index: 5; }
+
+@keyframes homeAmbientGlow {
+  from { opacity: .55; filter: brightness(1); }
+  to   { opacity: 1; filter: brightness(1.18); }
+}
+
+/* A arte principal fica somente no background: remove os elementos 3D/hero
+   que eram desenhados por cima dele. Mantém partículas e halo animados. */
+#screen-home .scene .robot,
+#screen-home .scene .trophy,
+#screen-home .scene .jars,
+#screen-home .scene .platform,
+#screen-home .scene .stars,
+#screen-home .potekg-asset {
+  display: none !important;
+}
+
+#screen-home .scene {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  flex: none !important;
+  z-index: 2 !important;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#screen-home .scene:before {
+  inset: 8% 4% 6%;
+  background: radial-gradient(ellipse at 63% 49%, rgba(0, 225, 255, .17), rgba(255, 22, 135, .11) 34%, transparent 70%);
+  filter: blur(20px);
+}
+
+/* Mais símbolos luminosos distribuídos pelo centro e pelas bordas. */
+#screen-home .arcade-decor {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 3 !important;
+  overflow: hidden;
+}
+#screen-home .arcade-decor .float-icon {
+  opacity: .95;
+  filter: drop-shadow(0 0 5px currentColor);
+  text-shadow: 0 0 9px currentColor, 0 0 22px currentColor, 0 0 34px currentColor;
+  animation: arcadeFloatGlow 3.2s ease-in-out infinite;
+}
+#screen-home .arcade-decor .icon-1  { top: 12%; left: 7%; color: #ffe34d; font-size: 31px; }
+#screen-home .arcade-decor .icon-2  { top: 21%; right: 8%; color: #ff42c6; font-size: 26px; }
+#screen-home .arcade-decor .icon-3  { top: 43%; left: 4%; color: #9cebff; font-size: 24px; }
+#screen-home .arcade-decor .icon-4  { top: 57%; right: 4%; color: #a6ff4d; font-size: 25px; }
+#screen-home .arcade-decor .icon-5  { top: 37%; right: 19%; color: #7dffb5; font-size: 28px; }
+#screen-home .arcade-decor .icon-6  { bottom: 17%; left: 13%; color: #83eaff; font-size: 24px; }
+#screen-home .arcade-decor .icon-7  { top: 16%; left: 42%; color: #ff7bce; font-size: 23px; }
+#screen-home .arcade-decor .icon-8  { bottom: 15%; right: 13%; color: #bba0ff; font-size: 26px; }
+#screen-home .arcade-decor .icon-9  { top: 68%; left: 28%; color: #ffe34d; font-size: 15px; }
+#screen-home .arcade-decor .icon-10 { top: 8%; right: 33%; color: #9efff2; font-size: 22px; }
+#screen-home .arcade-decor .icon-11 { top: 30%; left: 56%; font-size: 26px; animation-delay: -.7s; }
+#screen-home .arcade-decor .icon-12 { top: 47%; left: 49%; color: #7dffb5; font-size: 28px; animation-delay: -1.8s; }
+#screen-home .arcade-decor .icon-13 { top: 73%; right: 29%; color: #ffe34d; font-size: 25px; animation-delay: -1.2s; }
+#screen-home .arcade-decor .icon-14 { top: 28%; right: 34%; color: #9cebff; font-size: 25px; animation-delay: -2.4s; }
+#screen-home .arcade-decor .icon-15 { bottom: 27%; right: 5%; color: #7dffb5; font-size: 23px; animation-delay: -.4s; }
+#screen-home .arcade-decor .icon-16 { bottom: 10%; left: 37%; color: #ff7bce; font-size: 21px; animation-delay: -1.5s; }
+#screen-home .arcade-decor .icon-17 { top: 63%; right: 22%; font-size: 24px; animation-delay: -2s; }
+#screen-home .arcade-decor .icon-18 { top: 12%; right: 4%; color: #83eaff; font-size: 22px; animation-delay: -2.8s; }
+#screen-home .arcade-decor .icon-19 { top: 80%; left: 6%; color: #7dffb5; font-size: 25px; animation-delay: -1s; }
+#screen-home .arcade-decor .icon-20 { top: 52%; left: 31%; color: #ff42c6; font-size: 18px; animation-delay: -2.2s; }
+
+@keyframes arcadeFloatGlow {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg) scale(.92); opacity: .62; }
+  50% { transform: translate3d(0, -15px, 0) rotate(9deg) scale(1.2); opacity: 1; }
+}
+
+
+
+/* PAINEL NEON — IDENTIFICAÇÃO DO JOGADOR */
+#screen-home .player-fields {
+    position: relative;
+    isolation: isolate;
+
+    width: min(100%, 430px);
+    padding: 20px 18px 22px;
+    margin-top: 22px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(8, 14, 55, 0.97),
+        rgba(20, 8, 52, 0.97)
+    );
+
+    border: 2px solid #36eaff;
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 35, 202, 0.75),
+        0 0 12px rgba(54, 234, 255, 0.85),
+        0 0 28px rgba(255, 35, 202, 0.40),
+        inset 0 0 22px rgba(35, 75, 255, 0.20);
+}
+
+/* Detalhes luminosos nos cantos */
+#screen-home .player-fields::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    z-index: -1;
+    pointer-events: none;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 7px;
+}
+
+/* Rótulos mais legíveis */
+#screen-home .player-fields label {
+    color: #ffffff;
+    text-shadow: 0 0 7px rgba(54, 234, 255, 0.55);
+    font-weight: 900;
+}
+
+/* Campos de nome e sobrenome */
+#screen-home .player-fields input {
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 12px 15px;
+
+    color: #20133c;
+    background: #f4fbff;
+
+    border: 2px solid #b5f5ff;
+    border-radius: 7px;
+
+    box-shadow: 0 0 10px rgba(54, 234, 255, 0.22);
+}
+
+/* Brilho ao selecionar um campo */
+#screen-home .player-fields input:focus {
+    outline: 2px solid #ffe34d;
+    outline-offset: 2px;
+
+    border-color: #ffffff;
+    box-shadow:
+        0 0 0 4px rgba(255, 227, 77, 0.15),
+        0 0 16px rgba(54, 234, 255, 0.65);
+}
+
+/* Botão JOGAR destacado dentro do painel */
+#screen-home .player-fields #start-btn {
+    width: 100%;
+    margin-top: 9px;
+    position: relative;
+    z-index: 2;
+
+    border: 3px solid #fff5a0;
+    border-radius: 5px;
+
+    box-shadow:
+        0 4px 0 #bd5d19,
+        0 0 14px rgba(255, 227, 77, 0.38);
+
+    transition:
+        transform 0.15s ease,
+        filter 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+#screen-home .player-fields #start-btn:hover {
+    filter: brightness(1.12);
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 0 #bd5d19,
+        0 0 24px rgba(255, 227, 77, 0.65);
+}
+
+#screen-home .player-fields #start-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #bd5d19;
+}
+
+
+/* O formulário fica acima dos efeitos para continuar legível e utilizável. */
+#screen-home .player-fields,
+#screen-home .player-fields label,
+#screen-home .player-fields input,
+#screen-home .player-fields button,
+#screen-home .field-error,
+#screen-home .small-note,
+#screen-home .tag,
+#screen-home h1,
+#screen-home .theme,
+#screen-home .lead {
+  position: relative;
+  z-index: 6;
+}
+
+@media (max-width: 760px) {
+  #screen-home .scene { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; }
+  #screen-home .arcade-decor .float-icon { font-size: 19px; }
+  #screen-home .arcade-decor .icon-11 { top: 33%; left: 68%; }
+  #screen-home .arcade-decor .icon-12 { top: 58%; left: 78%; }
+  #screen-home .arcade-decor .icon-13 { top: 76%; right: 18%; }
+  #screen-home .arcade-decor .icon-14 { top: 30%; right: 6%; }
+  #screen-home .arcade-decor .icon-17 { top: 67%; right: 8%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #screen-home::before,
+  #screen-home .arcade-decor .float-icon { animation: none !important; }
+}
+
+
+/* ==================================================
+   SETOR 23 — GLOW UP DA TELA FINAL
+   Mascotes em PNG, brilho neon e animações
+   ================================================== */
+
+/* ROBÔ: flutuação suave e brilho azul */
+#screen-feedback .sidekick-robot-asset {
+  display: block;
+  width: clamp(76px, 8vw, 120px);
+  height: auto;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 8px rgba(0, 238, 255, .8))
+    drop-shadow(0 0 22px rgba(0, 153, 255, .5));
+  transform-origin: center;
+  animation: robotCelebration 2.8s ease-in-out infinite;
+}
+
+/* FOGUETE: movimento diagonal e rastro luminoso */
+#screen-feedback .sidekick-rocket-asset {
+  display: block;
+  width: clamp(76px, 8vw, 118px);
+  height: auto;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 9px rgba(255, 65, 170, .8))
+    drop-shadow(0 0 22px rgba(255, 150, 30, .5));
+  transform-origin: center;
+  animation: rocketCelebration 2.4s ease-in-out infinite;
+}
+
+/* ESTRELA: mascote flutuando perto do centro do placar */
+#screen-feedback .scoreboard-star-mascot {
+  position: absolute;
+  z-index: 3;
+  width: clamp(42px, 5vw, 68px);
+  height: auto;
+  top: 22%;
+  right: 23%;
+  object-fit: contain;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 235, 80, .95))
+    drop-shadow(0 0 22px rgba(255, 190, 20, .7));
+  animation: starCelebration 3s ease-in-out infinite;
+}
+
+/* Mais profundidade e brilho na moldura */
+#screen-feedback .scoreboard-card {
+  isolation: isolate;
+  box-shadow:
+    0 0 0 2px rgba(255, 239, 105, .3),
+    0 0 24px rgba(255, 0, 180, .22),
+    0 0 48px rgba(0, 220, 255, .13),
+    8px 8px 0 #05040c;
+  animation: scoreboardEntrance .75s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+/* Realce do título e dos elementos centrais */
+#screen-feedback .scoreboard-status,
+#screen-feedback .scoreboard-medal {
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, .3),
+    0 0 24px rgba(255, 0, 190, .22);
+}
+
+/* Pontuação com destaque luminoso */
+#screen-feedback .scoreboard-stats {
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 18px rgba(255, 236, 100, .24),
+    0 0 34px rgba(0, 225, 255, .12);
+}
+
+/* Reflexo animado na caixa de pontuação */
+#screen-feedback .scoreboard-stats::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -65%;
+  width: 35%;
+  height: 180%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, .35),
+    transparent
+  );
+  transform: skewX(-22deg);
+  animation: statsShimmer 5s ease-in-out infinite;
+}
+
+/* Botão final mais vivo */
+#screen-feedback .scoreboard-retry {
+  animation: buttonNeonPulse 2.5s ease-in-out infinite;
+}
+
+/* Animações */
+@keyframes robotCelebration {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg) scale(1.04);
+  }
+}
+
+@keyframes rocketCelebration {
+  0%, 100% {
+    transform: translate(0, 0) rotate(-8deg);
+  }
+  50% {
+    transform: translate(7px, -12px) rotate(3deg);
+  }
+}
+
+@keyframes starCelebration {
+  0%, 100% {
+    transform: translateY(0) rotate(-10deg) scale(.94);
+    opacity: .82;
+  }
+  50% {
+    transform: translateY(-13px) rotate(12deg) scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes scoreboardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes statsShimmer {
+  0%, 60% {
+    left: -65%;
+  }
+  100% {
+    left: 140%;
+  }
+}
+
+@keyframes buttonNeonPulse {
+  0%, 100% {
+    filter: brightness(1);
+    box-shadow: 0 5px 0 #8d004b, 0 0 14px #ff008c22;
+  }
+  50% {
+    filter: brightness(1.08);
+    box-shadow: 0 5px 0 #8d004b, 0 0 24px #ff008c66;
+  }
+}
+
+/* Evita animações excessivas se o usuário preferir movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  #screen-feedback .sidekick-robot-asset,
+  #screen-feedback .sidekick-rocket-asset,
+  #screen-feedback .scoreboard-star-mascot,
+  #screen-feedback .scoreboard-card,
+  #screen-feedback .scoreboard-stats::after,
+  #screen-feedback .scoreboard-retry {
+    animation: none !important;
+  }
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 600px) {
+  #screen-feedback .sidekick-robot-asset,
+  #screen-feedback .sidekick-rocket-asset {
+    width: 38px;
+  }
+
+  #screen-feedback .scoreboard-star-mascot {
+    width: 34px;
+    top: 24%;
+    right: 17%;
+  }
+}
+
+
+/* =====================================================
+   SETOR 28 — GLOW UP REAL DO PLACAR FINAL
+   Painel premium, luz central e brilho arcade
+   ===================================================== */
+
+#screen-feedback #final-scoreboard:not([hidden]) #scoreboard-card {
+  position: relative !important;
+  isolation: isolate;
+  overflow: hidden !important;
+
+  background:
+    radial-gradient(ellipse at 50% 32%,
+      rgba(151, 49, 255, .30) 0%,
+      rgba(67, 23, 125, .17) 35%,
+      transparent 68%),
+    radial-gradient(ellipse at 50% 100%,
+      rgba(255, 0, 145, .15),
+      transparent 55%),
+    linear-gradient(145deg,
+      #1c1036 0%,
+      #10091f 48%,
+      #080612 100%) !important;
+
+  border: 2px solid #ffe95c !important;
+  border-radius: 8px !important;
+
+  box-shadow:
+    0 0 0 4px rgba(255, 47, 190, .25),
+    0 0 22px rgba(255, 47, 190, .32),
+    0 0 42px rgba(104, 65, 255, .24),
+    0 22px 55px rgba(0, 0, 0, .58),
+    inset 0 0 35px rgba(151, 49, 255, .10) !important;
+
+  animation: painelEntrada28 .65s ease-out both;
+}
+
+/* Luz ambiente dentro do painel */
+#screen-feedback #final-scoreboard #scoreboard-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 50% 38%,
+      rgba(255, 255, 255, .075),
+      transparent 35%),
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(255, 255, 255, .025) 48%,
+      transparent 72%
+    );
+
+  animation: brilhoAmbiente28 5s ease-in-out infinite alternate;
+}
+
+/* Filete interno mais refinado */
+#screen-feedback #final-scoreboard #scoreboard-card::before {
+  inset: 7px !important;
+  border: 1px solid rgba(255, 233, 92, .35) !important;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+/* Título principal */
+#screen-feedback #final-scoreboard .scoreboard-status {
+  color: #fff !important;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, .35),
+    0 0 24px rgba(210, 96, 255, .55),
+    3px 4px 0 #090511 !important;
+}
+
+/* Medalha em destaque */
+#screen-feedback #final-scoreboard .scoreboard-medal {
+  filter:
+    drop-shadow(0 0 8px rgba(255, 219, 70, .45))
+    drop-shadow(0 0 20px rgba(255, 173, 38, .22));
+}
+
+/* Nome do jogador */
+#screen-feedback #final-scoreboard .scoreboard-player {
+  color: #ffffff !important;
+  text-shadow: 0 0 14px rgba(176, 123, 255, .42);
+}
+
+/* Placar: painel branco com acabamento amarelo */
+#screen-feedback #final-scoreboard .scoreboard-stats {
+  border: 2px solid #ffe95c !important;
+  border-radius: 5px;
+  box-shadow:
+    0 0 16px rgba(255, 233, 92, .13),
+    0 7px 0 rgba(0, 0, 0, .22);
+  overflow: hidden;
+}
+
+#screen-feedback #final-scoreboard .scoreboard-stats div {
+  background: linear-gradient(180deg, #ffffff, #f2edff);
+}
+
+#screen-feedback #final-scoreboard .scoreboard-stats strong {
+  color: #21113d !important;
+  text-shadow: 0 1px 0 #ffffff;
+}
+
+/* Botão principal */
+#screen-feedback #final-scoreboard .scoreboard-retry {
+  border: 2px solid #ffb5dc !important;
+  border-radius: 4px;
+  background: linear-gradient(100deg, #ff168e, #e90072 55%, #ff168e) !important;
+  color: #ffffff !important;
+
+  box-shadow:
+    0 5px 0 #870746,
+    0 0 18px rgba(255, 22, 142, .28);
+
+  transition:
+    transform .2s ease,
+    filter .2s ease,
+    box-shadow .2s ease;
+}
+
+#screen-feedback #final-scoreboard .scoreboard-retry:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.13);
+  box-shadow:
+    0 7px 0 #870746,
+    0 0 28px rgba(255, 22, 142, .48);
+}
+
+/* Animação de entrada e iluminação suave */
+@keyframes painelEntrada28 {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes brilhoAmbiente28 {
+  from { opacity: .45; }
+  to   { opacity: 1; }
+}
+
+/* Respeita a preferência por movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  #screen-feedback #final-scoreboard #scoreboard-card,
+  #screen-feedback #final-scoreboard #scoreboard-card::after {
+    animation: none !important;
+  }
+}
+
+
+
+
+
+/* =========================================================
+   SETOR 28 — TELA DE INSTRUÇÕES: MOLDURA CROMÁTICA ARCADE
+   Mantém o conteúdo e a lógica originais; altera apenas o visual.
+   ========================================================= */
+#screen-how .paper.rules {
+  width: 78% !important;
+max-width: 1050px !important;
+margin-left: auto !important;
+margin-right: auto !important;
+transform: translateX(-150px);
+    
+  position: relative;
+  isolation: isolate;
+  border: 3px solid transparent !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(180deg, rgba(255,253,242,.985), rgba(255,251,232,.985)) padding-box,
+    linear-gradient(115deg,
+      #ff168e 0%,
+      #ffcf4a 18%,
+      #a6ff4d 34%,
+      #45f5ff 51%,
+      #5965ff 68%,
+      #c34cff 84%,
+      #ff168e 100%) border-box !important;
+  background-size: 100% 100%, 260% 260% !important;
+  background-position: center, 0% 50% !important;
+  box-shadow:
+    0 0 0 2px rgba(8, 3, 35, .78),
+    0 0 12px rgba(69, 245, 255, .30),
+    0 0 24px rgba(255, 22, 142, .22),
+    0 14px 32px rgba(5, 0, 24, .32) !important;
+  animation: instructionChromaticFrame 9s linear infinite;
+}
+
+/* Reflexo colorido discreto no interior, sem prejudicar a leitura. */
+#screen-how .paper.rules::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(255, 22, 142, .075), transparent 36%),
+    radial-gradient(ellipse at 100% 100%, rgba(69, 245, 255, .09), transparent 38%);
+}
+
+#screen-how .paper.rules .rule {
+  position: relative;
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+#screen-how .paper.rules .rule:hover {
+  background-color: rgba(113, 72, 255, .055);
+}
+
+#screen-how .paper.rules .rule-icon {
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.8),
+    0 0 12px rgba(102, 75, 255, .20);
+  transition: transform .2s ease, filter .2s ease;
+}
+
+#screen-how .paper.rules .rule:hover .rule-icon {
+  transform: translateY(-2px) scale(1.04);
+  filter: saturate(1.2) brightness(1.04);
+}
+
+#screen-how .bottom-action .blue-btn {
+  border: 2px solid transparent !important;
+  background:
+    linear-gradient(110deg, #4825ff, #713cff 55%, #4825ff) padding-box,
+    linear-gradient(100deg, #56f5ff, #ffffff, #ff4db8, #ffe65b, #56f5ff) border-box !important;
+  box-shadow:
+    0 5px 0 #24105f,
+    0 0 16px rgba(83, 245, 255, .24),
+    0 0 22px rgba(255, 55, 176, .16) !important;
+  transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+}
+
+#screen-how .bottom-action .blue-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+  box-shadow:
+    0 7px 0 #24105f,
+    0 0 22px rgba(83, 245, 255, .38),
+    0 0 30px rgba(255, 55, 176, .26) !important;
+}
+
+@keyframes instructionChromaticFrame {
+  0%   { background-position: center, 0% 50%; }
+  50%  { background-position: center, 100% 50%; }
+  100% { background-position: center, 0% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #screen-how .paper.rules { animation: none !important; }
+  #screen-how .paper.rules .rule,
+  #screen-how .paper.rules .rule-icon,
+  #screen-how .bottom-action .blue-btn { transition: none !important; }
+}
+
+/* FUNDO EXCLUSIVO DA TELA DE INSTRUÇÕES */
+#screen-how {
+    background-image: url("assets/background-instrucoes.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #17052f;
+}
+
+/* Oculta a personagem somente nas instruções */
+#screen-how .how-mascot {
+    display: none !important;
+}
+
+/* Redimensionamento do quadro de instruções */
+#screen-how .instructions-panel {
+    width: min(78%, 1050px);
+    max-width: 1050px;
+    margin-inline: auto;
+    padding: 18px 24px;
+    box-sizing: border-box;
+}
+
+/* Reduz o espaçamento entre os itens */
+#screen-how .instructions-panel .instruction-item {
+    padding: 10px 0;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 760px) {
+    #screen-how .instructions-panel {
+        width: 92%;
+        padding: 12px 14px;
+    }
+
+    #screen-how .instructions-panel .instruction-item {
+        padding: 8px 0;
+    }
+}
+
+/* Robô exibido na tela de feedback */
+#reward-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 76px;
+    margin: 12px auto;
+}
+
+#reward-icon .reward-robot {
+    display: block;
+    width: 100px;
+    height: 76px;
+    object-fit: contain;
+    animation: robot-entry 0.45s ease-out both;
+    filter: none !important;
+    box-shadow: none !important;
+}
+
+@keyframes robot-entry {
+    from {
+        opacity: 0;
+        transform: scale(0.65) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+
+/* CSS DE GAME OVER — inserido dentro do <style> para ser aplicado */
+/* ==================================================
+   SETOR 29 — GAME OVER: FUNDO VERMELHO E PLACAR TRANSLÚCIDO
+   Regra isolada: afeta somente a tela final de derrota.
+   Imagem esperada: assets/background-gameover.png
+   ================================================== */
+.app.game-over-mode {
+  background: url("assets/background-gameover.png") center center / cover no-repeat fixed !important;
+}
+.app.game-over-mode:before { opacity: 0 !important; }
+.app.game-over-mode #screen-feedback { background: transparent !important; }
+.app.game-over-mode #screen-feedback .scoreboard-wrap {
+  width: 100%; max-width: 1320px; margin: auto; padding: 14px 0 22px;
+}
+.app.game-over-mode #screen-feedback .scoreboard-card.failed {
+  --medal: #ff263b;
+  background: rgba(12, 0, 4, 0.12) !important;
+  border: 3px solid #ff263b !important;
+  box-shadow: 0 0 0 2px rgba(255,38,59,.22), 0 0 30px rgba(255,0,32,.22), inset 0 0 0 1px rgba(255,90,90,.28) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+.app.game-over-mode #screen-feedback .scoreboard-card.failed:before {
+  border: 1px solid rgba(255,38,59,.45) !important;
+}
+.app.game-over-mode #screen-feedback .scoreboard-card.failed:after,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-sidekick,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-star-mascot,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-brand-scene,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-glow,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-stars,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-sidekick-left,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-sidekick-right,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-brand-scene img,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-brand-scene .brand-product,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-brand-scene .brand-rocket,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-star-mascot {
+  display: none !important;
+  animation: none !important;
+}
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-status {
+  color: #ff263b !important;
+  font-size: clamp(38px, 6.5vw, 76px) !important;
+  letter-spacing: 2px;
+  text-shadow: 0 3px 0 #4b0008, 0 0 18px rgba(255,0,32,.6) !important;
+}
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-medal {
+  filter: none !important;
+  margin: 4px auto 8px;
+  animation: none !important;
+}
+.app.game-over-mode #screen-feedback .scoreboard-card.failed #scoreboard-gameover-art {
+  display: block !important;
+  width: clamp(110px, 20vw, 230px);
+  max-height: 115px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-headline {
+  color: #fff;
+  text-shadow: 0 0 12px rgba(255,38,59,.35);
+}
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-stats {
+  border-color: #ff263b !important;
+}
+@media (max-width: 600px) {
+  .app.game-over-mode #screen-feedback .scoreboard-wrap { padding: 8px 0; }
+  .app.game-over-mode #screen-feedback .scoreboard-card.failed { background: rgba(12,0,4,0.12) !important; }
+  .app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-status { font-size: clamp(30px, 8vw, 48px) !important; }
+}
+
+
+/* ==================================================
+   CORREÇÃO — TRANSPARÊNCIA DO QUADRO GAME OVER
+   Afeta somente o placar marcado como failed.
+   ================================================== */
+
+#screen-feedback #final-scoreboard #scoreboard-card.failed {
+  background: rgba(20, 0, 10, 0.10) !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Remove eventuais camadas decorativas sobre o fundo */
+#screen-feedback #final-scoreboard #scoreboard-card.failed::after {
+  background: transparent !important;
+}
+
+/* Mantém a borda vermelha do Game Over */
+#screen-feedback #final-scoreboard #scoreboard-card.failed {
+  border-color: #ff263b !important;
+}
+
+/* GAME OVER — ESTILO ARCADE VERMELHO */
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-status {
+  font-family: "Courier New", monospace !important;
+  color: #ff263b !important;
+  font-size: clamp(32px, 5vw, 64px) !important;
+  font-weight: 900 !important;
+  line-height: 1.3 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase;
+
+  -webkit-text-stroke: 1px #ff8994;
+
+  text-shadow:
+    0 3px 0 #b90019,
+    0 6px 0 #65000b,
+    3px 0 #65000b,
+    -3px 0 #65000b,
+    0 0 12px rgba(255, 0, 32, 0.5) !important;
+}
+
+
+/* =====================================================
+   SETOR 30 — TRANSPARÊNCIA DO PLACAR DE PREMIAÇÃO
+   Afeta somente ouro, prata, bronze e desafio completo.
+   ===================================================== */
+
+#screen-feedback #final-scoreboard:not([hidden]) #scoreboard-card.gold,
+#screen-feedback #final-scoreboard:not([hidden]) #scoreboard-card.silver,
+#screen-feedback #final-scoreboard:not([hidden]) #scoreboard-card.bronze,
+#screen-feedback #final-scoreboard:not([hidden]) #scoreboard-card.complete {
+    /* 10% de cor e 90% de transparência */
+    background: rgba(20, 5, 35, 0.70) !important;
+    background-image: none !important;
+
+    /* Permite visualizar o cenário atrás do painel */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Ajustes responsivos da tela de premiação */
+#screen-result {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding-bottom: 24px;
+}
+
+/* Evita que o aviso final seja cortado */
+#screen-result .reward-instructions,
+#screen-result .reward-notice {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+/* =========================================
+   CORREÇÃO DEFINITIVA — SOMBRA DO ROBÔ
+   Colocar no FINAL do CSS
+   ========================================= */
+
+#reward-icon .reward-robot,
+#reward-icon img.reward-robot,
+#reward-icon .reward-robot img,
+#reward-icon img {
+    filter: none !important;
+    -webkit-filter: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* Remove efeitos dos elementos que envolvem o robô */
+#reward-icon,
+#reward-icon::before,
+#reward-icon::after {
+    filter: none !important;
+    -webkit-filter: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* Mantém a animação de entrada sem adicionar sombra */
+@keyframes robot-entry {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ==========================================
+   CORREÇÃO DA TELA FINAL — INSTRUÇÕES E CORTE
+   ========================================== */
+
+/* Caixa de instruções */
+#prize-instructions {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    box-sizing: border-box;
+    padding-bottom: 12px;
+}
+
+/* Texto de orientação e aviso final */
+#prize-instructions .instruction-intro,
+#prize-instructions .prize-step,
+#prize-instructions small {
+    display: block;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+/* Aviso vermelho sobre a retirada do brinde */
+#prize-instructions small {
+    color: #d00036;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 8px;
+}
+
+/* Botão e rodapé */
+#scoreboard-retry {
+    display: block;
+    position: relative;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.scoreboard-footer {
+    position: relative;
+    margin-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* Evita que o conteúdo da página seja cortado na vertical */
+html,
+body {
+    min-height: 100%;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+
+/* =========================================================
+   FIX DEFINITIVO DA TELA DE RESULTADO — INDEX.HTML
+   Só ativa quando o placar final está visível.
+   Permite rolagem da página e impede corte das instruções.
+   ========================================================= */
+html:has(#final-scoreboard:not([hidden])),
+body:has(#final-scoreboard:not([hidden])) {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.app:has(#final-scoreboard:not([hidden])),
+.shell:has(#final-scoreboard:not([hidden])) {
+  height: auto !important;
+  min-height: 100dvh !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.shell:has(#final-scoreboard:not([hidden])) {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])),
+#screen-feedback.active:has(#final-scoreboard:not([hidden])) {
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 100dvh !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding: 12px 0 20px !important;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])) .inner,
+#screen-feedback:has(#final-scoreboard:not([hidden])) .scoreboard-wrap {
+  width: min(980px, calc(100% - 28px)) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 auto !important;
+  overflow: visible !important;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])) .scoreboard-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  padding: clamp(12px, 2.2vw, 24px) !important;
+  gap: 0 !important;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])) .scoreboard-card > * {
+  flex-shrink: 0;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])) .prize-instructions[hidden] {
+  display: none !important;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])) .prize-instructions:not([hidden]) {
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  margin: 12px 0 !important;
+  padding: 12px clamp(10px, 1.8vw, 18px) !important;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])) .instruction-intro,
+#screen-feedback:has(#final-scoreboard:not([hidden])) .prize-step,
+#screen-feedback:has(#final-scoreboard:not([hidden])) .prize-instructions small {
+  display: block !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  line-height: 1.45 !important;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])) .device-instructions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 7px 10px !important;
+  width: 100% !important;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])) .device-tip {
+  min-width: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  align-items: start !important;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])) .scoreboard-retry {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  height: auto !important;
+  margin: 4px 0 8px !important;
+}
+
+#screen-feedback:has(#final-scoreboard:not([hidden])) .scoreboard-footer {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 auto !important;
+  height: auto !important;
+  margin: 4px 0 2px !important;
+  padding: 4px 0 !important;
+  line-height: 1.5 !important;
+  overflow: visible !important;
+  text-align: center !important;
+}
+
+@media (max-width: 600px) {
+  #screen-feedback:has(#final-scoreboard:not([hidden])) .inner,
+  #screen-feedback:has(#final-scoreboard:not([hidden])) .scoreboard-wrap {
+    width: calc(100% - 16px) !important;
+  }
+  #screen-feedback:has(#final-scoreboard:not([hidden])) .device-instructions {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  #screen-feedback:has(#final-scoreboard:not([hidden])) .device-tip {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+  #screen-feedback:has(#final-scoreboard:not([hidden])) .prize-instructions small {
+    font-size: 10px !important;
+  }
+}
+
 </style>
  </head>
  <body>
@@ -2260,7 +3666,7 @@ body, .app {
        </button>
       </div>
       <p class="small-note">
-       ▶ Um desafio de cada vez. Qualidade em cada detalhe!
+       ¬_¬ 
       </p>
      </div>
      <div aria-hidden="true" class="scene">
@@ -2278,6 +3684,16 @@ body, .app {
        <span class="float-icon icon-8">✳</span>
        <span class="float-icon icon-9">●</span>
        <span class="float-icon icon-10">★</span>
+       <span class="float-icon icon-11">🚀</span>
+       <span class="float-icon icon-12">✓</span>
+       <span class="float-icon icon-13">✦</span>
+       <span class="float-icon icon-14">⚡</span>
+       <span class="float-icon icon-15">✔</span>
+       <span class="float-icon icon-16">✧</span>
+       <span class="float-icon icon-17">🚀</span>
+       <span class="float-icon icon-18">✳</span>
+       <span class="float-icon icon-19">✓</span>
+       <span class="float-icon icon-20">★</span>
       </div>
       <div class="stars">
        <span>
@@ -2302,31 +3718,8 @@ body, .app {
        <div class="robot-body">
        </div>
       </div>
-      <div class="jars">
-       <div class="jar orange">
-        <span>
-         SKALA
-         <br/>
-         BRASIL
-        </span>
-       </div>
-       <div class="jar pink">
-        <span>
-         SKALA
-         <br/>
-         BRASIL
-         <br/>
-         ★
-        </span>
-       </div>
-       <div class="jar cyan">
-        <span>
-         SKALA
-         <br/>
-         BRASIL
-        </span>
-       </div>
-      </div>
+      <!-- Asset personalizado dos três potes Skala com troféu -->
+      <img class="potekg-asset" src="assets/potekg.png" alt="Três potes Skala coloridos com troféu" />
       <div class="platform">
       </div>
      </div>
@@ -2431,6 +3824,7 @@ body, .app {
        QUALIDADE TAMBÉM É ATITUDE TODO DIA! ♥
       </div>
      </div>
+     <img class="how-mascot" src="assets/quality-mascot.png" alt="Mascote da Qualidade Skala Brasil" />
     </section>
     <!-- TELA 3: PERGUNTA -->
     <!-- SETOR HTML 04 — TELA DE PERGUNTAS -->
@@ -2553,13 +3947,55 @@ body, .app {
      <div class="scoreboard-wrap" id="final-scoreboard" hidden>
       <div class="scoreboard-card" id="scoreboard-card">
        <div class="scoreboard-kicker">SEMANA DA QUALIDADE · ARCADE EDITION</div>
-       <div class="scoreboard-sidekick scoreboard-sidekick-left" aria-hidden="true"><span class="sidekick-speech">VOCÊ<br>ARRASOU!</span><span class="sidekick-robot">🤖</span><span class="sidekick-spark">✨</span></div>
-       <div class="scoreboard-sidekick scoreboard-sidekick-right" aria-hidden="true"><span class="sidekick-speech">QUALIDADE<br>TE LEVA<br>MAIS LONGE!</span><span class="sidekick-rocket">🚀</span><span class="sidekick-spark">🎉</span></div>
+
+
+<!-- MASCOTE ROBÔ -->
+<div class="scoreboard-sidekick scoreboard-sidekick-left" aria-hidden="true">
+  <span class="sidekick-speech">VOCÊ<br>ARRASOU!</span>
+
+  <img
+    class="sidekick-robot-asset"
+    src="assets/robo-parabenizando.png"
+    alt=""
+  />
+
+  <span class="sidekick-spark">✨</span>
+</div>
+
+<!-- MASCOTE FOGUETE -->
+<div class="scoreboard-sidekick scoreboard-sidekick-right" aria-hidden="true">
+  <span class="sidekick-speech">QUALIDADE<br>TE LEVA<br>MAIS LONGE!</span>
+
+  <img
+    class="sidekick-rocket-asset"
+    src="assets/foguete.png"
+    alt=""
+  />
+
+  <span class="sidekick-spark">🎉</span>
+</div>
+
+
        <div class="scoreboard-glow" aria-hidden="true"></div>
+
+<img
+  class="scoreboard-star-mascot"
+  src="assets/mascote-estrela.png"
+  alt=""
+  aria-hidden="true"
+/>
+
        <div class="scoreboard-status" id="scoreboard-status">GAME OVER</div>
-       <div class="scoreboard-medal" id="scoreboard-medal" aria-hidden="true">😢</div>
+       <div class="scoreboard-medal" id="scoreboard-medal" aria-hidden="true">
+        <span id="scoreboard-medal-emoji" hidden>🏆</span>
+        <img id="scoreboard-award-gold" src="assets/trophy-gold.png" alt="Troféu de ouro" hidden />
+        <img id="scoreboard-award-silver" src="assets/trophy-silver.png" alt="Troféu de prata" hidden />
+        <img id="scoreboard-award-bronze" src="assets/trophy-bronze.png" alt="Troféu de bronze" hidden />
+        <img id="scoreboard-gameover-art" src="assets/game-over.png" alt="Game over" hidden />
+       </div>
        <div class="scoreboard-stars" id="scoreboard-stars" aria-label="Sem medalha">✦ ✦ ✦</div>
        <div class="scoreboard-brand-scene" aria-label="Produtos Skala e foguete impulsionando o desempenho">
+        <img class="potekg-final-asset" src="assets/potekg.png" alt="Três potes Skala coloridos com troféu" />
         <span class="brand-product product-orange" title="Produto Skala">SKALA<br>BRASIL</span>
         <span class="brand-product product-pink" title="Produto Skala">SKALA<br>BRASIL</span>
         <span class="brand-product product-blue" title="Produto Skala">SKALA<br>BRASIL</span>
@@ -2657,6 +4093,8 @@ const QUESTIONS = [
 const STORAGE_KEY = "skalaQualityQuizLastResult";
 const TIME_PER_QUESTION = 50;
 const QUESTIONS_PER_GAME = 10;
+// REGRA EDITÁVEL: abaixo de 8 acertos, o jogador perde.
+const MIN_CORRECT_TO_PASS = 8;
 
 let index = 0;
 let score = 0;
@@ -2771,6 +4209,7 @@ function loadPreviousResult() {
    SETOR 19 — INÍCIO E REINÍCIO DO QUIZ
    ================================================== */
 function resetQuiz() {
+    document.querySelector(".app")?.classList.remove("game-over-mode");
     $("question-feedback-panel").hidden = false;
     $("final-scoreboard").hidden = true;
     clearInterval(timerId);
@@ -2855,6 +4294,7 @@ function openDevScoreboard(devScore) {
 
     const playerName = "RW7";
     const total = QUESTIONS_PER_GAME;
+    const passedMinimum = correctCount >= MIN_CORRECT_TO_PASS;
     const perfectGame = correctCount === total;
     let medal = "";
     if (perfectGame && score >= 1350) medal = "gold";
@@ -2875,25 +4315,26 @@ function openDevScoreboard(devScore) {
     $("final-scoreboard").hidden = false;
     const card = $("scoreboard-card");
     card.classList.remove("failed", "bronze", "silver", "gold");
-    card.classList.add(medal || "failed");
+    card.classList.add(!passedMinimum ? "failed" : (medal || "complete"));
+    document.querySelector(".app")?.classList.toggle("game-over-mode", !passedMinimum);
     $("scoreboard-player").textContent = playerName;
     $("scoreboard-points").textContent = score.toLocaleString("pt-BR");
     $("scoreboard-correct").textContent = `${correctCount}/${total}`;
 
-    if (!perfectGame) {
+    if (!passedMinimum) {
         $("scoreboard-status").textContent = "GAME OVER · DEV TEST";
-        $("scoreboard-medal").textContent = "😵‍💫";
+        setScoreboardAward("failed");
         renderScoreboardStars(0);
         $("scoreboard-stars").setAttribute("aria-label", "Sem medalha");
         $("scoreboard-headline").textContent = "TOO BAD! TENTE DE NOVO!";
         $("scoreboard-message").textContent = "Simulação de teste: pontuação abaixo de 1000 representa menos de 10 acertos.";
         $("prize-instructions").hidden = true;
     } else {
-        $("scoreboard-status").textContent = medal ? "PARABÉNS! · DEV TEST" : "DESAFIO COMPLETO · DEV TEST";
-        $("scoreboard-medal").textContent = medal === "gold" ? "🥇" : medal === "silver" ? "🥈" : medal === "bronze" ? "🥉" : "🏆";
+        $("scoreboard-status").textContent = perfectGame ? (medal ? "PARABÉNS! · DEV TEST" : "DESAFIO COMPLETO · DEV TEST") : "META MÍNIMA ATINGIDA · DEV TEST";
+        setScoreboardAward(medal || "complete");
         renderScoreboardStars(medal === "gold" ? 3 : medal === "silver" ? 2 : medal === "bronze" ? 1 : 0);
-        $("scoreboard-stars").setAttribute("aria-label", medal ? `Medalha ${medal}` : "Desafio completo");
-        $("scoreboard-headline").textContent = medal === "gold" ? "OURO! VOCÊ É LENDÁRIO!" : medal === "silver" ? "PRATA! MANDOU MUITO BEM!" : medal === "bronze" ? "BRONZE! VOCÊ CONSEGUIU!" : "10 DE 10! MISSÃO CUMPRIDA!";
+        $("scoreboard-stars").setAttribute("aria-label", medal ? `Medalha ${medal}` : "Desafio concluído");
+        $("scoreboard-headline").textContent = medal === "gold" ? "OURO! VOCÊ É LENDÁRIO!" : medal === "silver" ? "PRATA! MANDOU MUITO BEM!" : medal === "bronze" ? "BRONZE! VOCÊ CONSEGUIU!" : perfectGame ? "10 DE 10! MISSÃO CUMPRIDA!" : "VOCÊ ATINGIU A META MÍNIMA!";
         $("scoreboard-message").textContent = "MODO DEV: placar de teste. A simulação não comprova participação real nem libera automaticamente um brinde.";
         $("prize-instructions").hidden = true;
     }
@@ -2985,6 +4426,24 @@ function showLevelUpPopup(points) {
     }, 1400);
 }
 
+function setScoreboardAward(type) {
+    const awardIds = {
+        gold: "scoreboard-award-gold",
+        silver: "scoreboard-award-silver",
+        bronze: "scoreboard-award-bronze",
+        failed: "scoreboard-gameover-art"
+    };
+    const emoji = $("scoreboard-medal-emoji");
+    Object.values(awardIds).forEach(id => { $(id).hidden = true; });
+    emoji.hidden = true;
+    if (awardIds[type]) {
+        $(awardIds[type]).hidden = false;
+    } else {
+        emoji.textContent = "🏆";
+        emoji.hidden = false;
+    }
+}
+
 function renderScoreboardStars(count) {
     const stars = $("scoreboard-stars");
     stars.classList.remove("animate");
@@ -3040,7 +4499,11 @@ function submitAnswer() {
     $("points-live").textContent = `${score} pontos`;
     $("feedback-banner").textContent = lastWasCorrect ? "RESPOSTA CORRETA!" : "NÃO FOI DESSA VEZ!";
     $("feedback-banner").classList.toggle("wrong", !lastWasCorrect);
-    $("reward-icon").textContent = lastWasCorrect ? "🏆" : "💡";
+    
+$("reward-icon").innerHTML = lastWasCorrect
+    ? '<img src="assets/robot-correct.png" alt="Resposta correta" class="reward-robot">'
+    : '<img src="assets/robot-wrong.png" alt="Resposta incorreta" class="reward-robot">';
+
     $("points-earned").textContent = lastWasCorrect ? `+${lastPoints} PONTOS` : "+0 PONTOS";
     $("feedback-copy").textContent = lastWasCorrect
         ? "Muito bem! Você está impulsionando o desempenho!"
@@ -3069,6 +4532,7 @@ function submitAnswer() {
         }
 
         const playerName = localStorage.getItem("skalaQuizPlayerName") || "Jogador(a)";
+        const passedMinimum = correctCount >= MIN_CORRECT_TO_PASS;
         const perfectGame = correctCount === gameQuestions.length;
         let medal = "";
         if (perfectGame && score >= 1350) medal = "gold";
@@ -3078,23 +4542,33 @@ function submitAnswer() {
         $("question-feedback-panel").hidden = false;
         $("final-scoreboard").hidden = true;
         const card = $("scoreboard-card");
-        card.classList.remove("failed", "bronze", "silver", "gold");
-        card.classList.add(medal || "failed");
+        card.classList.remove("failed", "bronze", "silver", "gold", "complete");
+        card.classList.add(!passedMinimum ? "failed" : (medal || "complete"));
+        document.querySelector(".app")?.classList.toggle("game-over-mode", !passedMinimum);
         $("scoreboard-player").textContent = playerName;
         $("scoreboard-points").textContent = score.toLocaleString("pt-BR");
         $("scoreboard-correct").textContent = `${correctCount}/${gameQuestions.length}`;
 
-        if (!perfectGame) {
+        if (!passedMinimum) {
             $("scoreboard-status").textContent = "GAME OVER";
-            $("scoreboard-medal").textContent = "😵‍💫";
+            setScoreboardAward("failed");
             renderScoreboardStars(0);
             $("scoreboard-stars").setAttribute("aria-label", "Sem medalha");
             $("scoreboard-headline").textContent = "TOO BAD! TENTE DE NOVO!";
             $("scoreboard-message").textContent = "Quase lá! Para conquistar o brinde, você precisa acertar as 10 perguntas. Jogue novamente e tente bater seu recorde!";
             $("prize-instructions").hidden = true;
+        } else if (!perfectGame) {
+            // 8 ou 9 acertos: não é GAME OVER, mas não libera medalha/brinde de 10/10.
+            $("scoreboard-status").textContent = "DESAFIO COMPLETO!";
+            setScoreboardAward("complete");
+            renderScoreboardStars(0);
+            $("scoreboard-stars").setAttribute("aria-label", "Meta mínima atingida");
+            $("scoreboard-headline").textContent = "VOCÊ ATINGIU A META MÍNIMA!";
+            $("scoreboard-message").textContent = `Você acertou ${correctCount} de ${gameQuestions.length} perguntas e atingiu a meta mínima de ${MIN_CORRECT_TO_PASS}. Para liberar o brinde e uma medalha, é necessário acertar todas as ${gameQuestions.length} perguntas.`;
+            $("prize-instructions").hidden = true;
         } else {
             $("scoreboard-status").textContent = medal ? "PARABÉNS!" : "DESAFIO COMPLETO!";
-            $("scoreboard-medal").textContent = medal === "gold" ? "🥇" : medal === "silver" ? "🥈" : medal === "bronze" ? "🥉" : "🏆";
+            setScoreboardAward(medal || "complete");
             renderScoreboardStars(medal === "gold" ? 3 : medal === "silver" ? 2 : medal === "bronze" ? 1 : 0);
             $("scoreboard-stars").setAttribute("aria-label", medal ? `Medalha ${medal}` : "Desafio completo");
             $("scoreboard-headline").textContent = medal === "gold" ? "OURO! VOCÊ É LENDÁRIO!" : medal === "silver" ? "PRATA! MANDOU MUITO BEM!" : medal === "bronze" ? "BRONZE! VOCÊ CONSEGUIU!" : "10 DE 10! MISSÃO CUMPRIDA!";
