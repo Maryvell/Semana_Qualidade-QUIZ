@@ -25,7 +25,7 @@
     --ink:#151044
 }
 
-- {
+* {
     box-sizing:border-box
 }
 
@@ -3613,65 +3613,6 @@ body {
   *, *::before, *::after { scroll-behavior: auto !important; }
 }
 
-/* ==================================================
-   AJUSTES FINAIS DE RESPONSIVIDADE (CORREÇÕES DOS PRINTS)
-   ================================================== */
-@media (max-width: 760px) {
-    /* 1. Corrige o quadro de instruções cortado saindo da tela */
-    #screen-how .paper.rules {
-        transform: none !important;
-        width: 100% !important;
-        margin: 0 auto !important;
-        padding: 15px !important;
-    }
-    
-    /* 2. Corrige a sobreposição dos potes com o texto de vitória no placar final */
-    #screen-feedback .scoreboard-brand-scene {
-        height: auto !important;
-        min-height: 50px !important;
-        margin-bottom: 8px !important;
-        padding-bottom: 0 !important;
-    }
-    #screen-feedback .potekg-final-asset {
-        width: min(40vw, 140px) !important;
-        max-height: 70px !important;
-        margin: 0 auto !important;
-    }
-    #screen-feedback .scoreboard-headline {
-        margin-top: 8px !important;
-        z-index: 2;
-        position: relative;
-    }
-    
-    /* 3. Ajusta o espaçamento do título GAME OVER para não encavalar as linhas */
-    .app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-status {
-        font-size: clamp(26px, 7.5vw, 36px) !important;
-        line-height: 1.2 !important;
-        padding: 0 5px;
-    }
-    
-    /* 4. Previne que o cabeçalho superior quebre linha ou fique apertado */
-    .screen-head {
-        gap: 4px !important;
-        justify-content: space-between !important;
-    }
-    .screen-head .mini-brand {
-        font-size: clamp(16px, 4.5vw, 20px) !important;
-    }
-    .screen-head .timer, .screen-head .pixel-mark {
-        flex-shrink: 0;
-    }
-    
-    /* 5. Garante que o robô de feedback não sobreponha a pontuação */
-    #reward-icon {
-        margin: 10px auto !important;
-        min-height: 60px !important;
-    }
-    #reward-icon .reward-robot {
-        height: 65px !important;
-        width: auto !important;
-    }
-}
 </style>
  </head>
  <body>
