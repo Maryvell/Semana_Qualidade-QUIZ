@@ -3617,7 +3617,31 @@ body {
    🔥 MODO LANDSCAPE FORÇADO (CELULAR DEITADO)
    ================================================== */
 
-/* O modo retrato permanece disponível quando o navegador não permite bloquear a orientação. */
+/* 1. SE ESTIVER EM PÉ (PORTRAIT): ESCONDE O JOGO E PEDE PARA DEITAR */
+@media (orientation: portrait) and (max-width: 900px) {
+    .app {
+        display: none !important;
+    }
+    body {
+        background: #10082d !important;
+        background-image: none !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+    body::before {
+        content: "📱🔄 Por favor, deite o celular (Modo Paisagem) para jogar a Semana da Qualidade.";
+        color: #ffe52e;
+        font-size: 20px;
+        line-height: 1.5;
+        font-weight: 900;
+        text-align: center;
+        padding: 30px;
+        font-family: Arial, sans-serif;
+    }
+}
 
 /* 2. AJUSTES PARA O CELULAR DEITADO (LANDSCAPE) */
 @media (orientation: landscape) and (max-height: 600px) {
@@ -3827,31 +3851,171 @@ body {
   }
 }
 
-/* O jogo ocupa a tela inteira quando o navegador aceita Fullscreen API. */
-.app:fullscreen {
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background: #10082d;
-}
-.app:-webkit-full-screen {
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background: #10082d;
+
+
+/* ==================================================
+   CORREÇÃO MOBILE — FUNDO PROPORCIONAL + SCROLL REAL
+   Sobrescreve regras antigas que escondiam o app em portrait.
+   ================================================== */
+@media (max-width: 900px) {
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    display: block !important;
+    background-color: #10082d !important;
+    margin: 0 !important;
+  }
+
+  /* Anula a regra antiga que escondia o jogo em modo retrato. */
+  body::before { content: none !important; display: none !important; }
+  .app {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    overflow: visible !important;
+  }
+  .shell {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    margin: 0 auto !important;
+    padding: 8px 10px 22px !important;
+    overflow: visible !important;
+    zoom: 1 !important;
+  }
+
+  /* Cada tela cresce conforme o conteúdo, sem prender o scroll. */
+  .screen, .screen.active {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Fundo em proporção: largura do celular, altura automática, sem crop/cover. */
+  #screen-home,
+  #screen-how,
+  #screen-quiz,
+  #screen-feedback {
+    background-color: #16083d !important;
+    background-size: 100% 100%, 100% auto !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+  }
+
+  #screen-home.active {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    padding: 14px 12px 16px !important;
+  }
+  #screen-home .home-copy,
+  #screen-home .player-fields,
+  #screen-home .scene {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  #screen-home .scene {
+    height: clamp(110px, 34vw, 175px) !important;
+    margin: 8px auto 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Segunda tela: evita a coluna estreita/deslocada vista no celular. */
+  #screen-how.active {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    padding: 14px 10px 18px !important;
+  }
+  #screen-how .inner,
+  #screen-how .paper,
+  #screen-how .paper.rules,
+  #screen-how .bottom-action,
+  #screen-how .callout {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+  }
+  #screen-how .inner { display: block !important; }
+  #screen-how .paper.rules { padding: 14px !important; }
+  #screen-how .how-mascot { display: none !important; }
+
+  #screen-quiz.active,
+  #screen-feedback.active {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 12px 10px 18px !important;
+  }
+  #screen-quiz .inner,
+  #screen-feedback .inner,
+  #screen-feedback .scoreboard-wrap,
+  #screen-feedback .scoreboard-card,
+  #screen-feedback .prize-instructions {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* O aviso inicial também cabe na largura estreita do telefone. */
+  #screen-splash {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    padding: 16px !important;
+    overflow-y: auto !important;
+  }
+  #screen-splash .splash-card {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 460px !important;
+    margin: auto !important;
+  }
 }
 
-/* No celular, nunca esconda o jogo só porque o aparelho está em pé. */
-@media (max-width: 900px) {
-  .app { display: block !important; }
-  .splash-card { width: min(480px, 100%); max-height: calc(100dvh - 24px); overflow-y: auto; }
-  .splash-screen { padding: 12px; }
-  .splash-card { padding: clamp(18px, 5vw, 30px) clamp(14px, 4vw, 24px); }
-  .splash-title { font-size: clamp(23px, 7vw, 34px); }
+@media (max-width: 380px) {
+  .shell { padding-left: 7px !important; padding-right: 7px !important; }
+  #screen-home.active, #screen-how.active, #screen-quiz.active, #screen-feedback.active {
+    padding-left: 8px !important; padding-right: 8px !important;
+  }
+  #screen-how .paper.rules { padding: 11px !important; }
 }
 
 </style>
@@ -3872,7 +4036,7 @@ body {
         
         <div class="splash-instruction">
           <div class="rotate-phone-icon">📱↻</div>
-          <p>Ao iniciar, vamos tentar abrir em <strong>tela cheia</strong> e ativar o modo paisagem. Se o seu navegador não permitir, o jogo continuará funcionando na vertical.</p>
+          <p>O jogo se adapta à tela do seu celular. Toque abaixo para começar!</p>
         </div>
 
         <button type="button" id="btn-enter-app" class="splash-btn">
@@ -4431,53 +4595,36 @@ const splashScreen = document.getElementById("screen-splash");
 const btnEnterApp = document.getElementById("btn-enter-app");
 
 async function launchArcadeMode() {
-  const appContainer = document.querySelector(".app");
-  const instruction = document.querySelector("#screen-splash .splash-instruction p");
-  let fullscreenEnabled = false;
+  const container = document.documentElement;
 
-  // A API de tela cheia precisa ser chamada diretamente após o toque do usuário.
-  // Usar .app em vez do documento inteiro mantém o jogo como superfície fullscreen.
+  // 1. Tenta colocar o navegador em Tela Cheia
   try {
-    if (appContainer?.requestFullscreen) {
-      await appContainer.requestFullscreen();
-      fullscreenEnabled = true;
-    } else if (appContainer?.webkitRequestFullscreen) {
-      appContainer.webkitRequestFullscreen();
-      fullscreenEnabled = true;
-    } else if (appContainer?.webkitEnterFullscreen) {
-      // Alguns navegadores WebKit não permitem fullscreen de elementos comuns.
-      appContainer.webkitEnterFullscreen();
-      fullscreenEnabled = true;
+    if (container.requestFullscreen) {
+      await container.requestFullscreen();
+    } else if (container.webkitRequestFullscreen) { /* Suporte para Safari / iOS */
+      await container.webkitRequestFullscreen();
     }
   } catch (err) {
-    console.info("Tela cheia indisponível neste navegador; mantendo layout responsivo.", err);
+    console.warn("Tela Cheia não suportada ou ignorada:", err);
   }
 
-  // O bloqueio de orientação só funciona em navegadores/dispositivos compatíveis,
-  // normalmente após entrar em fullscreen. Nunca bloqueamos o jogo se falhar.
-  let landscapeLocked = false;
+  // 2. Tenta travar a orientação da tela em Landscape (Funciona nativo no Android/Chrome)
   try {
-    if (fullscreenEnabled && window.screen?.orientation?.lock) {
-      await window.screen.orientation.lock("landscape");
-      landscapeLocked = true;
+    if (screen.orientation && screen.orientation.lock) {
+      await screen.orientation.lock("landscape");
     }
   } catch (err) {
-    console.info("Orientação paisagem não suportada; mantendo a orientação atual.", err);
+    console.warn("Trava de orientação não suportada nativamente neste dispositivo:", err);
   }
 
-  if (splashScreen) splashScreen.hidden = true;
-
-  // Foco no campo de nome sem deslocar a página; em mobile, evita abrir o teclado
-  // automaticamente, que poderia ocupar metade da tela antes de o jogador tocar no campo.
+  // 3. Esconde a tela de abertura e mostra o jogo
+  if (splashScreen) {
+    splashScreen.hidden = true;
+  }
+  
+  // Opcional: Já coloca o cursor/foco no campo do primeiro nome para o usuário digitar
   const firstNameInput = document.getElementById("player-first-name");
-  if (firstNameInput && !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-    firstNameInput.focus({ preventScroll: true });
-  }
-
-  // Feedback informativo, sem impedir a entrada no jogo.
-  if (instruction && !fullscreenEnabled && !landscapeLocked) {
-    instruction.textContent = "Seu navegador não permite forçar tela cheia ou orientação. Você ainda pode jogar normalmente; use o botão de tela cheia do navegador, se disponível.";
-  }
+  if (firstNameInput) firstNameInput.focus({ preventScroll: true });
 }
 
 if (btnEnterApp) {
