@@ -4,9 +4,10 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
   <meta content="#160b35" name="theme-color"/>
-  <!-- Carrega antecipadamente os cenários mais usados para reduzir a espera entre telas. -->
+  <!-- Preload crítico: garante que o primeiro cenário apareça o mais rápido possível. -->
   <link rel="preload" as="image" href="assets/background-mainmenu.png" fetchpriority="high"/>
   <link rel="preload" as="image" href="assets/background-question.png" fetchpriority="high"/>
+  <!-- Os demais arquivos de assets são aquecidos pelo pré-carregador no início do jogo. -->
   <title>
    Semana da Qualidade | Skala Brasil
   </title>
@@ -4077,6 +4078,59 @@ body {
   </div>
   <!-- SETOR SCRIPT — PERGUNTAS, NAVEGAÇÃO, PONTUAÇÃO E SALVAMENTO -->
     <script>
+/* ==================================================
+   SETOR 00 — PRÉ-CARREGAMENTO DE TODOS OS ASSETS
+   Mantém referências às imagens para aquecer o cache antes da troca de telas.
+   Os dois cenários críticos já são pré-carregados no <head>.
+   ================================================== */
+(() => {
+  const ASSET_BASE = "assets/";
+  const ASSET_FILES = [
+    "background-final.png",
+    "background-gameover.png",
+    "background-instrucoes.png",
+    "background-mainmenu.png",
+    "background-question.png",
+    "foguete.png",
+    "game-over.png",
+    "home-hero.png",
+    "mascote-estrela.png",
+    "potekg.png",
+    "quality-mascot.png",
+    "robo-parabenizando.png",
+    "robot-correct.png",
+    "robot-wrong.png",
+    "trophy-bronze.png",
+    "trophy-gold.png",
+    "trophy-silver.png"
+  ];
+
+  // Reutiliza as imagens durante toda a sessão; o navegador também guarda o cache HTTP.
+  window.__quizAssetCache = window.__quizAssetCache || [];
+
+  const preloadAsset = (file) => new Promise((resolve) => {
+    const img = new Image();
+    img.decoding = "async";
+    img.loading = "eager";
+    img.fetchPriority = file.startsWith("background-") ? "high" : "low";
+    img.onload = () => resolve({ file, loaded: true });
+    img.onerror = () => {
+      console.warn(`[Assets] Não foi possível carregar: ${ASSET_BASE + file}`);
+      resolve({ file, loaded: false });
+    };
+    img.src = ASSET_BASE + file;
+    window.__quizAssetCache.push(img);
+    // Imagens já em cache podem concluir sem disparar um novo evento de load.
+    if (img.complete) resolve({ file, loaded: img.naturalWidth > 0 });
+  });
+
+  // Primeiro aquece os fundos; depois, os sprites e medalhas em paralelo.
+  const backgrounds = ASSET_FILES.filter((file) => file.startsWith("background-"));
+  const sprites = ASSET_FILES.filter((file) => !file.startsWith("background-"));
+  window.__quizAssetsReady = Promise.all(backgrounds.map(preloadAsset))
+    .then(() => Promise.all(sprites.map(preloadAsset)));
+})();
+
 /* ==================================================
    SETOR 15 — BANCO DE PERGUNTAS
    Edite os textos e respostas nesta seção.
