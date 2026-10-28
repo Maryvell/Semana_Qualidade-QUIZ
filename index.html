@@ -3617,31 +3617,7 @@ body {
    🔥 MODO LANDSCAPE FORÇADO (CELULAR DEITADO)
    ================================================== */
 
-/* 1. SE ESTIVER EM PÉ (PORTRAIT): ESCONDE O JOGO E PEDE PARA DEITAR */
-@media (orientation: portrait) and (max-width: 900px) {
-    .app {
-        display: none !important;
-    }
-    body {
-        background: #10082d !important;
-        background-image: none !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-    }
-    body::before {
-        content: "📱🔄 Por favor, deite o celular (Modo Paisagem) para jogar a Semana da Qualidade.";
-        color: #ffe52e;
-        font-size: 20px;
-        line-height: 1.5;
-        font-weight: 900;
-        text-align: center;
-        padding: 30px;
-        font-family: Arial, sans-serif;
-    }
-}
+/* O modo retrato permanece disponível quando o navegador não permite bloquear a orientação. */
 
 /* 2. AJUSTES PARA O CELULAR DEITADO (LANDSCAPE) */
 @media (orientation: landscape) and (max-height: 600px) {
@@ -3851,6 +3827,33 @@ body {
   }
 }
 
+/* O jogo ocupa a tela inteira quando o navegador aceita Fullscreen API. */
+.app:fullscreen {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #10082d;
+}
+.app:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #10082d;
+}
+
+/* No celular, nunca esconda o jogo só porque o aparelho está em pé. */
+@media (max-width: 900px) {
+  .app { display: block !important; }
+  .splash-card { width: min(480px, 100%); max-height: calc(100dvh - 24px); overflow-y: auto; }
+  .splash-screen { padding: 12px; }
+  .splash-card { padding: clamp(18px, 5vw, 30px) clamp(14px, 4vw, 24px); }
+  .splash-title { font-size: clamp(23px, 7vw, 34px); }
+}
+
 </style>
  </head>
  <body>
@@ -3869,7 +3872,7 @@ body {
         
         <div class="splash-instruction">
           <div class="rotate-phone-icon">📱↻</div>
-          <p>Para a melhor experiência Arcade, jogue com o <strong>celular deitado</strong> (Modo Paisagem).</p>
+          <p>Ao iniciar, vamos tentar abrir em <strong>tela cheia</strong> e ativar o modo paisagem. Se o seu navegador não permitir, o jogo continuará funcionando na vertical.</p>
         </div>
 
         <button type="button" id="btn-enter-app" class="splash-btn">
@@ -4428,36 +4431,53 @@ const splashScreen = document.getElementById("screen-splash");
 const btnEnterApp = document.getElementById("btn-enter-app");
 
 async function launchArcadeMode() {
-  const container = document.documentElement;
+  const appContainer = document.querySelector(".app");
+  const instruction = document.querySelector("#screen-splash .splash-instruction p");
+  let fullscreenEnabled = false;
 
-  // 1. Tenta colocar o navegador em Tela Cheia
+  // A API de tela cheia precisa ser chamada diretamente após o toque do usuário.
+  // Usar .app em vez do documento inteiro mantém o jogo como superfície fullscreen.
   try {
-    if (container.requestFullscreen) {
-      await container.requestFullscreen();
-    } else if (container.webkitRequestFullscreen) { /* Suporte para Safari / iOS */
-      await container.webkitRequestFullscreen();
+    if (appContainer?.requestFullscreen) {
+      await appContainer.requestFullscreen();
+      fullscreenEnabled = true;
+    } else if (appContainer?.webkitRequestFullscreen) {
+      appContainer.webkitRequestFullscreen();
+      fullscreenEnabled = true;
+    } else if (appContainer?.webkitEnterFullscreen) {
+      // Alguns navegadores WebKit não permitem fullscreen de elementos comuns.
+      appContainer.webkitEnterFullscreen();
+      fullscreenEnabled = true;
     }
   } catch (err) {
-    console.warn("Tela Cheia não suportada ou ignorada:", err);
+    console.info("Tela cheia indisponível neste navegador; mantendo layout responsivo.", err);
   }
 
-  // 2. Tenta travar a orientação da tela em Landscape (Funciona nativo no Android/Chrome)
+  // O bloqueio de orientação só funciona em navegadores/dispositivos compatíveis,
+  // normalmente após entrar em fullscreen. Nunca bloqueamos o jogo se falhar.
+  let landscapeLocked = false;
   try {
-    if (screen.orientation && screen.orientation.lock) {
-      await screen.orientation.lock("landscape");
+    if (fullscreenEnabled && window.screen?.orientation?.lock) {
+      await window.screen.orientation.lock("landscape");
+      landscapeLocked = true;
     }
   } catch (err) {
-    console.warn("Trava de orientação não suportada nativamente neste dispositivo:", err);
+    console.info("Orientação paisagem não suportada; mantendo a orientação atual.", err);
   }
 
-  // 3. Esconde a tela de abertura e mostra o jogo
-  if (splashScreen) {
-    splashScreen.hidden = true;
-  }
-  
-  // Opcional: Já coloca o cursor/foco no campo do primeiro nome para o usuário digitar
+  if (splashScreen) splashScreen.hidden = true;
+
+  // Foco no campo de nome sem deslocar a página; em mobile, evita abrir o teclado
+  // automaticamente, que poderia ocupar metade da tela antes de o jogador tocar no campo.
   const firstNameInput = document.getElementById("player-first-name");
-  if (firstNameInput) firstNameInput.focus({ preventScroll: true });
+  if (firstNameInput && !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    firstNameInput.focus({ preventScroll: true });
+  }
+
+  // Feedback informativo, sem impedir a entrada no jogo.
+  if (instruction && !fullscreenEnabled && !landscapeLocked) {
+    instruction.textContent = "Seu navegador não permite forçar tela cheia ou orientação. Você ainda pode jogar normalmente; use o botão de tela cheia do navegador, se disponível.";
+  }
 }
 
 if (btnEnterApp) {
