@@ -3614,11 +3614,11 @@ body {
 }
 
 /* ==================================================
-   🔥 AJUSTE DEFINITIVO PARA MOBILE (90% DO PÚBLICO)
+   🔥 MODO LANDSCAPE FORÇADO (CELULAR DEITADO)
    ================================================== */
 
-/* 1. OBRIGA O MODO RETRATO (PORTRAIT) NOS CELULARES */
-@media (max-width: 900px) and (orientation: landscape) {
+/* 1. SE ESTIVER EM PÉ (PORTRAIT): ESCONDE O JOGO E PEDE PARA DEITAR */
+@media (orientation: portrait) and (max-width: 900px) {
     .app {
         display: none !important;
     }
@@ -3632,7 +3632,7 @@ body {
         margin: 0;
     }
     body::before {
-        content: "🔄 Por favor, gire o celular para a vertical (Modo Retrato) para jogar.";
+        content: "📱🔄 Por favor, deite o celular (Modo Paisagem) para jogar a Semana da Qualidade.";
         color: #ffe52e;
         font-size: 20px;
         line-height: 1.5;
@@ -3643,81 +3643,242 @@ body {
     }
 }
 
-/* 2. LIBERA SCROLL, FIXA FUNDO E REDUZ A PROPORÇÃO GERAL */
-@media (max-width: 760px) and (orientation: portrait) {
-    /* Libera rolagem sem quebrar o layout */
+/* 2. AJUSTES PARA O CELULAR DEITADO (LANDSCAPE) */
+@media (orientation: landscape) and (max-height: 600px) {
+    /* Libera o scroll vertical para garantir que rodapés ou placares grandes não cortem */
     html, body {
-        overflow-x: auto !important;
         overflow-y: auto !important;
-        min-height: 100% !important;
-        
-        /* Fundo fixo: se o usuário rolar a tela, o background acompanha sem cortar */
+        overflow-x: hidden !important;
+        height: auto !important;
+        min-height: 100vh !important;
         background-attachment: fixed !important;
-        background-size: cover !important;
-        overscroll-behavior: none; /* Evita aquele "pulo" chato no scroll do iOS/Android */
     }
-
-    /* Destrava a altura do jogo */
+    
     .app, .shell {
         height: auto !important;
         min-height: 100vh !important;
         overflow: visible !important;
     }
 
-    /* Redução mágica: o 'zoom' diminui o tamanho de tudo mantendo a proporção de PC */
+    /* Reduz a escala geral em 20% para caber na altura apertada do celular deitado */
     .shell {
-        padding: 10px 10px 30px !important;
-        zoom: 0.85; /* Reduz tudo em 15%, criando espaço para respirar */
+        zoom: 0.80; 
+        padding: 12px 25px 20px !important;
     }
 
-    /* Garante que todas as telas deixem o scroll acontecer solto */
-    #screen-home, #screen-how, #screen-quiz, #screen-feedback {
-        background-attachment: fixed !important;
-        min-height: 100vh !important;
-        height: auto !important;
-        overflow: visible !important;
-        border-radius: 0 !important; /* Tira borda redonda no celular para usar 100% da tela */
+    /* Na tela inicial, garante que o texto e a imagem fiquem lado a lado */
+    #screen-home {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
     }
 
-    /* Ajuste para a ilustração da tela inicial não estourar */
-    .scene, #screen-home .scene {
+    .home-copy {
+        flex: 1 1 50% !important;
+    }
+
+    .scene {
+        flex: 1 1 50% !important;
+        height: 300px !important;
         position: relative !important;
-        width: 100% !important;
-        height: 240px !important; 
-        margin-top: 15px !important;
+        margin-top: 0 !important;
     }
 
-    /* Previne que mascotes e troféus vazem muito para os lados e criem scroll horizontal desnecessário */
-    .scoreboard-sidekick {
-        transform: scale(0.65) !important;
-        transform-origin: center center;
-    }
-
-    /* Dá um respiro extra no final do placar para não colar no rodapé do celular */
-    #screen-feedback .scoreboard-card {
-        margin-bottom: 25px !important;
-        overflow: visible !important;
+    /* Ajuste fino dos elementos internos para não ficarem gigantes na tela deitada */
+    h1 {
+        font-size: clamp(38px, 6vw, 55px) !important;
+        margin-top: 10px !important;
     }
     
-    /* Corrige o rodapé para não ficar por cima do conteúdo se rolar a tela */
-    .footer {
-        position: relative !important;
-        margin-top: 20px !important;
+    .player-fields input {
+        min-height: 42px !important;
+    }
+
+    .big-btn {
+        min-height: 50px !important;
+    }
+
+    /* Ajusta as alternativas do Quiz para otimizar espaço vertical */
+    #screen-quiz .answer {
+        min-height: 44px !important;
+        padding: 6px 10px !important;
+        font-size: 15px !important;
+    }
+
+    /* Placar final otimizado para landscape */
+    #screen-feedback .scoreboard-card {
+        padding: 15px 20px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    #screen-feedback .scoreboard-medal img {
+        max-height: 90px !important;
+    }
+
+    .device-instructions {
+        grid-template-columns: 1fr 1fr !important;
     }
 }
 
-/* Telas MUITO pequenas (ex: iPhone SE antigo) - Reduz um pouquinho mais */
-@media (max-width: 380px) and (orientation: portrait) {
-    .shell {
-        zoom: 0.75; 
-    }
+/* ==================================================
+   🔥 TELA PRE-MAIN MENU (SPLASH LANDSCAPE / FULLSCREEN)
+   ================================================== */
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #0a041a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
+.splash-screen[hidden] {
+  display: none !important;
+}
+
+.splash-card {
+  width: min(480px, 100%);
+  padding: 30px 24px;
+  background: linear-gradient(145deg, #1b0c3f, #0d0521);
+  border: 4px solid #75e7ff;
+  border-radius: 12px;
+  box-shadow: 0 0 0 4px #ff1680, 0 0 35px rgba(117, 231, 255, 0.4);
+  text-align: center;
+  animation: splashPulse 3s ease-in-out infinite alternate;
+}
+
+.splash-header {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 22px;
+  color: #ffe52e;
+  margin-bottom: 10px;
+}
+
+.splash-title {
+  font-size: clamp(24px, 6vw, 36px);
+  color: #ffe52e;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  text-shadow: 3px 3px 0 #174cff;
+  letter-spacing: -1px;
+}
+
+.splash-subtitle {
+  color: #a8d52a;
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0 0 20px;
+  text-transform: uppercase;
+}
+
+.splash-instruction {
+  background: rgba(16, 8, 45, 0.8);
+  border: 2px dashed #ff1680;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.rotate-phone-icon {
+  font-size: 32px;
+  animation: rotatePhone 2s ease-in-out infinite;
+}
+
+.splash-instruction p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.splash-instruction strong {
+  color: #75e7ff;
+}
+
+.splash-btn {
+  width: 100%;
+  min-height: 56px;
+  background: #ffe52e;
+  color: #10082d;
+  border: 3px solid #fffdf2;
+  font-size: 18px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #ff8a24, 0 10px 0 #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.15s, filter 0.15s;
+}
+
+.splash-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.splash-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #ff8a24;
+}
+
+@keyframes rotatePhone {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-90deg); }
+}
+
+@keyframes splashPulse {
+  from { box-shadow: 0 0 0 4px #ff1680, 0 0 25px rgba(117, 231, 255, 0.3); }
+  to { box-shadow: 0 0 0 4px #ff1680, 0 0 45px rgba(117, 231, 255, 0.6); }
+}
+
+/* AVISO VISUAL CASO TENTE DESVIRAR O CELULAR */
+@media (max-width: 900px) and (orientation: portrait) {
+  #screen-splash .splash-instruction {
+    border-color: #ffe52e;
+    background: rgba(255, 22, 128, 0.2);
+  }
+}
 
 </style>
  </head>
  <body>
   <div class="app">
+
+    <!-- TELA PRE-MAIN MENU (TELA CHEIA & INTRO) -->
+    <section id="screen-splash" class="splash-screen">
+      <div class="splash-card">
+        <div class="splash-header">
+          <span class="splash-spark">✦</span>
+          <span class="splash-spark">★</span>
+          <span class="splash-spark">✦</span>
+        </div>
+        <h1 class="splash-title">O SHOW VAI COMEÇAR!</h1>
+        <p class="splash-subtitle">Prepare-se para o Desafio da Qualidade Skala Brasil</p>
+        
+        <div class="splash-instruction">
+          <div class="rotate-phone-icon">📱↻</div>
+          <p>Para a melhor experiência Arcade, jogue com o <strong>celular deitado</strong> (Modo Paisagem).</p>
+        </div>
+
+        <button type="button" id="btn-enter-app" class="splash-btn">
+          <span class="play-triangle"></span>
+          INICIAR MODO ARCADE
+        </button>
+      </div>
+    </section>
+
    <main class="shell">
     <!-- SETOR HTML 01 — CABEÇALHO: MARCA E NOME DO EVENTO -->
     <header class="topbar">
@@ -4259,6 +4420,49 @@ const TIME_PER_QUESTION = 50;
 const QUESTIONS_PER_GAME = 10;
 // REGRA EDITÁVEL: abaixo de 8 acertos, o jogador perde.
 const MIN_CORRECT_TO_PASS = 8;
+
+/* ==================================================
+   🔥 CONTROLE DA TELA CHEIA E MODO LANDSCAPE
+   ================================================== */
+const splashScreen = document.getElementById("screen-splash");
+const btnEnterApp = document.getElementById("btn-enter-app");
+
+async function launchArcadeMode() {
+  const container = document.documentElement;
+
+  // 1. Tenta colocar o navegador em Tela Cheia
+  try {
+    if (container.requestFullscreen) {
+      await container.requestFullscreen();
+    } else if (container.webkitRequestFullscreen) { /* Suporte para Safari / iOS */
+      await container.webkitRequestFullscreen();
+    }
+  } catch (err) {
+    console.warn("Tela Cheia não suportada ou ignorada:", err);
+  }
+
+  // 2. Tenta travar a orientação da tela em Landscape (Funciona nativo no Android/Chrome)
+  try {
+    if (screen.orientation && screen.orientation.lock) {
+      await screen.orientation.lock("landscape");
+    }
+  } catch (err) {
+    console.warn("Trava de orientação não suportada nativamente neste dispositivo:", err);
+  }
+
+  // 3. Esconde a tela de abertura e mostra o jogo
+  if (splashScreen) {
+    splashScreen.hidden = true;
+  }
+  
+  // Opcional: Já coloca o cursor/foco no campo do primeiro nome para o usuário digitar
+  const firstNameInput = document.getElementById("player-first-name");
+  if (firstNameInput) firstNameInput.focus({ preventScroll: true });
+}
+
+if (btnEnterApp) {
+  btnEnterApp.addEventListener("click", launchArcadeMode);
+}
 
 let index = 0;
 let score = 0;
