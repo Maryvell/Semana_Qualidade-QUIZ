@@ -2106,43 +2106,43 @@ button, input { max-width: 100%; }
 
 
 /* ==================================================
-   BACKGROUNDS PERSONALIZADOS — ADIÇÃO SEM ALTERAR O HTML/JS EXISTENTE
-   Arquivos esperados em ./assets/
-   Tela inicial = fábrica; telas intermediárias = arena; placar final = pódio.
+   CENÁRIOS POR TELA — ARQUIVOS VERTICAIS EM ./assets/
    ================================================== */
 #screen-home {
-  background-image:
-    linear-gradient(180deg, rgba(12, 5, 39, .32), rgba(12, 5, 39, .62)),
-    url("assets/background-mainmenu.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 18px;
-  overflow: hidden;
+  background-image: linear-gradient(180deg, rgba(12, 5, 39, .10), rgba(12, 5, 39, .28)), url("assets/background-mainmenu.png");
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  border-radius: 18px; overflow: hidden;
 }
-
-#screen-how,
-#screen-quiz,
+#screen-how {
+  background-image: linear-gradient(180deg, rgba(10, 4, 39, .12), rgba(10, 4, 39, .24)), url("assets/background-instrucoes.png");
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  border-radius: 18px; overflow: hidden;
+}
+#screen-quiz {
+  background-image: linear-gradient(180deg, rgba(10, 4, 39, .10), rgba(10, 4, 39, .22)), url("assets/background-question.png");
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  border-radius: 18px; overflow: hidden;
+}
 #screen-feedback {
-  background-image:
-    linear-gradient(180deg, rgba(10, 4, 39, .48), rgba(10, 4, 39, .66)),
-    url("assets/background-question.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 18px;
-  overflow: hidden;
+  background-image: linear-gradient(180deg, rgba(10, 4, 39, .12), rgba(10, 4, 39, .28)), url("assets/background-final.png");
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  border-radius: 18px; overflow: hidden;
 }
 
-/* O mesmo screen-feedback é usado para feedback entre perguntas e placar final.
-   Este seletor troca o cenário apenas quando o placar final está visível. */
-#screen-feedback:has(#final-scoreboard:not([hidden])) {
+
+/* Cenário de premiação: aplicar somente quando NÃO for Game Over */
+.app:not(.game-over-mode) #screen-feedback:has(#final-scoreboard:not([hidden])) {
   background-image:
     linear-gradient(180deg, rgba(10, 4, 39, .28), rgba(10, 4, 39, .48)),
-    url("assets/background-final.png");
+    url("assets/background-final.png") !important;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+
+.app.game-over-mode #screen-feedback {
+  background-image: linear-gradient(180deg, rgba(10, 0, 4, .12), rgba(10, 0, 4, .26)), url("assets/background-gameover.png") !important;
 }
 
 @media (max-width: 700px) {
@@ -3617,31 +3617,7 @@ body {
    🔥 MODO LANDSCAPE FORÇADO (CELULAR DEITADO)
    ================================================== */
 
-/* 1. SE ESTIVER EM PÉ (PORTRAIT): ESCONDE O JOGO E PEDE PARA DEITAR */
-@media (orientation: portrait) and (max-width: 900px) {
-    .app {
-        display: none !important;
-    }
-    body {
-        background: #10082d !important;
-        background-image: none !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-    }
-    body::before {
-        content: "📱🔄 Por favor, deite o celular (Modo Paisagem) para jogar a Semana da Qualidade.";
-        color: #ffe52e;
-        font-size: 20px;
-        line-height: 1.5;
-        font-weight: 900;
-        text-align: center;
-        padding: 30px;
-        font-family: Arial, sans-serif;
-    }
-}
+/* O modo retrato permanece disponível quando o navegador não permite bloquear a orientação. */
 
 /* 2. AJUSTES PARA O CELULAR DEITADO (LANDSCAPE) */
 @media (orientation: landscape) and (max-height: 600px) {
@@ -3721,330 +3697,523 @@ body {
     }
 }
 
+
+
 /* ==================================================
-   🔥 TELA PRE-MAIN MENU (SPLASH LANDSCAPE / FULLSCREEN)
+   AJUSTE FINAL — MOBILE PORTRAIT + CENÁRIOS VISÍVEIS
+   Os painéis deixam o cenário aparecer; somente o cartão da pergunta permanece quase opaco.
    ================================================== */
-.splash-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background: #0a041a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+html, body { width:100%; min-width:0; min-height:100%; height:auto; overflow-x:hidden; overflow-y:auto; }
+body { -webkit-text-size-adjust:100%; }
+.app { width:100%; min-width:0; min-height:100dvh; height:auto; overflow:visible; }
+.shell { width:100%; max-width:1100px; min-height:100dvh; height:auto; margin:0 auto; padding:clamp(8px,2.5vw,24px); overflow:visible; }
+.screen { min-width:0; min-height:0; height:auto; overflow:visible; }
+#screen-home, #screen-how, #screen-quiz, #screen-feedback { background-repeat:no-repeat; }
+
+/* Transparência padrão para os quadros de conteúdo. */
+#screen-home .player-fields,
+#screen-how .paper.rules,
+#screen-how .callout,
+#screen-how .rule,
+#screen-feedback .scoreboard-card,
+#screen-feedback .prize-instructions,
+#screen-feedback .device-tip,
+#screen-feedback .scoreboard-stats div,
+.exit-confirm-card {
+  background-color:rgba(18, 7, 47, .62) !important;
+  backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px);
+}
+#screen-home .player-fields { border-color:#ff35d0 !important; }
+#screen-home .player-fields input { background:rgba(245, 250, 255, .96) !important; color:#151044 !important; }
+#screen-how .paper.rules { color:#fff !important; border-color:#8cf36a !important; }
+#screen-how .rule { color:#fff !important; border-bottom-color:rgba(156,235,255,.32) !important; }
+#screen-feedback .scoreboard-card { color:#fff !important; }
+#screen-feedback .prize-instructions { color:#fff !important; border-color:#ffe34d !important; }
+#screen-feedback .prize-instructions small { color:#ffe34d !important; }
+
+/* O cartão de pergunta é a única superfície deliberadamente sólida para legibilidade. */
+#screen-quiz .paper,
+#screen-quiz .question-card,
+#screen-quiz .question-panel {
+  background:rgba(255, 253, 242, .94) !important;
+  color:#21153d !important;
+  backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
+}
+#screen-quiz .answer { min-width:0; white-space:normal; overflow-wrap:anywhere; }
+
+@media (max-width:760px) {
+  html, body { overflow-x:hidden !important; overflow-y:auto !important; }
+  .app { display:block !important; }
+  .shell { padding:8px 10px 18px !important; }
+  .topbar { gap:8px; }
+  .brand { font-size:clamp(17px,5vw,23px); padding:7px 10px; }
+  .event-label { font-size:clamp(9px,2.5vw,12px); text-align:right; }
+  .screen { width:100% !important; max-width:100% !important; border-radius:12px !important; }
+  #screen-home.active { display:flex !important; flex-direction:column !important; gap:12px; padding:clamp(12px,3.5vw,20px) !important; }
+  #screen-home .home-copy { width:100% !important; max-width:none !important; flex:none !important; position:relative; z-index:3; }
+  #screen-home h1 { font-size:clamp(32px,9.5vw,52px) !important; line-height:.92 !important; overflow-wrap:anywhere; }
+  #screen-home .tag { max-width:100%; font-size:clamp(10px,3vw,13px); }
+  #screen-home .theme { max-width:100%; font-size:clamp(17px,5vw,25px) !important; }
+  #screen-home .lead { font-size:clamp(13px,3.7vw,16px) !important; line-height:1.4 !important; }
+  #screen-home .player-fields { width:100% !important; max-width:none !important; padding:clamp(12px,3.5vw,20px) !important; margin-top:14px !important; }
+  #screen-home .player-fields label { font-size:11px !important; }
+  #screen-home .player-fields input { min-height:46px !important; font-size:16px !important; }
+  #screen-home .big-btn { width:100% !important; min-height:54px !important; font-size:clamp(19px,5.5vw,26px) !important; }
+  #screen-home .scene { position:relative !important; inset:auto !important; width:100% !important; height:clamp(150px,48vw,260px) !important; min-height:150px !important; margin:0 auto !important; flex:none !important; }
+  #screen-home #previous-result { position:relative !important; inset:auto !important; width:100% !important; max-width:100% !important; margin:10px 0 0 !important; }
+  #screen-how.active, #screen-quiz.active, #screen-feedback.active { display:block !important; padding:clamp(10px,3vw,18px) !important; }
+  #screen-how .inner, #screen-quiz .inner, #screen-feedback .inner { width:100% !important; max-width:100% !important; margin:0 auto !important; padding:0 !important; overflow:visible !important; }
+  #screen-how .screen-head, #screen-quiz .screen-head, #screen-feedback .screen-head { gap:8px; margin-bottom:12px !important; }
+  #screen-how .section-title, #screen-quiz .section-title, #screen-feedback .section-title { font-size:clamp(25px,7vw,36px) !important; line-height:1.08 !important; overflow-wrap:anywhere; }
+  #screen-how .paper.rules { padding:clamp(12px,3.5vw,20px) !important; border-radius:12px; }
+  #screen-how .rule { grid-template-columns:32px minmax(0,1fr) !important; gap:10px !important; padding:12px 0 !important; font-size:clamp(13px,3.6vw,16px) !important; }
+  #screen-how button, #screen-feedback button { max-width:100%; white-space:normal; }
+  #screen-quiz .paper { padding:clamp(12px,3.5vw,20px) !important; border-radius:12px; }
+  #screen-quiz .question-text { font-size:clamp(18px,5vw,25px) !important; line-height:1.25 !important; overflow-wrap:anywhere; }
+  #screen-quiz .answers { grid-template-columns:minmax(0,1fr) !important; gap:9px !important; }
+  #screen-quiz .answer { min-height:48px !important; padding:11px !important; font-size:clamp(13px,3.8vw,16px) !important; }
+  #screen-feedback .scoreboard-wrap { padding:0 !important; margin:0 auto !important; overflow:visible !important; }
+  #screen-feedback .scoreboard-card { width:100% !important; max-width:100% !important; max-height:none !important; overflow:visible !important; padding:clamp(12px,3.5vw,20px) !important; border-width:3px !important; }
+  #screen-feedback .scoreboard-stats { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:8px !important; }
+  #screen-feedback .scoreboard-stats div { min-width:0; padding:10px 5px !important; }
+  #screen-feedback .scoreboard-player { overflow-wrap:anywhere; }
+  #screen-feedback .prize-instructions { padding:10px !important; }
+  #screen-feedback .device-instructions { grid-template-columns:minmax(0,1fr) !important; }
+  .footer { position:relative !important; width:100% !important; flex-wrap:wrap !important; text-align:center !important; gap:6px; }
 }
 
-.splash-screen[hidden] {
-  display: none !important;
+/* Garantia de prioridade para os cenários verticais sobre regras antigas do tema. */
+#screen-home { background-image:linear-gradient(180deg, rgba(12,5,39,.10), rgba(12,5,39,.28)), url("assets/background-mainmenu.png") !important; }
+#screen-how { background-image:linear-gradient(180deg, rgba(10,4,39,.12), rgba(10,4,39,.24)), url("assets/background-instrucoes.png") !important; }
+#screen-quiz { background-image:linear-gradient(180deg, rgba(10,4,39,.10), rgba(10,4,39,.22)), url("assets/background-question.png") !important; }
+#screen-feedback { background-image:linear-gradient(180deg, rgba(10,4,39,.12), rgba(10,4,39,.28)), url("assets/background-final.png") !important; }
+#screen-feedback:has(#final-scoreboard:not([hidden])) { background-image:linear-gradient(180deg, rgba(10,4,39,.08), rgba(10,4,39,.20)), url("assets/background-final.png") !important; }
+.app.game-over-mode #screen-feedback { background-image:linear-gradient(180deg, rgba(10,0,4,.12), rgba(10,0,4,.26)), url("assets/background-gameover.png") !important; background-color:transparent !important; }
+
+/* Em retrato, os cenários verticais usam toda a área da tela sem recorte lateral. */
+@media (max-width:760px) and (orientation:portrait) {
+  #screen-home, #screen-how, #screen-quiz, #screen-feedback { background-size:100% 100% !important; background-position:center top !important; }
 }
 
-.splash-card {
-  width: min(480px, 100%);
-  padding: 30px 24px;
-  background: linear-gradient(145deg, #1b0c3f, #0d0521);
-  border: 4px solid #75e7ff;
-  border-radius: 12px;
-  box-shadow: 0 0 0 4px #ff1680, 0 0 35px rgba(117, 231, 255, 0.4);
-  text-align: center;
-  animation: splashPulse 3s ease-in-out infinite alternate;
+@media (max-width:360px) {
+  #screen-home h1 { font-size:clamp(29px,9vw,34px) !important; }
+  #screen-quiz .answer { font-size:13px !important; padding:9px !important; }
+  #screen-feedback .scoreboard-status { font-size:clamp(26px,8vw,34px) !important; }
 }
 
-.splash-header {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  font-size: 22px;
-  color: #ffe52e;
-  margin-bottom: 10px;
-}
 
-.splash-title {
-  font-size: clamp(24px, 6vw, 36px);
-  color: #ffe52e;
-  text-transform: uppercase;
-  margin: 0 0 8px;
-  text-shadow: 3px 3px 0 #174cff;
-  letter-spacing: -1px;
-}
 
-.splash-subtitle {
-  color: #a8d52a;
-  font-size: 14px;
-  font-weight: 800;
-  margin: 0 0 20px;
-  text-transform: uppercase;
-}
-
-.splash-instruction {
-  background: rgba(16, 8, 45, 0.8);
-  border: 2px dashed #ff1680;
-  padding: 14px;
-  border-radius: 8px;
-  margin-bottom: 22px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-align: left;
-}
-
-.rotate-phone-icon {
-  font-size: 32px;
-  animation: rotatePhone 2s ease-in-out infinite;
-}
-
-.splash-instruction p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.4;
-  color: #fff;
-}
-
-.splash-instruction strong {
-  color: #75e7ff;
-}
-
-.splash-btn {
+/* ============================================================
+   AJUSTE FINAL DE LAYOUT — PORTRAIT, CENÁRIOS COMPLETOS E PAINÉIS TRANSLÚCIDOS
+   Este bloco prevalece sobre os ajustes antigos sem alterar a lógica do quiz.
+   ============================================================ */
+html, body {
   width: 100%;
-  min-height: 56px;
-  background: #ffe52e;
-  color: #10082d;
-  border: 3px solid #fffdf2;
-  font-size: 18px;
-  font-weight: 1000;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: 0 6px 0 #ff8a24, 0 10px 0 #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: transform 0.15s, filter 0.15s;
+  min-height: 100%;
+  height: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior-y: contain;
+}
+body { min-height: 100dvh; }
+.app {
+  width: 100%;
+  height: auto !important;
+  min-height: 100dvh !important;
+  overflow: visible !important;
+}
+.shell {
+  width: min(100%, 620px) !important;
+  height: auto !important;
+  min-height: 100dvh !important;
+  margin-inline: auto;
+  padding: 10px clamp(8px, 2.5vw, 16px) 14px !important;
+  overflow: visible !important;
+}
+.topbar { flex: 0 0 auto; }
+.footer { flex: 0 0 auto; }
+.screen,
+.screen.active {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: auto !important;
+  min-height: calc(100dvh - 20px) !important;
+  flex: 1 0 auto;
+  overflow: hidden !important;
+  background-repeat: no-repeat !important;
+  background-position: center top !important;
+  background-size: 100% 100% !important;
+  border-radius: 14px;
+}
+/* A tela inicial compartilha espaço com cabeçalho e rodapé, mas cresce se o conteúdo exigir. */
+#screen-home,
+#screen-home.active {
+  min-height: max(620px, calc(100dvh - 105px)) !important;
+  height: auto !important;
+  flex: 0 0 auto;
+  overflow: hidden !important;
+}
+/* Nas telas internas, o cenário ocupa toda a área vertical; não fica restrito ao conteúdo. */
+#screen-how.active,
+#screen-quiz.active,
+#screen-feedback.active {
+  min-height: calc(100dvh - 20px) !important;
+  height: auto !important;
+  flex: 0 0 auto;
+  overflow: hidden !important;
+}
+#screen-how .inner,
+#screen-quiz .inner,
+#screen-feedback .inner {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  margin: 0 auto !important;
+  padding: clamp(10px, 2.5vw, 18px) clamp(8px, 2vw, 14px);
+  overflow: visible !important;
+}
+/* Painéis gerais: preenchimento com apenas 5% de opacidade para preservar os cenários. */
+#screen-home .player-fields,
+#screen-how .paper.rules {
+  background: rgba(15, 5, 42, 0.05) !important;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  border-color: rgba(255, 22, 128, 0.9);
+  box-shadow: 0 0 0 2px rgba(117, 231, 255, 0.45), 0 0 18px rgba(255, 22, 128, 0.24);
+}
+#screen-home .player-fields {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: clamp(12px, 3vw, 22px) !important;
+  border: 2px solid rgba(255, 22, 128, 0.9);
+  border-radius: 16px;
+}
+#screen-how .paper.rules {
+  color: #fff !important;
+  border: 2px solid rgba(168, 213, 42, 0.95) !important;
+  border-radius: 12px;
+  padding: clamp(10px, 2.5vw, 20px) !important;
+}
+#screen-how .rule {
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,0.22) !important;
+}
+/* O cartão da pergunta permanece claro e quase opaco para garantir legibilidade. */
+#screen-quiz .paper {
+  background: rgba(255, 253, 242, 0.96) !important;
+  color: #20133d !important;
+  border-color: rgba(232, 250, 255, 0.98) !important;
+  border-radius: 14px;
+  box-shadow: 6px 6px 0 rgba(7, 4, 26, 0.8);
+}
+#screen-quiz .answer { opacity: 1 !important; }
+/* Placar e feedback deixam o cenário visível sem sacrificar contraste do texto. */
+#screen-feedback .scoreboard-card,
+#screen-feedback .feedback-banner,
+#screen-feedback .stats,
+#screen-feedback .stat {
+  background-color: rgba(17, 6, 44, 0.08) !important;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+#screen-feedback .scoreboard-card {
+  max-width: 100%;
+  overflow-y: auto !important;
+  border-radius: 14px;
+}
+#screen-feedback .scoreboard-card.failed {
+  background-color: rgba(10, 4, 25, 0.18) !important;
+}
+/* Ajustes compactos para celulares estreitos. */
+@media (max-width: 420px) {
+  .brand { padding: 6px 10px; font-size: 20px; }
+  .event-label { font-size: 9px; letter-spacing: 1px; }
+  .event-label strong { font-size: 10px; }
+  #screen-home h1 { font-size: clamp(31px, 9.5vw, 42px) !important; line-height: .94; }
+  #screen-home .lead { font-size: 14px; }
+  #screen-home .player-fields input { min-height: 44px; }
+  #screen-how .rule { grid-template-columns: 42px minmax(0, 1fr); gap: 9px; padding: 10px 0; font-size: 14px; }
+  #screen-how .rule-icon { width: 38px; height: 38px; }
+  #screen-quiz .question-text { overflow-wrap: anywhere; }
+  #screen-quiz .answer { overflow-wrap: anywhere; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .screen { animation: none !important; }
 }
 
-.splash-btn:hover {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
-}
-
-.splash-btn:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 #ff8a24;
-}
-
-@keyframes rotatePhone {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(-90deg); }
-}
-
-@keyframes splashPulse {
-  from { box-shadow: 0 0 0 4px #ff1680, 0 0 25px rgba(117, 231, 255, 0.3); }
-  to { box-shadow: 0 0 0 4px #ff1680, 0 0 45px rgba(117, 231, 255, 0.6); }
-}
-
-/* AVISO VISUAL CASO TENTE DESVIRAR O CELULAR */
-@media (max-width: 900px) and (orientation: portrait) {
-  #screen-splash .splash-instruction {
-    border-color: #ffe52e;
-    background: rgba(255, 22, 128, 0.2);
-  }
-}
-
-
-
-/* ==================================================
-   CORREÇÃO MOBILE — FUNDO PROPORCIONAL + SCROLL REAL
-   Sobrescreve regras antigas que escondiam o app em portrait.
-   ================================================== */
-@media (max-width: 900px) {
-  html, body {
-    width: 100% !important;
-    max-width: 100% !important;
+/* CORREÇÃO FINAL — SCROLL MOBILE E TELA DE INSTRUÇÕES */
+@media (max-width: 760px) {
+  html,
+  body {
+    width: 100%;
     height: auto !important;
-    min-height: 100% !important;
+    min-height: 100%;
     overflow-x: hidden !important;
     overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
   }
 
-  body {
-    display: block !important;
-    background-color: #10082d !important;
-    margin: 0 !important;
-  }
-
-  /* Anula a regra antiga que escondia o jogo em modo retrato. */
-  body::before { content: none !important; display: none !important; }
   .app {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
     height: auto !important;
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
+    min-height: 100dvh;
     overflow: visible !important;
   }
+
   .shell {
-    box-sizing: border-box !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
     height: auto !important;
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
-    margin: 0 auto !important;
-    padding: 8px 10px 22px !important;
-    overflow: visible !important;
-    zoom: 1 !important;
-  }
-
-  /* Cada tela cresce conforme o conteúdo, sem prender o scroll. */
-  .screen, .screen.active {
-    box-sizing: border-box !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
+    min-height: 100dvh;
     overflow: visible !important;
   }
 
-  /* Fundo em proporção: largura do celular, altura automática, sem crop/cover. */
-  #screen-home,
-  #screen-how,
-  #screen-quiz,
-  #screen-feedback {
-    background-color: #16083d !important;
-    background-size: 100% 100%, 100% auto !important;
-    background-position: center top !important;
-    background-repeat: no-repeat !important;
-    background-attachment: scroll !important;
+  .screen,
+  .screen.active,
+  .inner {
+    min-height: auto;
+    overflow: visible !important;
   }
 
-  #screen-home.active {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 12px !important;
-    padding: 14px 12px 16px !important;
-  }
-  #screen-home .home-copy,
-  #screen-home .player-fields,
-  #screen-home .scene {
-    box-sizing: border-box !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-  }
-  #screen-home .scene {
-    height: clamp(110px, 34vw, 175px) !important;
-    margin: 8px auto 0 !important;
+  /* Corrige o quadro de instruções cortado/deslocado */
+  #screen-how.active {
+    width: 100%;
+    min-width: 0;
+    align-items: stretch;
+    padding: 12px !important;
     overflow: hidden !important;
   }
 
-  /* Segunda tela: evita a coluna estreita/deslocada vista no celular. */
-  #screen-how.active {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 12px !important;
-    padding: 14px 10px 18px !important;
+  #screen-how .inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+    margin: 4px 0 12px !important;
+    padding: 0;
   }
-  #screen-how .inner,
-  #screen-how .paper,
+
   #screen-how .paper.rules,
   #screen-how .bottom-action,
   #screen-how .callout {
-    box-sizing: border-box !important;
+    position: relative;
+    left: auto;
+    right: auto;
+    transform: none;
     width: 100% !important;
     max-width: 100% !important;
-    min-width: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    transform: none !important;
-  }
-  #screen-how .inner { display: block !important; }
-  #screen-how .paper.rules { padding: 14px !important; }
-  #screen-how .how-mascot { display: none !important; }
-
-  #screen-quiz.active,
-  #screen-feedback.active {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    padding: 12px 10px 18px !important;
-  }
-  #screen-quiz .inner,
-  #screen-feedback .inner,
-  #screen-feedback .scoreboard-wrap,
-  #screen-feedback .scoreboard-card,
-  #screen-feedback .prize-instructions {
-    box-sizing: border-box !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
+    min-width: 0;
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
 
-  /* O aviso inicial também cabe na largura estreita do telefone. */
-  #screen-splash {
-    box-sizing: border-box !important;
-    width: 100% !important;
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
-    padding: 16px !important;
-    overflow-y: auto !important;
+  #screen-how .paper.rules {
+    overflow-wrap: anywhere;
   }
-  #screen-splash .splash-card {
-    box-sizing: border-box !important;
-    width: 100% !important;
-    max-width: 460px !important;
-    margin: auto !important;
+
+  #screen-how .paper.rules .rule {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  #screen-how .paper.rules .rule > * {
+    min-width: 0;
   }
 }
 
-@media (max-width: 380px) {
-  .shell { padding-left: 7px !important; padding-right: 7px !important; }
-  #screen-home.active, #screen-how.active, #screen-quiz.active, #screen-feedback.active {
-    padding-left: 8px !important; padding-right: 8px !important;
+/* GAME OVER: usar exclusivamente o cenário de derrota */
+.app.game-over-mode #screen-feedback {
+    background-image: url("assets/background-gameover.png") !important;
+    background-position: center center !important;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+}
+
+/* Remover imagens de fundo das camadas internas */
+.app.game-over-mode #screen-feedback .scoreboard-card,
+.app.game-over-mode #screen-feedback .scoreboard-brand-scene,
+.app.game-over-mode #screen-feedback .scoreboard-content,
+.app.game-over-mode #screen-feedback .scoreboard-inner {
+    background-image: none !important;
+}
+
+/* Ocultar elementos exclusivos da tela de premiação */
+.app.game-over-mode #screen-feedback #scoreboard-award-gold,
+.app.game-over-mode #screen-feedback #scoreboard-award-silver,
+.app.game-over-mode #screen-feedback #scoreboard-award-bronze,
+.app.game-over-mode #screen-feedback #scoreboard-stars,
+.app.game-over-mode #screen-feedback #scoreboard-brand-scene {
+    display: none !important;
+}
+
+/* Exibir somente a arte de Game Over, se ela fizer parte do layout */
+.app.game-over-mode #screen-feedback #scoreboard-gameover-art {
+    display: block !important;
+}
+
+
+/* GAME OVER: impedir qualquer cenário de premiação */
+.app.game-over-mode #screen-feedback:has(#final-scoreboard:not([hidden])) {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Usar somente o cenário específico de derrota */
+.app.game-over-mode {
+  background: url("assets/background-gameover.png") center center / cover no-repeat fixed !important;
+}
+
+/* ==================================================
+   OTIMIZAÇÃO PROPORCIONAL BASE 390x844 (MOBILE PORTRAIT)
+   Garante encaixe perfeito sem scroll na Home, adaptando ao espaço.
+   ================================================== */
+@media (max-width: 760px) and (orientation: portrait) {
+  
+  /* 1. TRAVA A TELA E O APP (Evita o scroll e o efeito de "pular") */
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden !important; 
   }
-  #screen-how .paper.rules { padding: 11px !important; }
+
+  .app, .shell {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  .shell {
+    padding: clamp(8px, 1.5svh, 14px) clamp(12px, 4vw, 20px) clamp(8px, 1.5svh, 12px) !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 2. TELA INICIAL: DISTRIBUIÇÃO FLEXÍVEL SEM CORTES */
+  #screen-home.active {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between; /* Distribui topo, meio e rodapé */
+    height: 100% !important;
+    padding: clamp(10px, 2svh, 16px) !important;
+    overflow: hidden !important; /* Proíbe o scroll na home */
+  }
+
+  #screen-home .home-copy {
+    flex: 0 0 auto;
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Ajuste de Tipografia Proporcional à Altura (svh) e Largura (vw) */
+  #screen-home .tag {
+    align-self: flex-start;
+    font-size: clamp(9px, 2.5vw, 11px);
+    padding: 4px 8px;
+  }
+
+  #screen-home h1 {
+    font-size: clamp(32px, 10vw, 42px) !important;
+    margin: clamp(8px, 1.5svh, 16px) 0 0 !important;
+    line-height: 0.9 !important;
+  }
+
+  #screen-home .theme {
+    align-self: flex-start;
+    font-size: clamp(14px, 4vw, 18px) !important;
+    padding: clamp(6px, 1svh, 10px) clamp(10px, 3vw, 14px) !important;
+    margin-top: 1.5svh !important;
+  }
+
+  #screen-home .lead {
+    font-size: clamp(12px, 3.5vw, 14px) !important;
+    margin: clamp(10px, 2svh, 18px) 0 !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Painel de Identificação mais compacto verticalmente */
+  #screen-home .player-fields {
+    margin-top: 0 !important;
+    padding: clamp(12px, 2svh, 16px) clamp(12px, 3.5vw, 18px) !important;
+    gap: clamp(6px, 1svh, 10px) !important;
+  }
+
+  #screen-home .player-fields label {
+    font-size: 10px !important;
+    margin: 0 !important;
+  }
+
+  #screen-home .player-fields input {
+    min-height: max(42px, 5.5svh) !important; /* Garante área de toque, mas não cresce demais */
+    padding: 8px 12px !important;
+    font-size: 15px !important;
+  }
+
+  #screen-home .big-btn {
+    min-height: max(48px, 6.5svh) !important;
+    margin-top: clamp(4px, 1svh, 10px) !important;
+    font-size: clamp(18px, 5.5vw, 22px) !important;
+  }
+
+  #screen-home .small-note { display: none !important; } /* Oculta para poupar espaço */
+
+  /* 3. O SEGREDO: ASSET DOS POTES DINÂMICO */
+  /* Removemos o absolute e deixamos ele preencher o espaço que sobra (flex) */
+  #screen-home .potekg-asset {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    margin: clamp(5px, 1svh, 15px) auto 0 !important;
+    width: auto !important;
+    max-width: 90% !important;
+    height: auto !important;
+    max-height: 22svh !important; /* Limita a altura a 22% da tela */
+    object-fit: contain;
+    flex: 1 1 auto; /* Permite que cresça/encolha conforme a tela */
+    z-index: 5;
+  }
+
+  /* 4. BARRA DE RESULTADO ANTERIOR */
+  /* Remove o posicionamento absoluto que sobrepunha os potes e o rodapé */
+  #screen-home #previous-result {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    margin: clamp(5px, 1svh, 10px) auto 0 !important;
+    width: 100% !important;
+    flex: 0 0 auto;
+    padding: clamp(6px, 1svh, 10px) !important;
+  }
+
+  #screen-home .scene { display: none !important; } /* Limpa artefatos ocultos */
+
+  /* ==================================================
+     TELAS INTERNAS: LIBERA SCROLL SE NECESSÁRIO
+     ================================================== */
+  #screen-how.active, 
+  #screen-quiz.active, 
+  #screen-feedback.active {
+    overflow-y: auto !important; /* Libera o scroll apenas nas telas de jogo/instruções */
+    padding: clamp(10px, 2svh, 16px) !important;
+    height: 100% !important;
+    max-height: none !important;
+  }
+
+  /* Compactação do Placar Final para evitar muito scroll */
+  #screen-feedback .scoreboard-card {
+    padding: clamp(12px, 2.5svh, 20px) clamp(10px, 3vw, 16px) !important;
+  }
+  #screen-feedback .scoreboard-status { font-size: clamp(26px, 8vw, 36px) !important; margin-top: 1svh !important; }
+  #screen-feedback .scoreboard-medal img { max-height: clamp(80px, 12svh, 110px) !important; }
+  #screen-feedback .scoreboard-brand-scene { height: max(55px, 7svh) !important; }
+  #screen-feedback .potekg-final-asset { max-height: max(50px, 6svh) !important; }
+  #screen-feedback .prize-instructions { padding: 8px !important; margin: 1svh 0 !important; }
+  
+  .footer { margin-top: auto !important; padding-top: clamp(6px, 1svh, 12px) !important; }
 }
 
 </style>
  </head>
  <body>
   <div class="app">
-
-    <!-- TELA PRE-MAIN MENU (TELA CHEIA & INTRO) -->
-    <section id="screen-splash" class="splash-screen">
-      <div class="splash-card">
-        <div class="splash-header">
-          <span class="splash-spark">✦</span>
-          <span class="splash-spark">★</span>
-          <span class="splash-spark">✦</span>
-        </div>
-        <h1 class="splash-title">O SHOW VAI COMEÇAR!</h1>
-        <p class="splash-subtitle">Prepare-se para o Desafio da Qualidade Skala Brasil</p>
-        
-        <div class="splash-instruction">
-          <div class="rotate-phone-icon">📱↻</div>
-          <p>O jogo se adapta à tela do seu celular. Toque abaixo para começar!</p>
-        </div>
-
-        <button type="button" id="btn-enter-app" class="splash-btn">
-          <span class="play-triangle"></span>
-          INICIAR MODO ARCADE
-        </button>
-      </div>
-    </section>
 
    <main class="shell">
     <!-- SETOR HTML 01 — CABEÇALHO: MARCA E NOME DO EVENTO -->
@@ -4158,7 +4327,7 @@ body {
        </div>
       </div>
       <!-- Asset personalizado dos três potes Skala com troféu -->
-      <img class="potekg-asset" src="assets/potekg.png" alt="Três potes Skala coloridos com troféu" / decoding="async">
+      <img class="potekg-asset" src="assets/potekg.png" alt="Três potes Skala coloridos com troféu" decoding="async" />
       <div class="platform">
       </div>
      </div>
@@ -4263,7 +4432,7 @@ body {
        QUALIDADE TAMBÉM É ATITUDE TODO DIA! ♥
       </div>
      </div>
-     <img class="how-mascot" src="assets/quality-mascot.png" alt="Mascote da Qualidade Skala Brasil" / decoding="async">
+     <img class="how-mascot" src="assets/quality-mascot.png" alt="Mascote da Qualidade Skala Brasil" decoding="async" />
     </section>
     <!-- TELA 3: PERGUNTA -->
     <!-- SETOR HTML 04 — TELA DE PERGUNTAS -->
@@ -4396,7 +4565,7 @@ body {
     class="sidekick-robot-asset"
     src="assets/robo-parabenizando.png"
     alt=""
-  / decoding="async">
+  decoding="async" />
 
   <span class="sidekick-spark">✨</span>
 </div>
@@ -4409,7 +4578,7 @@ body {
     class="sidekick-rocket-asset"
     src="assets/foguete.png"
     alt=""
-  / decoding="async">
+  decoding="async" />
 
   <span class="sidekick-spark">🎉</span>
 </div>
@@ -4427,14 +4596,14 @@ body {
        <div class="scoreboard-status" id="scoreboard-status">GAME OVER</div>
        <div class="scoreboard-medal" id="scoreboard-medal" aria-hidden="true">
         <span id="scoreboard-medal-emoji" hidden>🏆</span>
-        <img id="scoreboard-award-gold" src="assets/trophy-gold.png" alt="Troféu de ouro" hidden / decoding="async">
-        <img id="scoreboard-award-silver" src="assets/trophy-silver.png" alt="Troféu de prata" hidden / decoding="async">
-        <img id="scoreboard-award-bronze" src="assets/trophy-bronze.png" alt="Troféu de bronze" hidden / decoding="async">
-        <img id="scoreboard-gameover-art" src="assets/game-over.png" alt="Game over" hidden / decoding="async">
+        <img id="scoreboard-award-gold" src="assets/trophy-gold.png" alt="Troféu de ouro" hidden decoding="async" />
+        <img id="scoreboard-award-silver" src="assets/trophy-silver.png" alt="Troféu de prata" hidden decoding="async" />
+        <img id="scoreboard-award-bronze" src="assets/trophy-bronze.png" alt="Troféu de bronze" hidden decoding="async" />
+        <img id="scoreboard-gameover-art" src="assets/game-over.png" alt="Game over" hidden decoding="async" />
        </div>
        <div class="scoreboard-stars" id="scoreboard-stars" aria-label="Sem medalha">✦ ✦ ✦</div>
        <div class="scoreboard-brand-scene" aria-label="Produtos Skala e foguete impulsionando o desempenho">
-        <img class="potekg-final-asset" src="assets/potekg.png" alt="Três potes Skala coloridos com troféu" / decoding="async">
+        <img class="potekg-final-asset" src="assets/potekg.png" alt="Três potes Skala coloridos com troféu" decoding="async" />
         <span class="brand-product product-orange" title="Produto Skala">SKALA<br>BRASIL</span>
         <span class="brand-product product-pink" title="Produto Skala">SKALA<br>BRASIL</span>
         <span class="brand-product product-blue" title="Produto Skala">SKALA<br>BRASIL</span>
@@ -4588,48 +4757,7 @@ const QUESTIONS_PER_GAME = 10;
 // REGRA EDITÁVEL: abaixo de 8 acertos, o jogador perde.
 const MIN_CORRECT_TO_PASS = 8;
 
-/* ==================================================
-   🔥 CONTROLE DA TELA CHEIA E MODO LANDSCAPE
-   ================================================== */
-const splashScreen = document.getElementById("screen-splash");
-const btnEnterApp = document.getElementById("btn-enter-app");
-
-async function launchArcadeMode() {
-  const container = document.documentElement;
-
-  // 1. Tenta colocar o navegador em Tela Cheia
-  try {
-    if (container.requestFullscreen) {
-      await container.requestFullscreen();
-    } else if (container.webkitRequestFullscreen) { /* Suporte para Safari / iOS */
-      await container.webkitRequestFullscreen();
-    }
-  } catch (err) {
-    console.warn("Tela Cheia não suportada ou ignorada:", err);
-  }
-
-  // 2. Tenta travar a orientação da tela em Landscape (Funciona nativo no Android/Chrome)
-  try {
-    if (screen.orientation && screen.orientation.lock) {
-      await screen.orientation.lock("landscape");
-    }
-  } catch (err) {
-    console.warn("Trava de orientação não suportada nativamente neste dispositivo:", err);
-  }
-
-  // 3. Esconde a tela de abertura e mostra o jogo
-  if (splashScreen) {
-    splashScreen.hidden = true;
-  }
-  
-  // Opcional: Já coloca o cursor/foco no campo do primeiro nome para o usuário digitar
-  const firstNameInput = document.getElementById("player-first-name");
-  if (firstNameInput) firstNameInput.focus({ preventScroll: true });
-}
-
-if (btnEnterApp) {
-  btnEnterApp.addEventListener("click", launchArcadeMode);
-}
+/* O jogo inicia diretamente na tela de identificação; sem tela intermediária, fullscreen ou bloqueio de orientação. */
 
 let index = 0;
 let score = 0;
