@@ -1572,7 +1572,7 @@ html, body { width:100%; height:100%; overflow:hidden; }
 #screen-feedback .device-instructions { display:grid; grid-template-columns:1fr 1fr; gap:7px 12px; }
 #screen-feedback .device-tip { display:grid; grid-template-columns:28px 1fr; gap:7px; align-items:start; font-size:11px; line-height:1.3; padding:6px 7px; background:#f1edff; border:1px solid #d5c9ff; }
 #screen-feedback .device-icon { font-size:20px; line-height:1.2; }
-#screen-feedback .device-tip b { color:#32186b; }
+#screen-feedback .device-tip b { color:#6055fc; }
 #screen-feedback .instruction-intro, #screen-feedback .prize-step { font-size:11px; line-height:1.3; margin:5px 0 7px; }
 #screen-feedback .prize-instructions > strong { font-size:12px; margin-bottom:5px; }
 #screen-feedback .prize-instructions small { font-size:10px; }
@@ -5192,6 +5192,238 @@ html body .app.game-over-mode #screen-feedback {
     outline-offset: 4px;
 }
 
+
+/* =========================================
+   PREMIAÇÃO — RESPONSIVIDADE DESKTOP
+   Mantém o layout vertical do celular no PC
+   ========================================= */
+
+@media (min-width: 600px) {
+
+  /* Centraliza a aplicação sem esticar o conteúdo */
+  .app {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+  }
+
+  /* Mantém as telas em formato vertical */
+  .app .screen {
+    width: min(100%, 390px);
+    max-width: 390px;
+    min-height: 0;
+    height: auto;
+    margin-inline: auto;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  /* Premiação: não comprimir nem cortar o conteúdo */
+  .app #screen-scoreboard,
+  .app #screen-scoreboard.screen {
+    width: min(100%, 390px);
+    max-width: 390px;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    box-sizing: border-box;
+    padding-bottom: 24px;
+  }
+
+  /* Cartão da premiação */
+  .app #scoreboard-card {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  /* Instruções de retirada do brinde */
+  .app #prize-instructions,
+  .app .prize-instructions {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    box-sizing: border-box;
+  }
+
+  /* Imagens preservam suas proporções */
+  .app #scoreboard-card img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Texto e quadros podem crescer conforme o conteúdo */
+  .app #scoreboard-card p,
+  .app #scoreboard-card h1,
+  .app #scoreboard-card h2,
+  .app #scoreboard-card h3 {
+    overflow-wrap: anywhere;
+  }
+
+  /* Botões não devem ser cortados */
+  .app #scoreboard-card button {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Evita que o conteúdo seja recortado pelo viewport */
+  html,
+  body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+/* Telas estreitas: mantém o comportamento móvel */
+@media (max-width: 599px) {
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+/* =========================================
+   CORREÇÃO GLOBAL — TEXTOS ROXOS ILEGÍVEIS
+   ========================================= */
+
+/* Títulos e textos dos quadros de instruções */
+.prize-instructions,
+.prize-instructions p,
+.prize-instructions span,
+.prize-instructions strong,
+.prize-instructions b,
+.prize-instructions li,
+.prize-instructions div {
+    color: #FFFFFF;
+}
+
+/* Títulos das plataformas */
+.prize-instructions .device-title,
+.prize-instructions .device-name,
+.prize-instructions .device-label {
+    color: #FFE95C !important;
+    font-weight: 800;
+}
+
+/* Texto de atalhos e instruções */
+.prize-instructions .device-tip,
+.prize-instructions .device-description,
+.prize-instructions .device-instructions {
+    color: #FFFFFF !important;
+}
+
+/* Links dentro dos quadros */
+.prize-instructions a {
+    color: #7DEBFF !important;
+}
+
+/* Garantir contraste nos cartões internos */
+.prize-instructions .device-tip,
+.prize-instructions .device-card,
+.prize-instructions .device-instructions {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+}
+
+/* TELA DE PREMIAÇÃO — liberar scroll vertical */
+#screen-feedback:has(#scoreboard-card.gold),
+#screen-feedback:has(#scoreboard-card.silver),
+#screen-feedback:has(#scoreboard-card.bronze),
+#screen-feedback:has(#scoreboard-card.complete) {
+    height: auto !important;
+    min-height: 100dvh;
+    max-height: none !important;
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
+}
+
+#screen-feedback:has(#scoreboard-card.gold) .scoreboard-card,
+#screen-feedback:has(#scoreboard-card.silver) .scoreboard-card,
+#screen-feedback:has(#scoreboard-card.bronze) .scoreboard-card,
+#screen-feedback:has(#scoreboard-card.complete) .scoreboard-card {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    overflow-y: auto !important;
+}
+
+/* =====================================================
+   TELA FINAL — PREMIAÇÃO
+   Liberar scroll vertical sem alterar as outras telas
+   ===================================================== */
+
+.app #screen-feedback {
+    height: auto !important;
+    min-height: 100% !important;
+    max-height: none !important;
+
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+
+    flex: 0 0 auto !important;
+    align-items: stretch;
+}
+
+/* Liberar o conteúdo interno da tela */
+.app #screen-feedback .screen-content,
+.app #screen-feedback .screen-inner,
+.app #screen-feedback .scoreboard-card,
+.app #screen-feedback #scoreboard-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    overflow: visible !important;
+}
+
+/* Cartão de premiação e instruções */
+.app #screen-feedback #scoreboard-card,
+.app #screen-feedback .prize-instructions {
+    flex-shrink: 0 !important;
+}
+
+/* Permitir que a página inteira role */
+html:has(.app #screen-feedback.active),
+body:has(.app #screen-feedback.active) {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+/* Permitir rolagem com a rodinha do mouse */
+.app:has(#screen-feedback.active),
+.app:has(#screen-feedback:not([hidden])) {
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+/* Evitar que o quadro de instruções seja cortado */
+.app #screen-feedback .device-instructions {
+    max-height: none !important;
+    overflow: visible !important;
+}
+
 </style>
  </head>
  <body>
@@ -5975,7 +6207,7 @@ function openDevScoreboard(devScore) {
         $("scoreboard-stars").setAttribute("aria-label", "Sem medalha");
         $("scoreboard-headline").textContent = "TOO BAD! TENTE DE NOVO!";
         $("scoreboard-message").textContent = "Simulação de teste: pontuação abaixo de 1000 representa menos de 10 acertos.";
-        $("prize-instructions").hidden = true;
+        $("prize-instructions").hidden = false;
     } else {
         $("scoreboard-status").textContent = perfectGame ? (medal ? "PARABÉNS! · DEV TEST" : "DESAFIO COMPLETO · DEV TEST") : "META MÍNIMA ATINGIDA · DEV TEST";
         setScoreboardAward(medal || "complete");
@@ -5983,7 +6215,7 @@ function openDevScoreboard(devScore) {
         $("scoreboard-stars").setAttribute("aria-label", medal ? `Medalha ${medal}` : "Desafio concluído");
         $("scoreboard-headline").textContent = medal === "gold" ? "OURO! VOCÊ É LENDÁRIO!" : medal === "silver" ? "PRATA! MANDOU MUITO BEM!" : medal === "bronze" ? "BRONZE! VOCÊ CONSEGUIU!" : perfectGame ? "10 DE 10! MISSÃO CUMPRIDA!" : "VOCÊ ATINGIU A META MÍNIMA!";
         $("scoreboard-message").textContent = "MODO DEV: placar de teste. A simulação não comprova participação real nem libera automaticamente um brinde.";
-        $("prize-instructions").hidden = true;
+        $("prize-instructions").hidden = false;
     }
 
     $("scoreboard-retry").textContent = "SAIR DO TESTE ↻";
