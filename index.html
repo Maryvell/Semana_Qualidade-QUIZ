@@ -5365,64 +5365,7 @@ body {
     overflow-y: auto !important;
 }
 
-/* =====================================================
-   TELA FINAL — PREMIAÇÃO
-   Liberar scroll vertical sem alterar as outras telas
-   ===================================================== */
 
-.app #screen-feedback {
-    height: auto !important;
-    min-height: 100% !important;
-    max-height: none !important;
-
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
-
-    flex: 0 0 auto !important;
-    align-items: stretch;
-}
-
-/* Liberar o conteúdo interno da tela */
-.app #screen-feedback .screen-content,
-.app #screen-feedback .screen-inner,
-.app #screen-feedback .scoreboard-card,
-.app #screen-feedback #scoreboard-card {
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-
-    overflow: visible !important;
-}
-
-/* Cartão de premiação e instruções */
-.app #screen-feedback #scoreboard-card,
-.app #screen-feedback .prize-instructions {
-    flex-shrink: 0 !important;
-}
-
-/* Permitir que a página inteira role */
-html:has(.app #screen-feedback.active),
-body:has(.app #screen-feedback.active) {
-    height: auto !important;
-    min-height: 100% !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-}
-
-/* Permitir rolagem com a rodinha do mouse */
-.app:has(#screen-feedback.active),
-.app:has(#screen-feedback:not([hidden])) {
-    height: auto !important;
-    min-height: 100vh !important;
-    max-height: none !important;
-    overflow: visible !important;
-}
-
-/* Evitar que o quadro de instruções seja cortado */
-.app #screen-feedback .device-instructions {
-    max-height: none !important;
-    overflow: visible !important;
-}
 
 </style>
  </head>
