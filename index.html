@@ -3877,9 +3877,9 @@ body { min-height: 100dvh; }
 /* Painéis gerais: preenchimento com apenas 5% de opacidade para preservar os cenários. */
 #screen-home .player-fields,
 #screen-how .paper.rules {
-  background: rgba(15, 5, 42, 0.05) !important;
+  background: rgba(15, 5, 42, 0.55) !important;
   -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(0px);
   border-color: rgba(255, 22, 128, 0.9);
   box-shadow: 0 0 0 2px rgba(117, 231, 255, 0.45), 0 0 18px rgba(255, 22, 128, 0.24);
 }
@@ -3914,7 +3914,7 @@ body { min-height: 100dvh; }
 #screen-feedback .feedback-banner,
 #screen-feedback .stats,
 #screen-feedback .stat {
-  background-color: rgba(17, 6, 44, 0.08) !important;
+  background-color: rgba(17, 6, 44, 0.78) !important;
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
 }
@@ -3924,7 +3924,7 @@ body { min-height: 100dvh; }
   border-radius: 14px;
 }
 #screen-feedback .scoreboard-card.failed {
-  background-color: rgba(10, 4, 25, 0.18) !important;
+  background-color: rgba(10, 4, 25, 0.78) !important;
 }
 /* Ajustes compactos para celulares estreitos. */
 @media (max-width: 420px) {
@@ -4210,6 +4210,988 @@ body { min-height: 100dvh; }
   .footer { margin-top: auto !important; padding-top: clamp(6px, 1svh, 12px) !important; }
 }
 
+/* =========================================================
+   CORREÇÕES: SCROLL, FEEDBACK E PROPORÇÃO NO PC
+   ========================================================= */
+
+/* 1. LIBERAR O SCROLL (Permite rolar a tela se o conteúdo for grande) */
+html, body {
+    overflow-y: auto !important; /* Força a liberação da rolagem vertical */
+    height: auto !important;
+    min-height: 100vh !important;
+}
+.app, .shell, .screen {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: visible !important;
+}
+
+/* 2. CONTROLE DE BACKGROUND DO FEEDBACK */
+/* Fundo limpo para a resposta (Certo/Errado) */
+#screen-feedback {
+    background-image: linear-gradient(180deg, rgba(10,4,39,.20), rgba(10,4,39,.60)), url("assets/background-question.png") !important;
+    background-size: cover !important;
+    background-position: center top !important;
+}
+/* Fundo festivo APENAS quando for a tela de pontuação final */
+#screen-feedback:has(#final-scoreboard:not([hidden])) {
+    background-image: linear-gradient(180deg, rgba(10,4,39,.12), rgba(10,4,39,.48)), url("assets/background-final.png") !important;
+}
+
+
+
+/* PC — AMPLIAR A LARGURA DA TELA INICIAL */
+@media (min-width: 761px) {
+  #screen-home .inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  #screen-home .player-fields {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  #screen-home .player-fields input,
+  #screen-home .player-fields .big-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+}
+
+/* ==================================================
+   CORREÇÃO DE LARGURA — TELA DE INSTRUÇÕES NO PC
+   Usa as classes reais do HTML: .inner, .paper.rules e .rule
+   ================================================== */
+@media (min-width: 761px) {
+    #screen-how.active {
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+        align-items: stretch !important;
+    }
+
+    #screen-how .inner {
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+        margin: 12px auto !important;
+    }
+
+    #screen-how .paper.rules,
+    #screen-how .bottom-action {
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    #screen-how .rule {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    #screen-how .rule > div:last-child {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    #screen-how .blue-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+
+/* =====================================================
+   DESKTOP — HOME E IDENTIFICAÇÃO EM LARGURA TOTAL
+   Não altera o layout de celulares.
+   ===================================================== */
+
+@media (min-width: 761px) {
+
+    /* Aproveita toda a largura da janela */
+    .app {
+        width: 100%;
+        max-width: none;
+    }
+
+    .shell {
+        width: 100% !important;
+        max-width: none !important;
+        box-sizing: border-box;
+        padding-left: clamp(24px, 4vw, 64px);
+        padding-right: clamp(24px, 4vw, 64px);
+    }
+
+    /* Tela inicial ocupa toda a largura */
+    #screen-home {
+        position: relative;
+        width: 50% !important;
+        max-width: none !important;
+        box-sizing: border-box;
+    }
+
+    /* Texto da apresentação ocupa a largura disponível */
+    #screen-home .home-copy {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0;
+        box-sizing: border-box;
+        z-index: 5;
+    }
+
+    /* Texto introdutório sem limite artificial de largura */
+    #screen-home .lead {
+        width: 100% !important;
+        max-width: none !important;
+        box-sizing: border-box;
+    }
+
+    /* Quadro de identificação ocupa toda a largura */
+    #screen-home .player-fields {
+        width: 100% !important;
+        max-width: none !important;
+        box-sizing: border-box;
+    }
+
+    /* Campos e botão acompanham a largura do quadro */
+    #screen-home .player-fields input,
+    #screen-home .player-fields #start-btn {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* Mantém o cenário como fundo, sem reservar uma coluna */
+    #screen-home .scene {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    #screen-home .home-copy {
+        position: relative;
+        z-index: 5;
+    }
+}
+
+/* =====================================================
+   DESKTOP — TODAS AS TELAS COM 50% DE LARGURA,
+   CENTRALIZADAS HORIZONTALMENTE
+   ===================================================== */
+
+@media (min-width: 761px) {
+
+    html,
+    body,
+    .app {
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    .shell {
+        width: 100% !important;
+        max-width: none !important;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Aplica a largura de 50% a todas as telas */
+    .screen,
+    #screen-home,
+    #screen-how,
+    #screen-quiz,
+    #screen-feedback {
+        width: 30% !important;
+        max-width: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        align-self: center !important;
+        box-sizing: border-box;
+    }
+
+    /* O conteúdo interno acompanha a largura da tela */
+    .screen .inner,
+    #screen-home .inner,
+    #screen-how .inner,
+    #screen-quiz .inner,
+    #screen-feedback .inner {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+}
+
+
+/* ==========================================
+   DESKTOP — TELAS CENTRALIZADAS
+   Preserva a navegação original do aplicativo
+   ========================================== */
+
+@media (min-width: 761px) {
+
+    .shell {
+        width: 100% !important;
+        max-width: none !important;
+        box-sizing: border-box;
+        align-items: center;
+    }
+
+    /* Todas as telas ocupam 50% e ficam centralizadas.
+       Não alterar display: ele controla a navegação. */
+    .screen {
+        width: 50% !important;
+        max-width: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        align-self: center !important;
+        box-sizing: border-box;
+    }
+
+    /* Conteúdo interno acompanha a largura da tela */
+    .screen .inner {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    /* Corrige o quadro de instruções */
+    #screen-how .paper.rules {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        transform: none !important;
+        box-sizing: border-box;
+    }
+
+    /* Botão acompanha a largura interna */
+    #screen-how .bottom-action {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        transform: none !important;
+        box-sizing: border-box;
+    }
+}
+
+/* PC — TODAS AS TELAS COM 50% DA JANELA, CENTRALIZADAS */
+@media (min-width: 761px) {
+
+    .shell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100% !important;
+        max-width: none !important;
+        box-sizing: border-box;
+    }
+
+    #screen-home,
+    #screen-home.active,
+    #screen-how,
+    #screen-how.active,
+    #screen-quiz,
+    #screen-quiz.active,
+    #screen-feedback,
+    #screen-feedback.active {
+        width: 30% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+        box-sizing: border-box;
+    }
+
+    /* Conteúdo interno acompanha a tela */
+    #screen-home .inner,
+    #screen-how .inner,
+    #screen-quiz .inner,
+    #screen-feedback .inner {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+    }
+}
+
+/* =====================================================
+   CORREÇÃO FINAL — CONTRASTE DO FEEDBACK E GAME OVER
+   ===================================================== */
+
+/* 1. FEEDBACK: painel Pontos / Acertos */
+#screen-feedback #question-feedback-panel .stats {
+    background: #ffffff !important;
+    color: #21153d !important;
+    opacity: 1 !important;
+    filter: none !important;
+    text-shadow: none !important;
+    box-shadow: 4px 4px 0 #09051d !important;
+    border: 4px solid #ff1680 !important;
+    isolation: isolate;
+}
+
+#screen-feedback #question-feedback-panel .stats .stat {
+    background: #ffffff !important;
+    color: #21153d !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+}
+
+#screen-feedback #question-feedback-panel .stat-label {
+    color: #49356b !important;
+    font-weight: 800 !important;
+    opacity: 1 !important;
+}
+
+#screen-feedback #question-feedback-panel .stat-value {
+    color: #21153d !important;
+    font-weight: 1000 !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+}
+
+/* 2. GAME OVER: cartão com largura limitada no PC */
+@media (min-width: 761px) {
+
+    .app.game-over-mode #screen-feedback {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-inline: auto !important;
+        box-sizing: border-box;
+    }
+
+    .app.game-over-mode #screen-feedback #final-scoreboard {
+        width: 100% !important;
+        max-width: none !important;
+        margin-inline: auto !important;
+        box-sizing: border-box;
+    }
+
+    .app.game-over-mode #screen-feedback .scoreboard-card.failed {
+        width: 50vw !important;
+        max-width: 760px !important;
+        min-width: 0 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box;
+    }
+}
+
+/* 3. Evita que textos do placar fiquem apagados */
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-stats {
+    background: #ffffff !important;
+    color: #21153d !important;
+    opacity: 1 !important;
+}
+
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-stats span,
+.app.game-over-mode #screen-feedback .scoreboard-card.failed .scoreboard-stats strong {
+    color: #21153d !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+}
+
+/* 4. Celular: não aplicar a largura de 50vw */
+@media (max-width: 760px) {
+    .app.game-over-mode #screen-feedback .scoreboard-card.failed {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+
+
+/* =====================================================
+   DESKTOP PHONE MODE — TODAS AS TELAS EM PROPORÇÃO MOBILE
+   O fundo externo continua preenchendo o monitor; o app
+   fica centralizado em uma área vertical de até 430 px.
+   ===================================================== */
+@media (min-width: 761px) {
+  html, body {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .app {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  .shell {
+    width: min(430px, 100vw) !important;
+    max-width: 430px !important;
+    min-width: 0 !important;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0 !important;
+    margin: 0 auto !important;
+    padding: 8px 12px 8px !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: hidden !important;
+  }
+
+  /* Todas as telas usam a mesma largura do frame de celular.
+     Não definir display: a classe .active controla a navegação. */
+  .screen,
+  .screen.active,
+  #screen-home,
+  #screen-how,
+  #screen-quiz,
+  #screen-feedback {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none;
+    box-sizing: border-box;
+  }
+
+  .screen { flex: 1 1 0; min-height: 0; overflow: hidden; }
+  .screen.active { min-height: 0; }
+  .inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
+  }
+
+  /* Início: replica a composição vertical usada no celular. */
+  #screen-home {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 14px 0 8px;
+    overflow: hidden;
+  }
+  #screen-home .home-copy { flex: 0 0 auto; width: 100%; min-width: 0; }
+  #screen-home .tag { max-width: 100%; font-size: 11px; }
+  #screen-home h1 {
+    font-size: clamp(34px, 9vw, 40px);
+    line-height: .95;
+    letter-spacing: -1px;
+    margin: 12px 0;
+    overflow-wrap: anywhere;
+  }
+  #screen-home .theme { max-width: 100%; font-size: 18px; line-height: 1.05; }
+  #screen-home .lead { font-size: 15px; line-height: 1.35; margin: 10px 0; }
+  #screen-home .player-fields { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+  #screen-home .player-fields label { font-size: 10px; margin-top: 3px; }
+  #screen-home .player-fields input { width: 100%; min-width: 0; min-height: 42px; font-size: 14px; box-sizing: border-box; }
+  #screen-home .big-btn { width: 100%; min-height: 52px; margin-top: 8px; font-size: 22px; }
+  #screen-home .small-note { font-size: 10px; line-height: 1.35; margin-top: 8px; }
+  #screen-home .scene {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    height: clamp(150px, 24vh, 230px);
+    min-height: 0;
+    flex: 0 0 auto;
+    margin: 10px auto 0;
+    opacity: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  #screen-home .scene .jars { bottom: 18px; transform: scale(.72); transform-origin: center bottom; }
+  #screen-home .scene .platform { bottom: 8px; }
+  #screen-home .scene .trophy { transform: scale(.78); transform-origin: center bottom; }
+  #screen-home .scene .robot { transform: scale(.68); transform-origin: center bottom; }
+  #previous-result {
+    position: relative;
+    inset: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 8px 0 0 !important;
+    padding: 8px !important;
+    font-size: 10px;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+  }
+  #previous-result-text { font-size: 10px !important; line-height: 1.3; }
+
+  /* Instruções: quadro e botão dentro da mesma largura do celular. */
+  #screen-how { flex-direction: column; align-items: stretch; }
+  #screen-how .inner { width: 100% !important; max-width: 100% !important; margin: 6px auto 12px !important; }
+  #screen-how .paper.rules,
+  #screen-how .paper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    box-sizing: border-box;
+  }
+  #screen-how .bottom-action,
+  #screen-how .bottom-action .blue-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    box-sizing: border-box;
+  }
+
+  /* Quiz: pergunta, alternativas e ação sem largura desktop. */
+  #screen-quiz { flex-direction: column; align-items: stretch; }
+  #screen-quiz .inner { width: 100% !important; max-width: 100% !important; margin: 6px auto 12px !important; }
+  #screen-quiz .paper { width: 100%; max-width: 100%; padding: 12px; box-sizing: border-box; }
+  #screen-quiz .question-text { font-size: clamp(17px, 4.8vw, 22px); line-height: 1.18; overflow-wrap: anywhere; }
+  #screen-quiz .answer { width: 100%; min-width: 0; font-size: 14px; line-height: 1.25; box-sizing: border-box; }
+  #screen-quiz .answer-label { min-width: 0; overflow-wrap: anywhere; }
+  #screen-quiz .quiz-action,
+  #screen-quiz .quiz-action button { width: 100%; max-width: 100%; box-sizing: border-box; }
+
+  /* Feedback de resposta: manter todo o conteúdo no frame mobile. */
+  #screen-feedback { flex-direction: column; align-items: stretch; overflow: hidden; min-height: 0; }
+  #screen-feedback .inner { width: 100% !important; max-width: 100% !important; height: auto; min-height: 0; overflow: hidden; margin: 4px auto !important; }
+  #screen-feedback .scoreboard-wrap { width: 100%; max-width: 100%; height: auto; overflow: hidden; padding: 4px 0 8px; box-sizing: border-box; }
+  #screen-feedback .scoreboard-card,
+  #screen-feedback .scoreboard-card.failed {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    max-height: calc(100dvh - 24px);
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
+  }
+  #screen-feedback .scoreboard-card.failed .scoreboard-stats { width: 100%; box-sizing: border-box; }
+  #screen-feedback .feedback-copy { max-width: 100%; overflow-wrap: anywhere; }
+  #screen-feedback .points { max-width: 100%; box-sizing: border-box; }
+}
+
+
+
+/* =====================================================
+   HOTFIX — DESKTOP USA A MESMA LARGURA DO FRAME MOBILE
+   Corrige regras antigas com #screen-*.active em 30%.
+   O cabeçalho e todas as telas ficam dentro dos mesmos 430px.
+   ===================================================== */
+@media (min-width: 761px) {
+  .app > .shell {
+    width: 430px !important;
+    max-width: 430px !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box !important;
+    align-items: stretch !important;
+  }
+
+  .app > .shell > #screen-home,
+  .app > .shell > #screen-home.active,
+  .app > .shell > #screen-how,
+  .app > .shell > #screen-how.active,
+  .app > .shell > #screen-quiz,
+  .app > .shell > #screen-quiz.active,
+  .app > .shell > #screen-feedback,
+  .app > .shell > #screen-feedback.active {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex-basis: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: auto !important;
+    right: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* A tela inicial precisa permanecer em composição vertical,
+     sem herdar o layout horizontal usado em desktop. */
+  .app > .shell > #screen-home,
+  .app > .shell > #screen-home.active {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  #screen-home .home-copy,
+  #screen-home .player-fields,
+  #screen-home .lead,
+  #screen-home .scene,
+  #screen-how .inner,
+  #screen-quiz .inner,
+  #screen-feedback .inner {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #screen-home .home-copy {
+    flex: 0 0 auto !important;
+  }
+
+  #screen-home .player-fields input,
+  #screen-home .player-fields button,
+  #screen-home .big-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+
+/* =====================================================
+   GAME OVER NO PC — MESMA ÁREA VERTICAL DAS OUTRAS TELAS
+   Mantém o fundo em tela cheia e ajusta o cartão ao frame
+   ===================================================== */
+@media (min-width: 761px) {
+  .app.game-over-mode {
+    width: 100% !important;
+    max-width: none !important;
+    overflow-x: hidden !important;
+  }
+
+  .app.game-over-mode .shell {
+    width: 100% !important;
+    max-width: none !important;
+    align-items: center !important;
+  }
+
+  .app.game-over-mode #screen-feedback,
+  .app.game-over-mode #screen-feedback.active {
+    width: min(430px, 100%) !important;
+    min-width: 0 !important;
+    max-width: 430px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .app.game-over-mode #screen-feedback .inner {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .app.game-over-mode #screen-feedback #final-scoreboard,
+  .app.game-over-mode #screen-feedback .scoreboard-wrap {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 10px 0 16px !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+
+  .app.game-over-mode #screen-feedback .scoreboard-card,
+  .app.game-over-mode #screen-feedback .scoreboard-card.failed {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .app.game-over-mode #screen-feedback .scoreboard-status,
+  .app.game-over-mode #screen-feedback .scoreboard-kicker,
+  .app.game-over-mode #screen-feedback .scoreboard-player,
+  .app.game-over-mode #screen-feedback .scoreboard-stats,
+  .app.game-over-mode #screen-feedback .scoreboard-note,
+  .app.game-over-mode #screen-feedback .scoreboard-footer,
+  .app.game-over-mode #screen-feedback .scoreboard-exit {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-wrap: anywhere !important;
+    box-sizing: border-box !important;
+  }
+
+  .app.game-over-mode #screen-feedback .scoreboard-stats {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+  }
+
+  .app.game-over-mode #screen-feedback .scoreboard-stats > div {
+    min-width: 0 !important;
+  }
+}
+
+/* Em telas estreitas, o cartão também respeita a largura disponível */
+@media (max-width: 760px) {
+  .app.game-over-mode #screen-feedback .scoreboard-wrap,
+  .app.game-over-mode #screen-feedback .scoreboard-card,
+  .app.game-over-mode #screen-feedback .scoreboard-card.failed {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+
+
+/* =====================================================
+   AJUSTES FINOS — game over, assets e menu de instruções
+   ===================================================== */
+
+/* PC: o fundo vermelho fica somente dentro do frame vertical,
+   em vez de ampliar a arte de Game Over para o monitor inteiro. */
+@media (min-width: 761px) {
+  .app.game-over-mode {
+    background:
+      radial-gradient(ellipse at 50% 15%, rgba(168,230,46,.10), transparent 28%),
+      linear-gradient(145deg, #18072c 0%, #281747 52%, #1a0b3b 100%) !important;
+    background-attachment: initial !important;
+  }
+
+  .app.game-over-mode:before {
+    opacity: .22 !important;
+  }
+
+  .app.game-over-mode #screen-feedback,
+  .app.game-over-mode #screen-feedback.active {
+    background-image:
+      linear-gradient(180deg, rgba(10,0,4,.12), rgba(10,0,4,.26)),
+      url("assets/background-gameover.png") !important;
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+  }
+
+  /* Reduz os elementos decorativos sem alterar o texto do placar. */
+  .app.game-over-mode #screen-feedback .scoreboard-sidekick {
+    width: 92px !important;
+    transform: scale(.72) !important;
+    transform-origin: top center !important;
+  }
+
+  .app.game-over-mode #screen-feedback .sidekick-robot-asset,
+  .app.game-over-mode #screen-feedback .sidekick-rocket-asset {
+    max-width: 72px !important;
+    max-height: 82px !important;
+    object-fit: contain !important;
+  }
+
+  .app.game-over-mode #screen-feedback .scoreboard-medal img,
+  .app.game-over-mode #screen-feedback .scoreboard-logo,
+  .app.game-over-mode #screen-feedback .scoreboard-mascot {
+    max-width: 100px !important;
+    max-height: 100px !important;
+    object-fit: contain !important;
+  }
+}
+
+/* Diminui os assets decorativos da tela final em celular também. */
+@media (max-width: 760px) {
+  #screen-feedback .scoreboard-sidekick {
+    width: 78px !important;
+    transform: scale(.72) !important;
+    transform-origin: top center !important;
+  }
+
+  #screen-feedback .sidekick-robot-asset,
+  #screen-feedback .sidekick-rocket-asset {
+    max-width: 62px !important;
+    max-height: 70px !important;
+    object-fit: contain !important;
+  }
+
+  #screen-feedback .scoreboard-medal img,
+  #screen-feedback .scoreboard-logo,
+  #screen-feedback .scoreboard-mascot {
+    max-width: 84px !important;
+    max-height: 84px !important;
+    object-fit: contain !important;
+  }
+
+  /* Instruções: mantém cada ícone em sua coluna e aproxima o texto
+     da esquerda sem deixá-lo sobrepor os ícones. */
+  #screen-how .paper.rules {
+    padding: 8px 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  #screen-how .paper.rules .rule {
+    display: grid !important;
+    grid-template-columns: 40px minmax(0, 1fr) !important;
+    align-items: center !important;
+    column-gap: 9px !important;
+    padding: 9px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  #screen-how .paper.rules .rule-icon {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    font-size: 21px !important;
+    box-sizing: border-box !important;
+  }
+
+  #screen-how .paper.rules .rule > div:last-child {
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 13px !important;
+    line-height: 1.28 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  #screen-how .paper.rules .rule strong {
+    overflow-wrap: anywhere !important;
+  }
+}
+
+/* =====================================================
+   GAME OVER — RESTAURAR O BACKGROUND
+   ===================================================== */
+
+html body .app.game-over-mode #screen-feedback:has(#final-scoreboard:not([hidden])) {
+    background-color: #210019 !important;
+
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(10, 0, 4, 0.12),
+            rgba(10, 0, 4, 0.25)
+        ),
+        url("./assets/background-gameover.png") !important;
+
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+}
+
+/* Mantém a tela de resultado com o fundo preenchido */
+html body .app.game-over-mode #screen-feedback {
+    position: relative !important;
+    overflow-x: hidden !important;
+    background-color: #210019 !important;
+}
+
+/* Desktop: simula a tela vertical de celular */
+@media (min-width: 761px) {
+    html body .app.game-over-mode #screen-feedback {
+        width: 100% !important;
+        max-width: 430px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box !important;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+}
+
+/* Descer o texto de apresentação */
+#screen-home p.lead {
+    margin-top: 14px !important;
+    margin-bottom: 2px !important;
+}
+
+/* Descer o quadro de identificação */
+#screen-home .player-fields {
+    margin-top: 132px !important;
+}
+
+/* Botão JOGAR com fundo translúcido */
+#screen-home #start-btn {
+    background: rgba(255, 227, 77, 0.48) !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+}
+
+/* Mantém o texto e o ícone nítidos */
+#screen-home #start-btn,
+#screen-home #start-btn .play-triangle {
+    color: #171044 !important;
+    opacity: 1 !important;
+}
+
+/* Botão JOGAR — estado normal */
+#screen-home #start-btn {
+    background: rgba(255, 227, 77, 0.65) !important;
+    border-color: #fff19a !important;
+    color: #171044 !important;
+    box-shadow: 0 4px 0 rgba(255, 0, 170, 0.45);
+    transition: background 180ms ease,
+                box-shadow 180ms ease,
+                filter 180ms ease;
+}
+
+/* Ao passar o mouse: amarelo 100% opaco e brilhante */
+#screen-home #start-btn:hover {
+    background: #ffe34d !important;
+    background-image: none !important;
+    opacity: 1 !important;
+    filter: brightness(1.08) !important;
+    box-shadow:
+        0 0 10px rgba(255, 227, 77, 0.85),
+        0 0 24px rgba(255, 227, 77, 0.55),
+        0 4px 0 #ff00a8 !important;
+}
+
+/* Mantém o ícone e o texto nítidos */
+#screen-home #start-btn:hover,
+#screen-home #start-btn:hover .play-triangle {
+    color: #171044 !important;
+    opacity: 1 !important;
+}
+
+/* Acessibilidade: foco pelo teclado */
+#screen-home #start-btn:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 4px;
+}
+
 </style>
  </head>
  <body>
@@ -4249,13 +5231,7 @@ body { min-height: 100dvh; }
        <br/>
        o desempenho
       </div>
-      <p class="lead">
-       Teste seus conhecimentos sobre
-       <strong>
-        Qualidade
-       </strong>
-       , avance de fase e descubra quantos pontos consegue conquistar!
-      </p>
+      
       <div class="player-fields">
        <label for="player-first-name">
         Identifique-se para jogar
@@ -4273,6 +5249,14 @@ body { min-height: 100dvh; }
         JOGAR
        </button>
       </div>
+<p class="lead">
+       Teste seus conhecimentos sobre
+       <strong>
+        Qualidade
+       </strong>
+       , avance de fase e descubra quantos pontos consegue conquistar!
+      </p>
+
       <p class="small-note">
        ¬_¬ 
       </p>
