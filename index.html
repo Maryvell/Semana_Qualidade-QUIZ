@@ -879,6 +879,61 @@ h1 span { display: block; color: var(--green); }
 .exit-confirm-actions button:active { transform: translateY(3px); box-shadow: none; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+/* ---------- 13.1 TELA "VOLTE MAIS TARDE" (FORA DO HORÁRIO) ---------- */
+html.is-closed, html.is-closed body { overflow: hidden; }
+.closed-screen {
+  position: absolute; inset: 0; z-index: 60;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: calc(24px + var(--safe-t)) var(--gutter) calc(24px + var(--safe-b));
+  background:
+    linear-gradient(180deg, rgba(18, 6, 46, .55), rgba(18, 6, 46, .88)),
+    url("assets/background-mainmenu.png") center top / cover no-repeat,
+    var(--bg);
+  text-align: center;
+  animation: fadeIn .25s ease-out;
+}
+.closed-screen[hidden] { display: none !important; }
+.closed-brand { margin-bottom: 52px; }
+.closed-card {
+  position: relative; width: 100%; max-width: 360px;
+  padding: 24px 18px 20px;
+  background: var(--glass);
+  border: 3px solid var(--pool); border-radius: 22px;
+  box-shadow: 0 7px 0 var(--blue), 0 0 32px rgba(23, 71, 255, .35);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.closed-icon {
+  width: 72px; height: 72px; margin: -60px auto 10px;
+  display: grid; place-items: center;
+  border-radius: 50%; border: 3px solid #fff;
+  background: var(--pink); font-size: 36px;
+  box-shadow: 0 0 22px rgba(255, 22, 135, .55);
+  animation: floatIcon 3.4s ease-in-out infinite;
+}
+.closed-title {
+  margin: 0; font-size: clamp(28px, 8.6vw, 36px); line-height: 1.05; font-weight: 900;
+  color: var(--yellow); text-shadow: 3px 3px 0 var(--purple), 0 0 18px rgba(255, 227, 77, .35);
+}
+.closed-lead { margin: 12px 0 8px; font-size: 15px; font-weight: 600; line-height: 1.4; color: #e9e2fa; }
+.closed-next {
+  display: inline-block; margin: 2px 0 6px; padding: 10px 18px;
+  background: var(--yellow); color: var(--ink);
+  border: 3px solid #fff8a0; border-radius: 14px;
+  box-shadow: 0 4px 0 #b77b00;
+  font-size: clamp(22px, 6.6vw, 28px); font-weight: 900; font-variant-numeric: tabular-nums;
+}
+.closed-sub { margin: 10px 0 0; font-size: 14px; font-weight: 700; color: #fff; }
+.closed-countdown {
+  margin: 14px 0 0; padding: 8px 10px;
+  border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(156, 235, 255, .3);
+  font-size: 13px; font-weight: 700; color: var(--pool);
+}
+.closed-all {
+  margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed rgba(255, 255, 255, .2);
+  font-size: 12px; line-height: 1.5; color: var(--muted);
+}
+.closed-all strong { color: #fff; }
+
 /* ---------- 14. CELULARES BAIXOS / ESTREITOS ---------- */
 @media (max-width: 599px) and (max-height: 760px) {
   h1 { font-size: clamp(34px, 10.5vw, 44px); margin-top: 10px; }
@@ -1385,6 +1440,20 @@ h1 span { display: block; color: var(--green); }
         </div>
       </div>
     </div>
+    <!-- SETOR HTML 06.1 — TELA "VOLTE MAIS TARDE" (fora do horário de funcionamento).
+         Os textos de horário são preenchidos pelo script a partir de HORARIO_FUNCIONAMENTO. -->
+    <div class="closed-screen" id="closed-screen" hidden role="dialog" aria-modal="true" aria-labelledby="closed-title">
+     <div class="brand closed-brand">SKALA<small>BRASIL</small></div>
+     <div class="closed-card">
+      <div class="closed-icon" aria-hidden="true">⏰</div>
+      <h2 class="closed-title" id="closed-title">VOLTE MAIS TARDE!</h2>
+      <p class="closed-lead">O desafio está fechado agora. Volte</p>
+      <div class="closed-next" id="closed-next">--:-- às --:--</div>
+      <p class="closed-sub">para participar da Semana da Qualidade.</p>
+      <p class="closed-countdown" id="closed-countdown"></p>
+      <p class="closed-all" id="closed-all"></p>
+     </div>
+    </div>
     <!-- SETOR HTML 07 — POPUP LEVEL UP -->
     <div id="level-up-popup" class="level-up-popup" role="status" aria-live="polite" aria-hidden="true">
      <div class="level-up-content">
@@ -1471,19 +1540,72 @@ h1 span { display: block; color: var(--green); }
    SETOR 15 — BANCO DE PERGUNTAS
    Edite os textos e respostas nesta seção.
    ================================================== */
-/* EDITE QUESTIONS: correct é o índice da resposta correta: 0=A, 1=B, 2=C, 3=D. Os textos abaixo são exemplos para teste. */
-/* BANCO DE PERGUNTAS: edite os textos e respostas aqui. */
+/* EDITE QUESTIONS: 8 temas · 46 perguntas · nível fácil (operação e produção).
+   A resposta CERTA está sempre na 1ª posição (correct: 0) para facilitar a edição.
+   O jogo sorteia as perguntas e embaralha as alternativas a cada partida.
+   Para adicionar: copie uma linha, troque o texto e mantenha a resposta certa em 1º. */
 const QUESTIONS = [
-{category:"BPF",question:"Qual atitude está de acordo com as Boas Práticas de Fabricação?",answers:["Usar adornos se estiverem limpos","Higienizar as mãos conforme o procedimento","Guardar objetos pessoais na linha","Usar o celular durante a operação"],correct:1},
-{category:"PROCESSOS",question:"Ao identificar uma condição fora do padrão, o que fazer?",answers:["Ignorar se a produção continuar","Corrigir sem comunicar ninguém","Comunicar o responsável e seguir o procedimento","Esperar o fim do turno"],correct:2},
-{category:"QUALIDADE",question:"Qual é o objetivo principal de um registro de qualidade?",answers:["Garantir rastreabilidade e evidência","Substituir a inspeção","Aumentar o tempo de processo","Evitar a comunicação entre turnos"],correct:0},
-{category:"BPF",question:"Antes de iniciar uma atividade na área produtiva, você deve:",answers:["Começar e preencher depois","Verificar as condições e cumprir os procedimentos aplicáveis","Usar qualquer utensílio disponível","Pular a verificação quando houver pressa"],correct:1},
-{category:"MELHORIA CONTÍNUA",question:"O que fazer ao perceber uma oportunidade de melhoria?",answers:["Não comentar para evitar mudanças","Alterar o processo por conta própria","Registrar ou comunicar a oportunidade conforme o fluxo definido","Esperar que outra pessoa perceba"],correct:2},
-{category:"PROCESSOS",question:"Por que é importante seguir a sequência definida no procedimento?",answers:["Para manter a execução padronizada e reduzir riscos","Apenas para cumprir formalidade","Para dispensar os registros","Porque elimina todas as inspeções"],correct:0},
-{category:"BPF",question:"Qual situação deve ser comunicada ao responsável pela qualidade?",answers:["Uma condição que possa comprometer o produto","Somente problemas no fim do mês","Apenas quando houver reclamação externa","Nenhuma, se a linha estiver rodando"],correct:0},
-{category:"RASTREABILIDADE",question:"A rastreabilidade ajuda a:",answers:["Eliminar a necessidade de identificação","Identificar histórico e informações relevantes do produto","Substituir todos os controles em processo","Evitar a análise de desvios"],correct:1},
-{category:"QUALIDADE",question:"Ao preencher um registro, a informação deve ser:",answers:["Aproximada, para ganhar tempo","Preenchida por outra pessoa sem validação","Legível, correta e conforme o procedimento","Deixada em branco para completar depois"],correct:2},
-{category:"MELHORIA CONTÍNUA",question:"Qual atitude contribui para impulsionar o desempenho?",answers:["Esconder desvios pequenos","Compartilhar problemas e contribuir com melhorias","Ignorar padrões quando há urgência","Repetir uma falha sem comunicar"],correct:1}
+/* ---------- LIMPEZA (6) ---------- */
+{category:"LIMPEZA",question:"Quando a linha de produção deve ser limpa?",answers:["Antes de começar e na troca de produto, conforme o procedimento", "Só no fim da semana", "Só quando estiver muito suja", "Só quando o auditor pedir"],correct:0},
+{category:"LIMPEZA",question:"Para que serve a etiqueta “LIMPO” no equipamento?",answers:["Mostrar que ele foi limpo e está pronto para uso", "Enfeitar o equipamento", "Mostrar que ele está quebrado", "Indicar quem é o dono da máquina"],correct:0},
+{category:"LIMPEZA",question:"Qual produto de limpeza devo usar no equipamento?",answers:["O indicado no procedimento de limpeza", "Qualquer um que estiver por perto", "Uma mistura de vários para limpar melhor", "Produto trazido de casa"],correct:0},
+{category:"LIMPEZA",question:"Terminei a limpeza do equipamento. E agora?",answers:["Registro a limpeza no formulário", "Não preciso anotar nada", "Anoto tudo só no fim do mês", "Peço para um colega assinar por mim"],correct:0},
+{category:"LIMPEZA",question:"Por que não pode sobrar creme do lote anterior no tanque?",answers:["Ele pode se misturar e contaminar o novo produto", "Ajuda a dar cheiro no próximo lote", "Deixa o tanque protegido", "Não faz diferença nenhuma"],correct:0},
+{category:"LIMPEZA",question:"Caiu produto no chão da área. O que fazer?",answers:["Sinalizar e limpar ou avisar quem faz a limpeza", "Passar por cima e seguir", "Esperar secar sozinho", "Cobrir com papelão"],correct:0},
+
+/* ---------- BPF (6) ---------- */
+{category:"BPF",question:"O que significa a sigla BPF?",answers:["Boas Práticas de Fabricação", "Boas Práticas de Faturamento", "Bom Padrão de Funcionários", "Base de Produção Final"],correct:0},
+{category:"BPF",question:"O que é proibido usar na área de produção?",answers:["Brincos, anéis, relógios e outros adornos", "Touca", "Uniforme limpo", "Calçado de segurança"],correct:0},
+{category:"BPF",question:"Por que usamos touca na produção?",answers:["Para não cair cabelo no produto", "Para combinar com o uniforme", "Para proteger do frio", "Só para a foto da equipe"],correct:0},
+{category:"BPF",question:"Quando devo lavar as mãos?",answers:["Ao entrar na área, após ir ao banheiro e sempre que sujar", "Só no fim do turno", "Só quando estiverem muito sujas", "Uma vez por semana"],correct:0},
+{category:"BPF",question:"Onde posso comer ou beber durante o trabalho?",answers:["Só no refeitório ou em áreas liberadas", "Na linha de produção", "Ao lado da máquina, com cuidado", "No almoxarifado"],correct:0},
+{category:"BPF",question:"Estou com um corte na mão. O que faço antes de ir para a linha?",answers:["Aviso o líder e protejo o machucado como orientado", "Escondo e trabalho normal", "Coloco qualquer fita adesiva", "Não falo nada para ninguém"],correct:0},
+
+/* ---------- CONTROLE DE PRAGAS (5) ---------- */
+{category:"CONTROLE DE PRAGAS",question:"Vi uma barata, rato ou inseto na fábrica. O que fazer?",answers:["Avisar o responsável na hora", "Fingir que não vi", "Tentar pegar com a mão", "Esperar ver de novo para avisar"],correct:0},
+{category:"CONTROLE DE PRAGAS",question:"Por que portas e janelas devem ficar fechadas?",answers:["Para evitar a entrada de pragas", "Para deixar a área mais quente", "Para ninguém ver o trabalho", "Não precisa, pode deixar aberto"],correct:0},
+{category:"CONTROLE DE PRAGAS",question:"As armadilhas e iscas espalhadas pela fábrica:",answers:["Não devem ser mexidas nem mudadas de lugar", "Podem ser movidas se atrapalharem", "Podem ser jogadas fora", "Servem de apoio para caixas"],correct:0},
+{category:"CONTROLE DE PRAGAS",question:"Deixar restos de comida na área de trabalho pode:",answers:["Atrair insetos e ratos", "Deixar o trabalho mais rápido", "Melhorar o produto", "Não causa problema nenhum"],correct:0},
+{category:"CONTROLE DE PRAGAS",question:"Quem aplica produtos contra pragas na fábrica?",answers:["Uma empresa especializada e autorizada", "Qualquer colaborador", "O operador, com veneno trazido de casa", "Ninguém, não é necessário"],correct:0},
+
+/* ---------- COSMETOVIGILÂNCIA (5) ---------- */
+{category:"COSMETOVIGILÂNCIA",question:"O que é cosmetovigilância?",answers:["Acompanhar se o produto causa algum problema em quem usa", "Vigiar a portaria da fábrica", "Controlar o estoque de matéria-prima", "Conferir o horário dos funcionários"],correct:0},
+{category:"COSMETOVIGILÂNCIA",question:"Uma cliente teve coceira no couro cabeludo depois de usar o produto. O que fazer?",answers:["Encaminhar o caso para o SAC e a Qualidade avaliarem", "Ignorar, isso é normal", "Dizer que a culpa é dela", "Apagar a mensagem"],correct:0},
+{category:"COSMETOVIGILÂNCIA",question:"Por que o número do lote ajuda na cosmetovigilância?",answers:["Mostra quando e como aquele produto foi feito", "Serve só para enfeitar a embalagem", "Mostra o preço do produto", "Indica a cor do produto"],correct:0},
+{category:"COSMETOVIGILÂNCIA",question:"Qual órgão do governo fiscaliza os cosméticos no Brasil?",answers:["ANVISA", "DETRAN", "INSS", "IBGE"],correct:0},
+{category:"COSMETOVIGILÂNCIA",question:"As reclamações de consumidores ajudam a fábrica a:",answers:["Encontrar e corrigir problemas no produto", "Aumentar o preço", "Nada, devem ser ignoradas", "Trocar o nome do produto"],correct:0},
+
+/* ---------- DOCUMENTOS E REGISTRO (6) ---------- */
+{category:"DOCUMENTOS E REGISTRO",question:"Com o que devo preencher um registro?",answers:["Com caneta, nunca com lápis", "Com lápis, para poder apagar", "Com marca-texto", "Com o que tiver à mão"],correct:0},
+{category:"DOCUMENTOS E REGISTRO",question:"Errei ao preencher um registro. Como corrigir?",answers:["Passo um risco, escrevo o certo, rubrico e coloco a data", "Uso corretivo", "Rasgo a folha", "Rabisco até não dar para ler"],correct:0},
+{category:"DOCUMENTOS E REGISTRO",question:"Quando devo preencher o registro de produção?",answers:["Na hora em que faço a atividade", "No fim do mês", "Só quando alguém pedir", "No dia seguinte, de memória"],correct:0},
+{category:"DOCUMENTOS E REGISTRO",question:"O que é um POP?",answers:["O passo a passo padrão de como fazer uma tarefa", "Um tipo de pipoca", "Um programa de computador", "Uma pausa para descanso"],correct:0},
+{category:"DOCUMENTOS E REGISTRO",question:"Posso assinar o registro de uma tarefa que outra pessoa fez?",answers:["Não, cada um assina só o que fez", "Sim, se for meu amigo", "Sim, para adiantar o serviço", "Sim, se o líder não estiver"],correct:0},
+{category:"DOCUMENTOS E REGISTRO",question:"Um campo do registro não se aplica. O que fazer?",answers:["Preencher com N/A ou traço, como manda o procedimento", "Deixar em branco", "Colocar qualquer número", "Arrancar o campo da folha"],correct:0},
+
+/* ---------- CONTROLE DE QUALIDADE (6) ---------- */
+{category:"CONTROLE DE QUALIDADE",question:"O que o Controle de Qualidade (CQ) faz?",answers:["Analisa matérias-primas e produtos para ver se estão no padrão", "Vende os produtos", "Faz a limpeza da fábrica", "Cuida do refeitório"],correct:0},
+{category:"CONTROLE DE QUALIDADE",question:"Um lote de shampoo pode ir para venda antes da aprovação do CQ?",answers:["Não, só depois de aprovado", "Sim, se tiver pressa", "Sim, se o cheiro estiver bom", "Sim, se o cliente pedir"],correct:0},
+{category:"CONTROLE DE QUALIDADE",question:"O que significa a etiqueta “QUARENTENA” em um material?",answers:["Está esperando análise e ainda não pode ser usado", "Está aprovado", "Está vencido", "Pode ser usado à vontade"],correct:0},
+{category:"CONTROLE DE QUALIDADE",question:"Material com etiqueta “REPROVADO” deve:",answers:["Ficar separado e não ser usado", "Ser usado se faltar material", "Ser misturado com material bom", "Ter a etiqueta retirada"],correct:0},
+{category:"CONTROLE DE QUALIDADE",question:"O que o CQ costuma conferir em um creme para cabelo?",answers:["Cor, cheiro, aparência, pH e consistência", "Só o preço", "Só o nome do produto", "A marca da caixa de papelão"],correct:0},
+{category:"CONTROLE DE QUALIDADE",question:"O que é a amostra de retenção?",answers:["Uma parte do lote guardada para análises futuras", "Um brinde para os funcionários", "Produto para testar em casa", "Sobra para jogar fora"],correct:0},
+
+/* ---------- NÃO CONFORMIDADE (6) ---------- */
+{category:"NÃO CONFORMIDADE",question:"O que é uma não conformidade?",answers:["Algo fora do padrão ou do que foi definido", "Um produto aprovado", "Uma reunião de equipe", "Um tipo de embalagem"],correct:0},
+{category:"NÃO CONFORMIDADE",question:"Encontrei um produto com defeito. Qual o primeiro passo?",answers:["Separar, identificar e avisar o responsável", "Misturar com os produtos bons", "Jogar fora escondido", "Mandar para o cliente mesmo assim"],correct:0},
+{category:"NÃO CONFORMIDADE",question:"Por que é importante comunicar uma não conformidade?",answers:["Para corrigir o problema e evitar que se repita", "Para culpar alguém", "Não é importante", "Para atrasar a produção"],correct:0},
+{category:"NÃO CONFORMIDADE",question:"Esconder um erro de produção pode:",answers:["Fazer um produto com problema chegar ao consumidor", "Melhorar a qualidade", "Evitar retrabalho para sempre", "Não causa nada"],correct:0},
+{category:"NÃO CONFORMIDADE",question:"O que é uma ação corretiva?",answers:["Uma ação para eliminar a causa do problema", "Uma bronca no colaborador", "Um uniforme novo", "Uma festa da equipe"],correct:0},
+{category:"NÃO CONFORMIDADE",question:"Rótulo de shampoo colado em frasco de condicionador é:",answers:["Uma não conformidade", "Um produto aprovado", "Uma melhoria", "O procedimento correto"],correct:0},
+
+/* ---------- INSPEÇÃO (6) ---------- */
+{category:"INSPEÇÃO",question:"Na inspeção do produto envasado, o que conferir?",answers:["Tampa, rótulo, lote, validade e vazamentos", "Só a cor da caixa", "Nada, a máquina garante", "Só o preço"],correct:0},
+{category:"INSPEÇÃO",question:"Achei um frasco vazando ou com a tampa mal fechada. O que fazer?",answers:["Retirar da linha e separar como defeito", "Deixar seguir na caixa", "Embalar mesmo assim", "Esconder embaixo da mesa"],correct:0},
+{category:"INSPEÇÃO",question:"Lote e validade apagados ou ilegíveis no frasco:",answers:["É um defeito e precisa ser corrigido antes de seguir", "Não tem problema", "O cliente nem olha isso", "Pode escrever qualquer data à mão"],correct:0},
+{category:"INSPEÇÃO",question:"Por que conferir o peso ou volume do produto?",answers:["Para o cliente receber a quantidade que está na embalagem", "Só para gastar tempo", "Não precisa conferir", "Para mudar o preço"],correct:0},
+{category:"INSPEÇÃO",question:"A inspeção no início da produção serve para:",answers:["Achar problemas cedo, antes de fazer o lote todo", "Atrasar a produção", "Substituir a limpeza", "Nada, só o final importa"],correct:0},
+{category:"INSPEÇÃO",question:"Antes de começar a envasar, o que conferir na embalagem?",answers:["Se rótulo e frasco são do produto certo", "Se a caixa é bonita", "Nada, é só começar", "Se o frasco é da minha cor favorita"],correct:0}
 ];
 
 /* ==================================================
@@ -2041,6 +2163,115 @@ $("continue-btn").addEventListener("click", () => {
 $("restart-btn").addEventListener("click", returnToStartMenu);
 $("scoreboard-retry").addEventListener("click", returnToStartMenu);
 loadPreviousResult();
+
+/* ==================================================
+   ⏰ SETOR DE AJUSTE — HORÁRIO DE FUNCIONAMENTO
+   O jogo só abre dentro dos turnos abaixo. Fora deles aparece a tela
+   "VOLTE MAIS TARDE!" mostrando o PRÓXIMO turno (de dia mostra o do
+   almoço; à tarde/noite mostra o da janta) e a lista de todos os horários.
+
+   • Edite "inicio" e "fim" no formato "HH:MM" (ex.: "11:00", "2:00", "02:00").
+     A frase da tela usa exatamente o texto que você escrever aqui.
+   • Turno que passa da meia-noite funciona normal (ex.: 23:00 às 02:00).
+   • O "fim" é o horário em que fecha (14:00 = fecha às 14:00 em ponto).
+   • Pode adicionar ou remover turnos na lista.
+   • ativo: false  → desliga o controle (jogo libera o tempo todo).
+   • simularHora: "15:30" → testa a tela como se fosse 15:30.
+     Deixe null para usar a hora real.
+   • Quem já está jogando quando o horário acaba pode terminar a partida;
+     o bloqueio aparece ao voltar para a tela inicial.
+   ================================================== */
+const HORARIO_FUNCIONAMENTO = {
+    ativo: true,
+    fusoHorario: "America/Sao_Paulo", // usa a hora de Brasília mesmo se o celular estiver em outro fuso
+    simularHora: null,                // ex.: "15:30" para testar; null = hora real
+    turnos: [
+        { nome: "almoço", inicio: "11:00", fim: "14:00" },
+        { nome: "janta",  inicio: "23:00", fim: "02:00" }
+    ]
+};
+
+/* ---- A partir daqui não é preciso editar ---- */
+function parseHora(texto) {
+    const [h, m = "0"] = String(texto).trim().split(":");
+    return (Number(h) % 24) * 60 + Number(m);
+}
+function minutosAgora() {
+    if (HORARIO_FUNCIONAMENTO.simularHora) return parseHora(HORARIO_FUNCIONAMENTO.simularHora);
+    try {
+        const partes = new Intl.DateTimeFormat("pt-BR", {
+            timeZone: HORARIO_FUNCIONAMENTO.fusoHorario, hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+        }).formatToParts(new Date());
+        const h = Number(partes.find(p => p.type === "hour").value);
+        const m = Number(partes.find(p => p.type === "minute").value);
+        return (h % 24) * 60 + m;
+    } catch (error) {
+        const d = new Date();
+        return d.getHours() * 60 + d.getMinutes();
+    }
+}
+function turnoAberto(turno, agora) {
+    const ini = parseHora(turno.inicio), fim = parseHora(turno.fim);
+    return ini <= fim ? (agora >= ini && agora < fim) : (agora >= ini || agora < fim);
+}
+function jogoAberto() {
+    if (!HORARIO_FUNCIONAMENTO.ativo || !HORARIO_FUNCIONAMENTO.turnos.length) return true;
+    const agora = minutosAgora();
+    return HORARIO_FUNCIONAMENTO.turnos.some(t => turnoAberto(t, agora));
+}
+/* Próximo turno a abrir e quantos minutos faltam. */
+function proximoTurno() {
+    const agora = minutosAgora();
+    let melhor = null;
+    HORARIO_FUNCIONAMENTO.turnos.forEach(t => {
+        const falta = (parseHora(t.inicio) - agora + 1440) % 1440;
+        if (!melhor || falta < melhor.falta) melhor = { turno: t, falta };
+    });
+    return melhor;
+}
+function textoFalta(min) {
+    const h = Math.floor(min / 60), m = min % 60;
+    if (h && m) return `${h}h ${m}min`;
+    return h ? `${h}h` : `${m}min`;
+}
+function atualizarTelaFechada() {
+    const prox = proximoTurno();
+    if (!prox) return;
+    $("closed-next").textContent = `das ${prox.turno.inicio} às ${prox.turno.fim}`;
+    $("closed-countdown").textContent = prox.falta > 0 ? `⏳ Abre em ${textoFalta(prox.falta)}` : "⏳ Abrindo...";
+    $("closed-all").innerHTML = "Horários do desafio:<br>" + HORARIO_FUNCIONAMENTO.turnos
+        .map(t => `<strong>${t.inicio} às ${t.fim}</strong>`).join(" &nbsp;ou&nbsp; ");
+}
+function estaJogando() {
+    return ["screen-how", "screen-quiz", "screen-feedback"].some(id => $(id)?.classList.contains("active"));
+}
+function verificarHorario() {
+    const aberto = jogoAberto();
+    if (aberto) {
+        $("closed-screen").hidden = true;
+        document.documentElement.classList.remove("is-closed");
+        return true;
+    }
+    if (estaJogando()) return false; // deixa terminar a partida em andamento
+    atualizarTelaFechada();
+    $("closed-screen").hidden = false;
+    document.documentElement.classList.add("is-closed");
+    window.scrollTo(0, 0);
+    return false;
+}
+
+// Bloqueia o botão JOGAR fora do horário (roda antes da validação do nome).
+$("start-btn").addEventListener("click", event => {
+    if (!verificarHorario()) event.stopImmediatePropagation();
+}, { capture: true });
+// Ao voltar para o início (fim de partida, sair, jogar de novo), confere o horário.
+["restart-btn", "scoreboard-retry", "exit-confirm-yes"].forEach(id => {
+    $(id)?.addEventListener("click", () => setTimeout(verificarHorario, 0));
+});
+// Confere ao abrir, a cada 20 s e quando o celular é desbloqueado / aba volta ao foco.
+verificarHorario();
+setInterval(verificarHorario, 20000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) verificarHorario(); });
 
 /* Pré-carregamento de baixa prioridade do cenário final, depois da primeira carga. */
 window.addEventListener("load", () => {
