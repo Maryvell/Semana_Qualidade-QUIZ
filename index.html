@@ -1631,8 +1631,8 @@ const QUESTIONS_PER_GAME = 10;
    ================================================== */
 const MEDAL_RULES = {
     gold: 7,    // acertos mínimos para OURO
-    silver: 7,  // acertos mínimos para PRATA
-    bronze: 7   // acertos mínimos para BRONZE (abaixo disso = GAME OVER)
+    silver: 6,  // acertos mínimos para PRATA
+    bronze: 5   // acertos mínimos para BRONZE (abaixo disso = GAME OVER)
 };
 
 // Quem conquista qualquer medalha vê as instruções para retirar o brinde.
@@ -2184,7 +2184,7 @@ loadPreviousResult();
 const HORARIO_FUNCIONAMENTO = {
     ativo: true,
     fusoHorario: "America/Sao_Paulo", // usa a hora de Brasília mesmo se o celular estiver em outro fuso
-    simularHora: null,                // ex.: "15:30" para testar; null = hora real
+    simularHora: "11:30",                // ex.: "15:30" para testar; null = hora real
     turnos: [
         { nome: "almoço", inicio: "11:00", fim: "14:00" },
         { nome: "janta",  inicio: "23:00", fim: "02:00" }
