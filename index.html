@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800;900&amp;display=swap"/>
   <title>
-   Semana da Qualidade | Skala Brasil
+   Semana da Qualidade | Skala Brasil · CD
   </title>
   <style>
 /* =====================================================================
@@ -1027,7 +1027,7 @@ html.is-closed, html.is-closed body { overflow: hidden; }
     <section class="screen home active" id="screen-home">
      <div class="home-copy">
       <div class="tag">
-       ✦ Desafio da Qualidade
+       ✦ Desafio da Qualidade · CD
       </div>
       <h1>
        SEMANA DA
@@ -1061,9 +1061,7 @@ html.is-closed, html.is-closed body { overflow: hidden; }
 <p class="lead">
        Teste seus conhecimentos sobre
        <strong>
-        Qualidade
-       </strong>
-       , avance de fase e descubra quantos pontos consegue conquistar!
+        Qualidade no Centro de Distribuição</strong>, avance de fase e descubra quantos pontos consegue conquistar!
       </p>
 
       <p class="small-note">
@@ -1540,78 +1538,79 @@ html.is-closed, html.is-closed body { overflow: hidden; }
    SETOR 15 — BANCO DE PERGUNTAS
    Edite os textos e respostas nesta seção.
    ================================================== */
-/* EDITE QUESTIONS: 8 temas · 46 perguntas · nível fácil (operação e produção).
+/* EDITE QUESTIONS: VERSÃO CD / LOGÍSTICA · 8 temas · 46 perguntas · nível fácil.
+   Boas práticas de Qualidade no Centro de Distribuição (revisadas pela equipe em 23/11/2026).
    A resposta CERTA está sempre na 1ª posição (correct: 0) para facilitar a edição.
    O jogo sorteia as perguntas e embaralha as alternativas a cada partida.
    Para adicionar: copie uma linha, troque o texto e mantenha a resposta certa em 1º. */
 const QUESTIONS = [
-/* ---------- LIMPEZA (6) ---------- */
-{category:"LIMPEZA",question:"Quando a linha de produção deve ser limpa?",answers:["Antes de começar e na troca de produto, conforme o procedimento", "Só no fim da semana", "Só quando estiver muito suja", "Só quando o auditor pedir"],correct:0},
-{category:"LIMPEZA",question:"Para que serve a etiqueta “LIMPO” no equipamento?",answers:["Mostrar que ele foi limpo e está pronto para uso", "Enfeitar o equipamento", "Mostrar que ele está quebrado", "Indicar quem é o dono da máquina"],correct:0},
-{category:"LIMPEZA",question:"Qual produto de limpeza devo usar no equipamento?",answers:["O indicado no procedimento de limpeza", "Qualquer um que estiver por perto", "Uma mistura de vários para limpar melhor", "Produto trazido de casa"],correct:0},
-{category:"LIMPEZA",question:"Terminei a limpeza do equipamento. E agora?",answers:["Registro a limpeza no formulário", "Não preciso anotar nada", "Anoto tudo só no fim do mês", "Peço para um colega assinar por mim"],correct:0},
-{category:"LIMPEZA",question:"Por que não pode sobrar creme do lote anterior no tanque?",answers:["Ele pode se misturar e contaminar o novo produto", "Ajuda a dar cheiro no próximo lote", "Deixa o tanque protegido", "Não faz diferença nenhuma"],correct:0},
-{category:"LIMPEZA",question:"Caiu produto no chão da área. O que fazer?",answers:["Sinalizar e limpar ou avisar quem faz a limpeza", "Passar por cima e seguir", "Esperar secar sozinho", "Cobrir com papelão"],correct:0},
+/* ---------- ETIQUETAS (6) ---------- */
+{category:"ETIQUETAS",question:"O que conferir na etiqueta da caixa ou do produto?",answers:["Código, lote, validade e se está legível", "Só a cor da etiqueta", "Só o tamanho da letra", "Nada, a etiqueta está sempre certa"],correct:0},
+{category:"ETIQUETAS",question:"Encontrei uma caixa sem etiqueta. O que fazer?",answers:["Separar, avisar o líder e identificar conforme o procedimento", "Colocar no palete mesmo assim", "Escrever qualquer lote à mão", "Tirar a etiqueta de outra caixa"],correct:0},
+{category:"ETIQUETAS",question:"Etiqueta rasgada ou apagada, que não dá para ler:",answers:["Deve ser trocada por uma etiqueta correta", "Pode ficar assim, ninguém olha", "Basta passar fita por cima", "Deve ser arrancada e deixar sem"],correct:0},
+{category:"ETIQUETAS",question:"Antes de colar uma etiqueta nova, o que fazer?",answers:["Conferir se os dados batem com o produto da caixa", "Colar em qualquer caixa", "Colar por cima de outra etiqueta diferente", "Colar sem olhar"],correct:0},
+{category:"ETIQUETAS",question:"Por que a etiqueta precisa estar com o lote certo?",answers:["Para rastrear o produto se houver algum problema", "Para deixar a caixa bonita", "Não faz diferença", "Só para o motorista ler"],correct:0},
+{category:"ETIQUETAS",question:"Onde a etiqueta da caixa deve ficar?",answers:["Em local visível, sem dobrar e sem ficar coberta", "Embaixo da caixa", "Virada para dentro do palete", "Dobrada ao meio"],correct:0},
 
-/* ---------- BPF (6) ---------- */
-{category:"BPF",question:"O que significa a sigla BPF?",answers:["Boas Práticas de Fabricação", "Boas Práticas de Faturamento", "Bom Padrão de Funcionários", "Base de Produção Final"],correct:0},
-{category:"BPF",question:"O que é proibido usar na área de produção?",answers:["Brincos, anéis, relógios e outros adornos", "Touca", "Uniforme limpo", "Calçado de segurança"],correct:0},
-{category:"BPF",question:"Por que usamos touca na produção?",answers:["Para não cair cabelo no produto", "Para combinar com o uniforme", "Para proteger do frio", "Só para a foto da equipe"],correct:0},
-{category:"BPF",question:"Quando devo lavar as mãos?",answers:["Ao entrar na área, após ir ao banheiro e sempre que sujar", "Só no fim do turno", "Só quando estiverem muito sujas", "Uma vez por semana"],correct:0},
-{category:"BPF",question:"Onde posso comer ou beber durante o trabalho?",answers:["Só no refeitório ou em áreas liberadas", "Na linha de produção", "Ao lado da máquina, com cuidado", "No almoxarifado"],correct:0},
-{category:"BPF",question:"Estou com um corte na mão. O que faço antes de ir para a linha?",answers:["Aviso o líder e protejo o machucado como orientado", "Escondo e trabalho normal", "Coloco qualquer fita adesiva", "Não falo nada para ninguém"],correct:0},
+/* ---------- CAIXAS (6) ---------- */
+{category:"CAIXAS",question:"Achei uma caixa amassada ou rasgada. O que fazer?",answers:["Separar e avisar para avaliar o produto de dentro. Caso o produto esteja conforme, trocar a caixa", "Colocar no fundo do palete", "Despachar mesmo assim", "Jogar fora sem avisar"],correct:0},
+{category:"CAIXAS",question:"Uma caixa molhada ou úmida pode:",answers:["Perder a resistência, rasgar e danificar os produtos", "Ficar mais forte", "Não ter problema nenhum", "Secar sozinha no caminhão"],correct:0},
+{category:"CAIXAS",question:"Por que conferir a quantidade de produtos na caixa?",answers:["Para o cliente receber o certo, sem faltar nem sobrar", "Só para passar o tempo", "Não precisa conferir", "Para trocar o produto de caixa"],correct:0},
+{category:"CAIXAS",question:"As setas “este lado para cima” na caixa indicam:",answers:["A posição certa para guardar e transportar", "Para onde levar a caixa", "Só um enfeite", "Que a caixa está vazia"],correct:0},
+{category:"CAIXAS",question:"Como as caixas devem ficar na base do palete?",answers:["Alinhadas, sem sobrar para fora da borda", "Para fora da borda, para caber mais", "De qualquer jeito", "De cabeça para baixo"],correct:0},
+{category:"CAIXAS",question:"Qual a finalidade da inspeção das caixas?",answers:["Identificar possíveis desvios que possam comprometer a qualidade do produto", "Apenas verificar a quantidade", "Aumentar a velocidade do processo", "Organizar somente o estoque"],correct:0},
 
-/* ---------- CONTROLE DE PRAGAS (5) ---------- */
-{category:"CONTROLE DE PRAGAS",question:"Vi uma barata, rato ou inseto na fábrica. O que fazer?",answers:["Avisar o responsável na hora", "Fingir que não vi", "Tentar pegar com a mão", "Esperar ver de novo para avisar"],correct:0},
-{category:"CONTROLE DE PRAGAS",question:"Por que portas e janelas devem ficar fechadas?",answers:["Para evitar a entrada de pragas", "Para deixar a área mais quente", "Para ninguém ver o trabalho", "Não precisa, pode deixar aberto"],correct:0},
-{category:"CONTROLE DE PRAGAS",question:"As armadilhas e iscas espalhadas pela fábrica:",answers:["Não devem ser mexidas nem mudadas de lugar", "Podem ser movidas se atrapalharem", "Podem ser jogadas fora", "Servem de apoio para caixas"],correct:0},
-{category:"CONTROLE DE PRAGAS",question:"Deixar restos de comida na área de trabalho pode:",answers:["Atrair insetos e ratos", "Deixar o trabalho mais rápido", "Melhorar o produto", "Não causa problema nenhum"],correct:0},
-{category:"CONTROLE DE PRAGAS",question:"Quem aplica produtos contra pragas na fábrica?",answers:["Uma empresa especializada e autorizada", "Qualquer colaborador", "O operador, com veneno trazido de casa", "Ninguém, não é necessário"],correct:0},
+/* ---------- PRODUTOS (6) ---------- */
+{category:"PRODUTOS",question:"Na separação do pedido, o que conferir no produto?",answers:["Código, lote, validade, quantidade e se está conforme", "Só a cor do frasco", "Só o nome da marca", "Nada, é só pegar"],correct:0},
+{category:"PRODUTOS",question:"Encontrei produto vazando ou com frasco quebrado. O que fazer?",answers:["Separar como avaria e avisar o responsável", "Colocar de volta na caixa", "Limpar e despachar", "Deixar no meio do estoque"],correct:0},
+{category:"PRODUTOS",question:"Posso misturar códigos diferentes na mesma caixa sem identificar?",answers:["Não, isso causa erro na separação e na entrega", "Sim, para economizar espaço", "Sim, se forem parecidos", "Sim, se o cliente for o mesmo"],correct:0},
+{category:"PRODUTOS",question:"Shampoo e condicionador têm embalagens parecidas. Como evitar erro?",answers:["Conferir o código e o nome do produto com atenção", "Pegar pela cor do frasco", "Pegar o que estiver mais perto", "Perguntar ao motorista"],correct:0},
+{category:"PRODUTOS",question:"Produto com validade vencida deve:",answers:["Ser separado e bloqueado, nunca enviado ao cliente", "Ser enviado primeiro", "Ter a etiqueta trocada", "Ficar junto com os outros"],correct:0},
+{category:"PRODUTOS",question:"Por que não jogar ou arremessar caixas e produtos?",answers:["Para evitar quebras, vazamentos e avarias", "Porque cansa o braço", "Não tem problema arremessar", "Só para não fazer barulho"],correct:0},
 
-/* ---------- COSMETOVIGILÂNCIA (5) ---------- */
-{category:"COSMETOVIGILÂNCIA",question:"O que é cosmetovigilância?",answers:["Acompanhar se o produto causa algum problema em quem usa", "Vigiar a portaria da fábrica", "Controlar o estoque de matéria-prima", "Conferir o horário dos funcionários"],correct:0},
-{category:"COSMETOVIGILÂNCIA",question:"Uma cliente teve coceira no couro cabeludo depois de usar o produto. O que fazer?",answers:["Encaminhar o caso para o SAC e a Qualidade avaliarem", "Ignorar, isso é normal", "Dizer que a culpa é dela", "Apagar a mensagem"],correct:0},
-{category:"COSMETOVIGILÂNCIA",question:"Por que o número do lote ajuda na cosmetovigilância?",answers:["Mostra quando e como aquele produto foi feito", "Serve só para enfeitar a embalagem", "Mostra o preço do produto", "Indica a cor do produto"],correct:0},
-{category:"COSMETOVIGILÂNCIA",question:"Qual órgão do governo fiscaliza os cosméticos no Brasil?",answers:["ANVISA", "DETRAN", "INSS", "IBGE"],correct:0},
-{category:"COSMETOVIGILÂNCIA",question:"As reclamações de consumidores ajudam a fábrica a:",answers:["Encontrar e corrigir problemas no produto", "Aumentar o preço", "Nada, devem ser ignoradas", "Trocar o nome do produto"],correct:0},
+/* ---------- PALETES (6) ---------- */
+{category:"PALETES",question:"Para que servem as cantoneiras no palete?",answers:["Proteger os cantos das caixas e dar firmeza à carga", "Enfeitar o palete", "Substituir o filme stretch", "Marcar o lote"],correct:0},
+{category:"PALETES",question:"Como deve ser o estiramento com filme stretch?",answers:["Firme, envolvendo todo o palete, sem amassar as caixas", "Bem frouxo, só por cima", "Tão apertado que amasse as caixas", "Não precisa usar filme"],correct:0},
+{category:"PALETES",question:"O filme stretch deve envolver também a base do palete?",answers:["Sim, para prender a carga ao palete", "Não, só as caixas de cima", "Só se sobrar filme", "Nunca"],correct:0},
+{category:"PALETES",question:"Palete quebrado ou com tábua solta:",answers:["Não deve ser usado; deve ser separado e trocado", "Pode ser usado com cuidado", "Serve para os produtos mais pesados", "Basta colocar mais filme"],correct:0},
+{category:"PALETES",question:"Um palete torto ou inclinado pode:",answers:["Cair e causar avarias e acidentes", "Ficar mais estável", "Ajudar no transporte", "Não causar nenhum problema"],correct:0},
+{category:"PALETES",question:"Qual a altura máxima para montar o palete?",answers:["A definida no procedimento, respeitando o empilhamento", "O mais alto possível", "Até encostar no teto", "Qualquer altura"],correct:0},
 
-/* ---------- DOCUMENTOS E REGISTRO (6) ---------- */
-{category:"DOCUMENTOS E REGISTRO",question:"Com o que devo preencher um registro?",answers:["Com caneta, preta ou azul", "Com lápis, para poder apagar", "Com marca-texto", "Com o que tiver à mão"],correct:0},
-{category:"DOCUMENTOS E REGISTRO",question:"Errei ao preencher um registro. Como corrigir?",answers:["Passo um risco, escrevo o certo", "Uso corretivo", "Rasgo a folha", "Rabisco até não dar para ler"],correct:0},
-{category:"DOCUMENTOS E REGISTRO",question:"Quando devo preencher o registro de produção?",answers:["Na hora em que faço a atividade", "No fim do mês", "Só quando alguém pedir", "No dia seguinte, de memória"],correct:0},
-{category:"DOCUMENTOS E REGISTRO",question:"O que é um POP?",answers:["O passo a passo padrão de como fazer uma tarefa", "Um tipo de pipoca", "Um programa de computador", "Uma pausa para descanso"],correct:0},
-{category:"DOCUMENTOS E REGISTRO",question:"Posso assinar o registro de uma tarefa que outra pessoa fez?",answers:["Não, cada um assina só o que fez", "Sim, se for meu amigo", "Sim, para adiantar o serviço", "Sim, se o líder não estiver"],correct:0},
-{category:"DOCUMENTOS E REGISTRO",question:"Um campo do registro não se aplica. O que fazer?",answers:["Preencher com N/A ou traço, como manda o procedimento", "Deixar em branco", "Colocar qualquer número", "Arrancar o campo da folha"],correct:0},
+/* ---------- ARMAZENAMENTO (6) ---------- */
+{category:"ARMAZENAMENTO",question:"O que significa FEFO?",answers:["Primeiro que vence, primeiro que sai", "Primeiro que chega, último que sai", "Fim de Estoque, Fim de Operação", "Último que vence, primeiro que sai"],correct:0},
+{category:"ARMAZENAMENTO",question:"Por que o produto deve ficar no endereço certo do estoque?",answers:["Para ser achado rápido e manter a rastreabilidade", "Tanto faz o lugar", "Só para encher as prateleiras", "Para esconder o produto"],correct:0},
+{category:"ARMAZENAMENTO",question:"Produtos podem ser guardados direto no chão?",answers:["Não, devem ficar sobre paletes ou estruturas", "Sim, se o chão estiver limpo", "Sim, por pouco tempo", "Sim, para economizar palete"],correct:0},
+{category:"ARMAZENAMENTO",question:"O local de armazenamento deve ser:",answers:["Limpo, seco, organizado e protegido do sol e da chuva", "Perto de goteiras", "Em frente às portas abertas", "Junto ao lixo"],correct:0},
+{category:"ARMAZENAMENTO",question:"Produto avariado ou bloqueado deve ficar:",answers:["Em área separada e identificada", "Junto com o produto bom", "No corredor", "Em cima de um palete bom"],correct:0},
+{category:"ARMAZENAMENTO",question:"Por que respeitar o limite de empilhamento da caixa?",answers:["Para as caixas de baixo não amassarem", "Para caber mais no estoque", "Não precisa respeitar", "Para o palete ficar mais alto"],correct:0},
 
-/* ---------- CONTROLE DE QUALIDADE (6) ---------- */
-{category:"CONTROLE DE QUALIDADE",question:"O que o Controle de Qualidade (CQ) faz?",answers:["Analisa matérias-primas e produtos para ver se estão no padrão", "Vende os produtos", "Faz a limpeza da fábrica", "Cuida do refeitório"],correct:0},
-{category:"CONTROLE DE QUALIDADE",question:"Um lote de shampoo pode ir para venda antes da aprovação do CQ?",answers:["Não, só depois de aprovado", "Sim, se tiver pressa", "Sim, se o cheiro estiver bom", "Sim, se o cliente pedir"],correct:0},
-{category:"CONTROLE DE QUALIDADE",question:"O que significa a etiqueta “QUARENTENA” em um material?",answers:["Está esperando análise e ainda não pode ser usado", "Está aprovado", "Está vencido", "Pode ser usado à vontade"],correct:0},
-{category:"CONTROLE DE QUALIDADE",question:"Material com etiqueta “REPROVADO” deve:",answers:["Ficar separado e não ser usado", "Ser usado se faltar material", "Ser misturado com material bom", "Ter a etiqueta retirada"],correct:0},
-{category:"CONTROLE DE QUALIDADE",question:"O que o CQ costuma conferir em um creme para cabelo?",answers:["Cor, cheiro, aparência, pH e consistência", "Só o preço", "Só o nome do produto", "A marca da caixa de papelão"],correct:0},
-{category:"CONTROLE DE QUALIDADE",question:"O que é a amostra de retenção?",answers:["Uma parte do lote guardada para análises futuras", "Um brinde para os funcionários", "Produto para testar em casa", "Sobra para jogar fora"],correct:0},
+/* ---------- MOVIMENTAÇÃO (5) ---------- */
+{category:"MOVIMENTAÇÃO",question:"Ao levantar o palete com paleteira ou empilhadeira, o garfo deve:",answers:["Entrar totalmente embaixo do palete", "Entrar só na ponta", "Furar a caixa se precisar", "Ficar torto"],correct:0},
+{category:"MOVIMENTAÇÃO",question:"Arrastar paletes ou caixas pelo chão pode:",answers:["Danificar as caixas e os produtos", "Deixar o produto mais seguro", "Não causar nada", "Ajudar a limpar o chão"],correct:0},
+{category:"MOVIMENTAÇÃO",question:"Durante a movimentação, a carga deve estar:",answers:["Estável, bem presa e identificada", "Solta, para ser mais rápido", "Sem etiqueta", "Acima do limite de altura"],correct:0},
+{category:"MOVIMENTAÇÃO",question:"Bati o palete e uma caixa amassou. O que fazer?",answers:["Avisar o líder e verificar o produto. Caso o produto esteja conforme, trocar a caixa", "Esconder a caixa no meio do palete", "Seguir como se nada tivesse acontecido", "Trocar a etiqueta"],correct:0},
+{category:"MOVIMENTAÇÃO",question:"Por que manter os corredores livres e organizados?",answers:["Para movimentar com segurança, sem batidas e avarias", "Para guardar produtos no corredor", "Não faz diferença", "Para deixar paletes esquecidos"],correct:0},
 
-/* ---------- NÃO CONFORMIDADE (6) ---------- */
-{category:"NÃO CONFORMIDADE",question:"O que é uma não conformidade?",answers:["Algo fora do padrão ou do que foi definido", "Um produto aprovado", "Uma reunião de equipe", "Um tipo de embalagem"],correct:0},
-{category:"NÃO CONFORMIDADE",question:"Encontrei um produto com defeito. Qual o primeiro passo?",answers:["Separar, identificar e avisar o responsável", "Misturar com os produtos bons", "Jogar fora escondido", "Mandar para o cliente mesmo assim"],correct:0},
-{category:"NÃO CONFORMIDADE",question:"Por que é importante comunicar uma não conformidade?",answers:["Para corrigir o problema e evitar que se repita", "Para culpar alguém", "Não é importante", "Para atrasar a produção"],correct:0},
-{category:"NÃO CONFORMIDADE",question:"Esconder um erro de produção pode:",answers:["Fazer um produto com problema chegar ao consumidor", "Melhorar a qualidade", "Evitar retrabalho para sempre", "Não causa nada"],correct:0},
-{category:"NÃO CONFORMIDADE",question:"O que é uma ação corretiva?",answers:["Uma ação para eliminar a causa do problema", "Uma bronca no colaborador", "Um uniforme novo", "Uma festa da equipe"],correct:0},
-{category:"NÃO CONFORMIDADE",question:"Rótulo de shampoo colado em frasco de condicionador é:",answers:["Uma não conformidade", "Um produto aprovado", "Uma melhoria", "O procedimento correto"],correct:0},
+/* ---------- RECEBIMENTO (5) ---------- */
+{category:"RECEBIMENTO",question:"No recebimento, o que conferir com a nota fiscal?",answers:["Código, lote, validade, quantidade e estado das caixas e paletes", "Só o nome do motorista", "Só a placa do caminhão", "Nada, a nota está sempre certa"],correct:0},
+{category:"RECEBIMENTO",question:"Chegou carga com caixas amassadas ou molhadas. O que fazer?",answers:["Registrar a avaria e avisar o responsável", "Receber sem falar nada", "Esconder as caixas avariadas", "Misturar com o estoque bom"],correct:0},
+{category:"RECEBIMENTO",question:"A quantidade recebida é diferente da nota. O que fazer?",answers:["Registrar a diferença e comunicar o responsável", "Assinar mesmo assim", "Completar com produto do estoque", "Ignorar a diferença"],correct:0},
+{category:"RECEBIMENTO",question:"O produto recebido deve ir para o estoque:",answers:["Identificado e registrado no sistema", "Sem identificação, para ganhar tempo", "Para qualquer lugar, sem registrar", "Direto para o caminhão de outro cliente"],correct:0},
+{category:"RECEBIMENTO",question:"Como deve estar a área de recebimento?",answers:["Limpa, organizada e com espaço para conferir", "Cheia de paletes sem identificação", "Com caixas espalhadas", "Molhada"],correct:0},
 
-/* ---------- INSPEÇÃO (6) ---------- */
-{category:"INSPEÇÃO",question:"Na inspeção do produto envasado, o que conferir?",answers:["Tampa, rótulo, lote, validade e vazamentos", "Só a cor da caixa", "Nada, a máquina garante", "Só o preço"],correct:0},
-{category:"INSPEÇÃO",question:"Achei um frasco vazando ou com a tampa mal fechada. O que fazer?",answers:["Retirar da linha e separar como defeito", "Deixar seguir na caixa", "Embalar mesmo assim", "Esconder embaixo da mesa"],correct:0},
-{category:"INSPEÇÃO",question:"Lote e validade apagados ou ilegíveis no frasco:",answers:["É um defeito e precisa ser corrigido antes de seguir", "Não tem problema", "O cliente nem olha isso", "Pode escrever qualquer data à mão"],correct:0},
-{category:"INSPEÇÃO",question:"Por que conferir o peso ou volume do produto?",answers:["Para o cliente receber a quantidade que está na embalagem", "Só para gastar tempo", "Não precisa conferir", "Para mudar o preço"],correct:0},
-{category:"INSPEÇÃO",question:"A inspeção no início da produção serve para:",answers:["Achar problemas cedo, antes de fazer o lote todo", "Atrasar a produção", "Substituir a limpeza", "Nada, só o final importa"],correct:0},
-{category:"INSPEÇÃO",question:"Antes de começar a envasar, o que conferir na embalagem?",answers:["Se rótulo e frasco são do produto certo", "Se a caixa é bonita", "Nada, é só começar", "Se o frasco é da minha cor favorita"],correct:0}
+/* ---------- EXPEDIÇÃO (6) ---------- */
+{category:"EXPEDIÇÃO",question:"Antes de carregar, o que conferir no pedido?",answers:["Código, lote, validade, quantidade e estado das caixas e paletes", "Só o peso total", "Só a cor dos paletes", "Nada, o sistema já conferiu"],correct:0},
+{category:"EXPEDIÇÃO",question:"Como deve estar o caminhão antes do carregamento?",answers:["Limpo, seco e sem pregos, furos ou cheiros", "Molhado, para refrescar a carga", "Com restos da carga anterior", "Tanto faz"],correct:0},
+{category:"EXPEDIÇÃO",question:"Dentro do caminhão, os paletes devem ficar:",answers:["Bem posicionados e travados para não balançar", "Soltos, com bastante espaço", "Inclinados", "Uns sobre os outros, sem cuidado"],correct:0},
+{category:"EXPEDIÇÃO",question:"Por que seguir o FEFO na expedição?",answers:["Para enviar primeiro o produto que vence antes", "Para enviar o mais novo primeiro", "Para enviar o que estiver mais perto", "Não faz diferença"],correct:0},
+{category:"EXPEDIÇÃO",question:"Encontrei uma caixa avariada na hora de carregar. O que fazer?",answers:["Não carregar, separar e avisar para substituir", "Carregar no fundo do caminhão", "Passar fita e carregar", "Deixar o motorista decidir"],correct:0},
+{category:"EXPEDIÇÃO",question:"Para que serve a etiqueta de identificação do volume na expedição?",answers:["Garantir que a carga certa chegue ao cliente certo", "Enfeitar o palete", "Mostrar o preço", "Não serve para nada"],correct:0}
 ];
 
 /* ==================================================
    SETOR 16 — CONFIGURAÇÕES, ESTADO E SORTEIO
    ================================================== */
-const STORAGE_KEY = "skalaQualityQuizLastResult";
+const STORAGE_KEY = "skalaQualityQuizCD_LastResult"; // chave própria da versão CD
 const TIME_PER_QUESTION = 50;
 const QUESTIONS_PER_GAME = 10;
 
